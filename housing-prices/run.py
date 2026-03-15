@@ -19,7 +19,7 @@ RESEARCH_LOG_PATH = ROOT / "research_log.md"
 THRESHOLD = -50
 RANDOM_STATE = 42
 
-HYPOTHESIS = "Adding one-hot encoding for HouseStyle (style of dwelling) will capture house-style price variations and reduce CV RMSE"
+HYPOTHESIS = "Adding one-hot encoding for Functional (home functionality rating) will capture functionality-based price variations and reduce CV RMSE"
 
 
 def ensure_dirs():
