@@ -19,7 +19,7 @@ RESEARCH_LOG_PATH = ROOT / "research_log.md"
 THRESHOLD = -50
 RANDOM_STATE = 42
 
-HYPOTHESIS = "Adding interaction feature GarageCars x OverallQual_Sq will capture how garage capacity value is amplified in homes with very high quality ratings, where the squared quality rating captures non-linear quality premiums and garage spaces command disproportionate prices in these premium homes"
+HYPOTHESIS = "Adding ratio feature GrLivArea / TotalSF will capture how the proportion of above-ground living space to total space affects price, where homes with more above-ground space relative to basement space may indicate different property types and value characteristics"
 
 
 def ensure_dirs():

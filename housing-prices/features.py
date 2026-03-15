@@ -133,6 +133,7 @@ def make_features(df: pd.DataFrame, feature_set: str = "baseline") -> pd.DataFra
         out["TotalSF_GarageCars"] = out["TotalSF"] * out["GarageCars"]
         out["GarageCars_KitchenQual_Ord"] = out["GarageCars"] * out["KitchenQual_Ord"]
         out["GarageCars_OverallQual_Sq"] = out["GarageCars"] * out["OverallQual_Sq"]
+        out["GrLivArea_Ratio"] = out["GrLivArea"] / out["TotalSF"]
 
         cols = (
             NUMERIC_COLUMNS
@@ -152,6 +153,7 @@ def make_features(df: pd.DataFrame, feature_set: str = "baseline") -> pd.DataFra
                 "TotalSF_GarageCars",
                 "GarageCars_KitchenQual_Ord",
                 "GarageCars_OverallQual_Sq",
+                "GrLivArea_Ratio",
             ]
             + list(neighborhood_dummies.columns)
             + list(mszoning_dummies.columns)
