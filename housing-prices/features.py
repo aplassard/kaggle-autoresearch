@@ -56,6 +56,13 @@ QUALITY_COLUMNS = [
     "GarageQual",
 ]
 
+BSMT_EXPOSURE_MAPPING = {
+    "Gd": 4,
+    "Av": 3,
+    "Mn": 2,
+    "No": 1,
+}
+
 
 def make_features(df: pd.DataFrame, feature_set: str = "baseline") -> pd.DataFrame:
     out = df.copy()
@@ -109,6 +116,14 @@ def make_features(df: pd.DataFrame, feature_set: str = "baseline") -> pd.DataFra
                 out[col + "_Ord"] = out[col].map(QUALITY_MAPPING).fillna(0)
                 quality_encoded.append(col + "_Ord")
 
+        if "BsmtExposure" in out.columns:
+            out["BsmtExposure_Ord"] = (
+                out["BsmtExposure"].map(BSMT_EXPOSURE_MAPPING).fillna(0)
+            )
+            bsmt_exposure_col = ["BsmtExposure_Ord"]
+        else:
+            bsmt_exposure_col = []
+
         cols = (
             NUMERIC_COLUMNS
             + [
@@ -126,6 +141,7 @@ def make_features(df: pd.DataFrame, feature_set: str = "baseline") -> pd.DataFra
             + list(housestyle_dummies.columns)
             + list(functional_dummies.columns)
             + quality_encoded
+            + bsmt_exposure_col
         )
     else:
         cols = NUMERIC_COLUMNS
