@@ -19,7 +19,7 @@ RESEARCH_LOG_PATH = ROOT / "research_log.md"
 THRESHOLD = -50
 RANDOM_STATE = 42
 
-HYPOTHESIS = "Adding interaction feature FireplaceQu_Ord x OverallQual will capture how fireplace quality amplifies overall quality value, where homes with both high overall quality and excellent fireplaces command premium prices beyond what either feature captures alone"
+HYPOTHESIS = "Adding interaction feature TotalSF x GarageCars will capture how total square footage value is amplified in homes with more garage capacity, where larger homes with multiple garage spaces command premium prices beyond what either feature captures alone"
 
 
 def ensure_dirs():
