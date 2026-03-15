@@ -19,7 +19,7 @@ RESEARCH_LOG_PATH = ROOT / "research_log.md"
 THRESHOLD = -50
 RANDOM_STATE = 42
 
-HYPOTHESIS = "Adding interaction feature BsmtQual_Ord x OverallQual will capture how basement quality amplifies overall quality value, where homes with both high overall quality and excellent basements command premium prices beyond what either feature captures alone"
+HYPOTHESIS = "Adding interaction feature KitchenQual_Ord x OverallQual will capture how kitchen quality amplifies overall quality value, where homes with both high overall quality and excellent kitchens command premium prices beyond what either feature captures alone"
 
 
 def ensure_dirs():
