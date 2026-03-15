@@ -40,6 +40,23 @@ NUMERIC_COLUMNS = [
 ]
 
 
+QUALITY_MAPPING = {
+    "Ex": 5,
+    "Gd": 4,
+    "TA": 3,
+    "Fa": 2,
+    "Po": 1,
+}
+
+QUALITY_COLUMNS = [
+    "ExterQual",
+    "BsmtQual",
+    "HeatingQC",
+    "KitchenQual",
+    "GarageQual",
+]
+
+
 def make_features(df: pd.DataFrame, feature_set: str = "baseline") -> pd.DataFrame:
     out = df.copy()
 
@@ -66,6 +83,12 @@ def make_features(df: pd.DataFrame, feature_set: str = "baseline") -> pd.DataFra
         )
         out = pd.concat([out, neighborhood_dummies], axis=1)
 
+        quality_encoded = []
+        for col in QUALITY_COLUMNS:
+            if col in out.columns:
+                out[col + "_Ord"] = out[col].map(QUALITY_MAPPING).fillna(0)
+                quality_encoded.append(col + "_Ord")
+
         cols = (
             NUMERIC_COLUMNS
             + [
@@ -78,6 +101,7 @@ def make_features(df: pd.DataFrame, feature_set: str = "baseline") -> pd.DataFra
                 "HasFireplace",
             ]
             + list(neighborhood_dummies.columns)
+            + quality_encoded
         )
     else:
         cols = NUMERIC_COLUMNS
