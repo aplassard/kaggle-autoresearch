@@ -1,7 +1,7 @@
 {
-  "cv_mean": 0.8406126420187057,
-  "cv_std": 0.011761336272759416,
+  "cv_mean": 0.8439834285355596,
+  "cv_std": 0.013608913298357032,
   "model_name": "random_forest_v1",
   "feature_set": "engineered",
-  "notes": "Improved hyperparameters: n_estimators=500, min_samples_leaf=3, min_samples_split=6"
+  "notes": "Added IsSenior feature (Age >= 60) to capture elderly passenger survival patterns"
 }

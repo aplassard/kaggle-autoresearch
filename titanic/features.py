@@ -11,6 +11,7 @@ ENGINEERED_COLUMNS = [
     "Title",
     "TicketPrefix",
     "FarePerPerson",
+    "IsSenior",
 ]
 
 
@@ -81,6 +82,7 @@ def make_features(df: pd.DataFrame, feature_set: str = "engineered") -> pd.DataF
         out["Title"] = out["Name"].map(extract_title).map(normalize_title)
         out["TicketPrefix"] = out["Ticket"].map(extract_ticket_prefix)
         out["FarePerPerson"] = out["Fare"] / out["FamilySize"]
+        out["IsSenior"] = (out["Age"] >= 60).astype(int)
         cols = BASELINE_COLUMNS + ENGINEERED_COLUMNS
     else:
         cols = BASELINE_COLUMNS
