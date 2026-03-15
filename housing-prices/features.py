@@ -124,6 +124,8 @@ def make_features(df: pd.DataFrame, feature_set: str = "baseline") -> pd.DataFra
         else:
             bsmt_exposure_col = []
 
+        out["OverallQual_Sq"] = out["OverallQual"] ** 2
+
         cols = (
             NUMERIC_COLUMNS
             + [
@@ -134,6 +136,7 @@ def make_features(df: pd.DataFrame, feature_set: str = "baseline") -> pd.DataFra
                 "IsRemodeled",
                 "HasGarage",
                 "HasFireplace",
+                "OverallQual_Sq",
             ]
             + list(neighborhood_dummies.columns)
             + list(mszoning_dummies.columns)
