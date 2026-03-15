@@ -83,6 +83,11 @@ def make_features(df: pd.DataFrame, feature_set: str = "baseline") -> pd.DataFra
         )
         out = pd.concat([out, neighborhood_dummies], axis=1)
 
+        mszoning_dummies = pd.get_dummies(
+            out["MSZoning"], prefix="MSZoning", drop_first=True
+        )
+        out = pd.concat([out, mszoning_dummies], axis=1)
+
         quality_encoded = []
         for col in QUALITY_COLUMNS:
             if col in out.columns:
@@ -101,6 +106,7 @@ def make_features(df: pd.DataFrame, feature_set: str = "baseline") -> pd.DataFra
                 "HasFireplace",
             ]
             + list(neighborhood_dummies.columns)
+            + list(mszoning_dummies.columns)
             + quality_encoded
         )
     else:
