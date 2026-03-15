@@ -112,7 +112,7 @@ def ensure_research_log():
                 [
                     "# Housing Prices autoresearch log",
                     "",
-                    "| timestamp_utc | branch | model_name | feature_set | cv_rmse_mean | cv_rmse_std | baseline_cv_rmse | delta_cv_rmse | threshold | decision | notes |",
+                    "| timestamp_utc | branch | model_name | feature_set | cv_rmse_mean | cv_rmse_std | baseline_cv_rmse | delta_cv_rmse | threshold | decision | hypothesis | notes |",
                     "|---|---|---|---|---:|---:|---:|---:|---:|---|---|",
                 ]
             ),
@@ -145,6 +145,7 @@ def append_research_log(current_run):
         f"| {delta_val} "
         f"| {THRESHOLD} "
         f"| {current_run['decision']['status']} "
+        f"| {current_run['hypothesis']} "
         f"| {current_run['decision']['reason']} |"
     )
 
