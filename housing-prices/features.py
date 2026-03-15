@@ -44,12 +44,36 @@ def make_features(df: pd.DataFrame, feature_set: str = "baseline") -> pd.DataFra
     out = df.copy()
 
     if feature_set == "baseline":
-        cols = NUMERIC_COLUMNS
+        out["TotalSF"] = (
+            out["TotalBsmtSF"].fillna(0)
+            + out["1stFlrSF"].fillna(0)
+            + out["2ndFlrSF"].fillna(0)
+        )
+        out["TotalBathrooms"] = (
+            out["FullBath"].fillna(0)
+            + out["HalfBath"].fillna(0) * 0.5
+            + out["BsmtFullBath"].fillna(0)
+            + out["BsmtHalfBath"].fillna(0) * 0.5
+        )
+        out["HouseAge"] = out["YrSold"].fillna(2010) - out["YearBuilt"].fillna(2000)
+        out["RemodAge"] = out["YrSold"].fillna(2010) - out["YearRemodAdd"].fillna(2000)
+        out["IsRemodeled"] = (out["YearBuilt"] != out["YearRemodAdd"]).astype(int)
+        out["HasGarage"] = (out["GarageArea"].fillna(0) > 0).astype(int)
+        out["HasFireplace"] = (out["Fireplaces"].fillna(0) > 0).astype(int)
+        cols = NUMERIC_COLUMNS + [
+            "TotalSF",
+            "TotalBathrooms",
+            "HouseAge",
+            "RemodAge",
+            "IsRemodeled",
+            "HasGarage",
+            "HasFireplace",
+        ]
     else:
         cols = NUMERIC_COLUMNS
 
     available_cols = [c for c in cols if c in out.columns]
-    return out[available_cols]
+    return out[list(available_cols)]
 
 
 def build_feature_matrices(train_df, test_df, feature_set="baseline"):
