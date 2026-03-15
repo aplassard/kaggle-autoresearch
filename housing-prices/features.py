@@ -93,6 +93,11 @@ def make_features(df: pd.DataFrame, feature_set: str = "baseline") -> pd.DataFra
         )
         out = pd.concat([out, bldgtype_dummies], axis=1)
 
+        housestyle_dummies = pd.get_dummies(
+            out["HouseStyle"], prefix="HouseStyle", drop_first=True
+        )
+        out = pd.concat([out, housestyle_dummies], axis=1)
+
         quality_encoded = []
         for col in QUALITY_COLUMNS:
             if col in out.columns:
@@ -113,6 +118,7 @@ def make_features(df: pd.DataFrame, feature_set: str = "baseline") -> pd.DataFra
             + list(neighborhood_dummies.columns)
             + list(mszoning_dummies.columns)
             + list(bldgtype_dummies.columns)
+            + list(housestyle_dummies.columns)
             + quality_encoded
         )
     else:
