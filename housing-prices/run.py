@@ -19,7 +19,7 @@ RESEARCH_LOG_PATH = ROOT / "research_log.md"
 THRESHOLD = -50
 RANDOM_STATE = 42
 
-HYPOTHESIS = "Increasing Ridge alpha from 1.0 to 10.0 will reduce overfitting and improve cross-validation RMSE by applying stronger regularization"
+HYPOTHESIS = "Adding engineered features (TotalSF, TotalBathrooms, HouseAge, RemodAge, IsRemodeled, HasGarage, HasFireplace) will capture important relationships and reduce CV RMSE"
 
 
 def ensure_dirs():
