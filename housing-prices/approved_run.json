@@ -1,0 +1,31 @@
+{
+  "timestamp_utc": "2026-03-15T15:44:05Z",
+  "branch": "unknown",
+  "feature_set": "baseline",
+  "hypothesis": "Baseline: Using basic numeric features with simple imputation to establish initial RMSE benchmark",
+  "model": {
+    "model_name": "ridge_v1",
+    "model_type": "Ridge",
+    "notes": "Single active model for branch-based autoresearch workflow"
+  },
+  "metrics": {
+    "cv_rmse_mean": 38381.28260092238,
+    "cv_rmse_std": 11544.855689478109,
+    "fold_scores": [
+      36830.41357060268,
+      36672.7565389052,
+      60209.32224247253,
+      31570.178231189835,
+      26623.742421441642
+    ],
+    "n_features": 35,
+    "n_rows": 1460
+  },
+  "approved_baseline": null,
+  "decision": {
+    "status": "no_baseline",
+    "accepted": true,
+    "delta_cv_rmse": null,
+    "reason": "No approved baseline found; current run becomes the initial baseline candidate."
+  }
+}

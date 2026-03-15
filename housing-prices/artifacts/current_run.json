@@ -1,0 +1,61 @@
+{
+  "timestamp_utc": "2026-03-15T15:47:47Z",
+  "branch": "unknown",
+  "feature_set": "baseline",
+  "hypothesis": "Adding StandardScaler will improve Ridge regression performance by normalizing feature scales, reducing the impact of features with larger magnitudes",
+  "model": {
+    "model_name": "ridge_v1",
+    "model_type": "Ridge",
+    "notes": "Single active model for branch-based autoresearch workflow"
+  },
+  "metrics": {
+    "cv_rmse_mean": 38378.70595041733,
+    "cv_rmse_std": 11534.318651772175,
+    "fold_scores": [
+      36832.55624918431,
+      36682.84385754482,
+      60183.4216160757,
+      31567.51533475179,
+      26627.192694530033
+    ],
+    "n_features": 35,
+    "n_rows": 1460
+  },
+  "approved_baseline": {
+    "timestamp_utc": "2026-03-15T15:44:05Z",
+    "branch": "unknown",
+    "feature_set": "baseline",
+    "hypothesis": "Baseline: Using basic numeric features with simple imputation to establish initial RMSE benchmark",
+    "model": {
+      "model_name": "ridge_v1",
+      "model_type": "Ridge",
+      "notes": "Single active model for branch-based autoresearch workflow"
+    },
+    "metrics": {
+      "cv_rmse_mean": 38381.28260092238,
+      "cv_rmse_std": 11544.855689478109,
+      "fold_scores": [
+        36830.41357060268,
+        36672.7565389052,
+        60209.32224247253,
+        31570.178231189835,
+        26623.742421441642
+      ],
+      "n_features": 35,
+      "n_rows": 1460
+    },
+    "approved_baseline": null,
+    "decision": {
+      "status": "no_baseline",
+      "accepted": true,
+      "delta_cv_rmse": null,
+      "reason": "No approved baseline found; current run becomes the initial baseline candidate."
+    }
+  },
+  "decision": {
+    "status": "rejected",
+    "accepted": false,
+    "delta_cv_rmse": -2.5766505050487467,
+    "reason": "RMSE reduction 2.58 did not meet threshold of 50.00 improvement."
+  }
+}
