@@ -14,6 +14,7 @@ DATA_DIR = ROOT / "data"
 ARTIFACTS_DIR = ROOT / "artifacts"
 
 APPROVED_RUN_PATH = ROOT / "approved_run.json"
+RESEARCH_LOG_PATH = ROOT / "research_log.md"
 
 THRESHOLD = -50
 RANDOM_STATE = 42
@@ -104,6 +105,53 @@ def write_current_run_json(current_run):
     )
 
 
+def ensure_research_log():
+    if not RESEARCH_LOG_PATH.exists():
+        RESEARCH_LOG_PATH.write_text(
+            "\n".join(
+                [
+                    "# Housing Prices autoresearch log",
+                    "",
+                    "| timestamp_utc | branch | model_name | feature_set | cv_rmse_mean | cv_rmse_std | baseline_cv_rmse | delta_cv_rmse | threshold | decision | notes |",
+                    "|---|---|---|---|---:|---:|---:|---:|---:|---|---|",
+                ]
+            ),
+            encoding="utf-8",
+        )
+
+
+def append_research_log(current_run):
+    ensure_research_log()
+
+    baseline_val = (
+        f"{current_run['approved_baseline']['metrics']['cv_rmse_mean']:.2f}"
+        if current_run["approved_baseline"] is not None
+        else ""
+    )
+    delta_val = (
+        f"{current_run['decision']['delta_cv_rmse']:.2f}"
+        if current_run["decision"]["delta_cv_rmse"] is not None
+        else ""
+    )
+
+    line = (
+        f"| {current_run['timestamp_utc']} "
+        f"| {current_run['branch']} "
+        f"| {current_run['model']['model_name']} "
+        f"| {current_run['feature_set']} "
+        f"| {current_run['metrics']['cv_rmse_mean']:.2f} "
+        f"| {current_run['metrics']['cv_rmse_std']:.2f} "
+        f"| {baseline_val} "
+        f"| {delta_val} "
+        f"| {THRESHOLD} "
+        f"| {current_run['decision']['status']} "
+        f"| {current_run['decision']['reason']} |"
+    )
+
+    with RESEARCH_LOG_PATH.open("a", encoding="utf-8") as f:
+        f.write(line + "\n")
+
+
 def detect_branch_name():
     head_path = ROOT / ".git" / "HEAD"
     if not head_path.exists():
@@ -142,6 +190,7 @@ def main():
     current_run["decision"] = decide(current_run["metrics"], approved)
 
     write_current_run_json(current_run)
+    append_research_log(current_run)
 
     print(json.dumps(current_run, indent=2))
 

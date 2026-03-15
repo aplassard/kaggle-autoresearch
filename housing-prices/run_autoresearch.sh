@@ -12,6 +12,7 @@ echo "Working directory: $WORKDIR"
 echo "----------------------------------------"
 
 for i in $(seq 1 $ITERATIONS); do
+    git checkout main && git pull
     echo ""
     echo "========================================"
     echo "Iteration $i of $ITERATIONS"
