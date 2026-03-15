@@ -60,15 +60,25 @@ def make_features(df: pd.DataFrame, feature_set: str = "baseline") -> pd.DataFra
         out["IsRemodeled"] = (out["YearBuilt"] != out["YearRemodAdd"]).astype(int)
         out["HasGarage"] = (out["GarageArea"].fillna(0) > 0).astype(int)
         out["HasFireplace"] = (out["Fireplaces"].fillna(0) > 0).astype(int)
-        cols = NUMERIC_COLUMNS + [
-            "TotalSF",
-            "TotalBathrooms",
-            "HouseAge",
-            "RemodAge",
-            "IsRemodeled",
-            "HasGarage",
-            "HasFireplace",
-        ]
+
+        neighborhood_dummies = pd.get_dummies(
+            out["Neighborhood"], prefix="Neighborhood", drop_first=True
+        )
+        out = pd.concat([out, neighborhood_dummies], axis=1)
+
+        cols = (
+            NUMERIC_COLUMNS
+            + [
+                "TotalSF",
+                "TotalBathrooms",
+                "HouseAge",
+                "RemodAge",
+                "IsRemodeled",
+                "HasGarage",
+                "HasFireplace",
+            ]
+            + list(neighborhood_dummies.columns)
+        )
     else:
         cols = NUMERIC_COLUMNS
 

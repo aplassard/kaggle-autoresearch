@@ -1,91 +1,121 @@
 {
-  "timestamp_utc": "2026-03-15T16:09:03Z",
+  "timestamp_utc": "2026-03-15T16:18:21Z",
   "branch": "unknown",
   "feature_set": "baseline",
-  "hypothesis": "Adding engineered features (TotalSF, TotalBathrooms, HouseAge, RemodAge, IsRemodeled, HasGarage, HasFireplace) will capture important relationships and reduce CV RMSE",
+  "hypothesis": "Adding one-hot encoding for Neighborhood will capture location-based price variations and reduce CV RMSE",
   "model": {
     "model_name": "ridge_v1",
     "model_type": "Ridge",
     "notes": "Single active model for branch-based autoresearch workflow"
   },
   "metrics": {
-    "cv_rmse_mean": 37900.13494917487,
-    "cv_rmse_std": 11311.279747382447,
+    "cv_rmse_mean": 35603.549103033394,
+    "cv_rmse_std": 10376.578582674756,
     "fold_scores": [
-      36301.52726988514,
-      36134.26936523779,
-      59303.315829544066,
-      31455.44440001521,
-      26306.117881192153
+      33641.57698345421,
+      33986.44194112898,
+      55280.597771297886,
+      30306.290391542007,
+      24802.838427743878
     ],
-    "n_features": 42,
+    "n_features": 66,
     "n_rows": 1460
   },
   "approved_baseline": {
-    "timestamp_utc": "2026-03-15T16:00:41Z",
+    "timestamp_utc": "2026-03-15T16:09:03Z",
     "branch": "unknown",
     "feature_set": "baseline",
-    "hypothesis": "Increasing Ridge alpha from 1.0 to 10.0 will reduce overfitting and improve cross-validation RMSE by applying stronger regularization",
+    "hypothesis": "Adding engineered features (TotalSF, TotalBathrooms, HouseAge, RemodAge, IsRemodeled, HasGarage, HasFireplace) will capture important relationships and reduce CV RMSE",
     "model": {
       "model_name": "ridge_v1",
       "model_type": "Ridge",
       "notes": "Single active model for branch-based autoresearch workflow"
     },
     "metrics": {
-      "cv_rmse_mean": 38309.10116889579,
-      "cv_rmse_std": 11431.625401074265,
+      "cv_rmse_mean": 37900.13494917487,
+      "cv_rmse_std": 11311.279747382447,
       "fold_scores": [
-        36848.619296241595,
-        36653.02210236038,
-        59896.22751768532,
-        31518.176672675887,
-        26629.460255515758
+        36301.52726988514,
+        36134.26936523779,
+        59303.315829544066,
+        31455.44440001521,
+        26306.117881192153
       ],
-      "n_features": 35,
+      "n_features": 42,
       "n_rows": 1460
     },
     "approved_baseline": {
-      "timestamp_utc": "2026-03-15T15:44:05Z",
+      "timestamp_utc": "2026-03-15T16:00:41Z",
       "branch": "unknown",
       "feature_set": "baseline",
-      "hypothesis": "Baseline: Using basic numeric features with simple imputation to establish initial RMSE benchmark",
+      "hypothesis": "Increasing Ridge alpha from 1.0 to 10.0 will reduce overfitting and improve cross-validation RMSE by applying stronger regularization",
       "model": {
         "model_name": "ridge_v1",
         "model_type": "Ridge",
         "notes": "Single active model for branch-based autoresearch workflow"
       },
       "metrics": {
-        "cv_rmse_mean": 38381.28260092238,
-        "cv_rmse_std": 11544.855689478109,
+        "cv_rmse_mean": 38309.10116889579,
+        "cv_rmse_std": 11431.625401074265,
         "fold_scores": [
-          36830.41357060268,
-          36672.7565389052,
-          60209.32224247253,
-          31570.178231189835,
-          26623.742421441642
+          36848.619296241595,
+          36653.02210236038,
+          59896.22751768532,
+          31518.176672675887,
+          26629.460255515758
         ],
         "n_features": 35,
         "n_rows": 1460
       },
-      "approved_baseline": null,
+      "approved_baseline": {
+        "timestamp_utc": "2026-03-15T15:44:05Z",
+        "branch": "unknown",
+        "feature_set": "baseline",
+        "hypothesis": "Baseline: Using basic numeric features with simple imputation to establish initial RMSE benchmark",
+        "model": {
+          "model_name": "ridge_v1",
+          "model_type": "Ridge",
+          "notes": "Single active model for branch-based autoresearch workflow"
+        },
+        "metrics": {
+          "cv_rmse_mean": 38381.28260092238,
+          "cv_rmse_std": 11544.855689478109,
+          "fold_scores": [
+            36830.41357060268,
+            36672.7565389052,
+            60209.32224247253,
+            31570.178231189835,
+            26623.742421441642
+          ],
+          "n_features": 35,
+          "n_rows": 1460
+        },
+        "approved_baseline": null,
+        "decision": {
+          "status": "no_baseline",
+          "accepted": true,
+          "delta_cv_rmse": null,
+          "reason": "No approved baseline found; current run becomes the initial baseline candidate."
+        }
+      },
       "decision": {
-        "status": "no_baseline",
+        "status": "accepted",
         "accepted": true,
-        "delta_cv_rmse": null,
-        "reason": "No approved baseline found; current run becomes the initial baseline candidate."
+        "delta_cv_rmse": -72.18143202659121,
+        "reason": "Reduced RMSE by 72.18, meeting threshold of 50.00 improvement."
       }
     },
     "decision": {
       "status": "accepted",
       "accepted": true,
-      "delta_cv_rmse": -72.18143202659121,
-      "reason": "Reduced RMSE by 72.18, meeting threshold of 50.00 improvement."
+      "delta_cv_rmse": -408.96621972091816,
+      "reason": "Reduced RMSE by 408.97, meeting threshold of 50.00 improvement."
     }
   },
   "decision": {
     "status": "accepted",
     "accepted": true,
-    "delta_cv_rmse": -408.96621972091816,
-    "reason": "Reduced RMSE by 408.97, meeting threshold of 50.00 improvement."
+    "delta_cv_rmse": -2296.5858461414755,
+    "reason": "Reduced RMSE by 2296.59, meeting threshold of 50.00 improvement."
   }
 }
