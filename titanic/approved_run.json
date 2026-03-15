@@ -1,8 +1,7 @@
 {
-  "cv_mean": 0.8338773460548616,
-  "cv_std": 0.014213052180924316,
+  "cv_mean": 0.8406126420187057,
+  "cv_std": 0.011761336272759416,
   "model_name": "random_forest_v1",
   "feature_set": "engineered",
-  "notes": "Initial approved baseline"
+  "notes": "Improved hyperparameters: n_estimators=500, min_samples_leaf=3, min_samples_split=6"
 }
-
