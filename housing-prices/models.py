@@ -4,7 +4,7 @@ MODEL_NAME = "ridge_v1"
 
 
 def get_model(random_state: int = 42):
-    return Ridge(alpha=1.0, random_state=random_state)
+    return Ridge(alpha=10.0, random_state=random_state)
 
 
 def get_model_metadata():
