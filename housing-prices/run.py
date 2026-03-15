@@ -19,7 +19,7 @@ RESEARCH_LOG_PATH = ROOT / "research_log.md"
 THRESHOLD = -50
 RANDOM_STATE = 42
 
-HYPOTHESIS = "Adding ordinal encoding for BsmtExposure (basement walkout/garden exposure) will capture basement-quality price variations and reduce CV RMSE"
+HYPOTHESIS = "Adding polynomial feature OverallQual^2 will capture the non-linear relationship between quality rating and sale price, where higher quality homes may have disproportionately higher values"
 
 
 def ensure_dirs():
