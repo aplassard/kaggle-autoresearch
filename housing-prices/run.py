@@ -19,7 +19,7 @@ RESEARCH_LOG_PATH = ROOT / "research_log.md"
 THRESHOLD = -50
 RANDOM_STATE = 42
 
-HYPOTHESIS = "Adding one-hot encoding for Neighborhood will capture location-based price variations and reduce CV RMSE"
+HYPOTHESIS = "Adding ordinal encoding for quality variables (ExterQual, BsmtQual, HeatingQC, KitchenQual, GarageQual) will capture quality-based price variations and reduce CV RMSE"
 
 
 def ensure_dirs():
