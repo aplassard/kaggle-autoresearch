@@ -19,7 +19,7 @@ RESEARCH_LOG_PATH = ROOT / "research_log.md"
 THRESHOLD = -50
 RANDOM_STATE = 42
 
-HYPOTHESIS = "Adding ratio feature GrLivArea / TotalSF will capture how the proportion of above-ground living space to total space affects price, where homes with more above-ground space relative to basement space may indicate different property types and value characteristics"
+HYPOTHESIS = "Adding ratio feature TotalBsmtSF / GrLivArea will capture how the basement-to-living-area ratio affects price, where homes with proportionally larger basements may indicate different property types (walk-out basements, garden apartments) and value characteristics"
 
 
 def ensure_dirs():
