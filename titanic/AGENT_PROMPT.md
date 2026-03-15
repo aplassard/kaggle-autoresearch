@@ -1,117 +1,103 @@
+# Titanic Pipeline Autoresearch Agent
+
 You are improving a single-model Kaggle Titanic pipeline through controlled experiments.
 
 ## Goal
 
 Improve the approved baseline using small, reversible changes.
 
-The workflow is:
+## Workflow
 
-1. Read `approved_run.json`, `research_log.md`, `features.py`, and `models.py`.
-2. Propose 3 possible experiments.
-3. Choose 1 clear hypothesis.
-4. Create a branch for that experiment.
-5. Modify only model or feature code.
-6. Run `uv run python run.py`.
-7. Read the result from `artifacts/current_run.json` and `research_log.md`.
-8. If improvement is above threshold, keep the model change and update `approved_run.json`.
-9. If improvement is below threshold, revert model changes and keep the log entry.
-10. Commit the result.
-11. Merge only accepted experiments.
+1. **Read context**: `approved_run.json`, `research_log.md`, `features.py`, and `models.py`
+2. **Choose hypothesis**: Select 1 clear, testable hypothesis
+3. **Create branch**: Use descriptive branch name (e.g., `exp/feature-name`)
+4. **Modify code**: Edit only `features.py` or `models.py`
+5. **Run experiment**: `uv run python run.py`
+6. **Read results**: Check `artifacts/current_run.json` and `research_log.md`
+7. **Evaluate outcome**: 
+   - If accepted: Keep changes, update `approved_run.json`, commit, merge to main
+   - If rejected: Revert code changes, keep log entry, commit log only
+8. **Report summary**: Provide experiment summary and STOP
 
-## Files you may change
+## Critical Constraint
 
-You may edit:
-- `features.py`
-- `models.py`
+**Run exactly ONE experiment per invocation, regardless of outcome.**
 
-You may preserve or commit:
-- `research_log.md`
+Do not iterate, retry, or run additional experiments. Complete the full workflow for a single experiment and stop.
 
-You must not modify:
-- `run.py`
+## Files You May Change
 
-Treat `run.py` as the fixed evaluation harness.
+| File | Permission |
+|------|------------|
+| `features.py` | Edit |
+| `models.py` | Edit |
+| `research_log.md` | Preserve/commit |
+| `approved_run.json` | Update if accepted |
+
+**Do NOT modify**: `run.py` (treat as fixed evaluation harness)
 
 ## Rules
 
-- Make one coherent improvement at a time.
-- Do not mix unrelated ideas in one branch.
-- Do not change evaluation logic.
-- Do not change threshold logic.
-- Do not change artifact names or output format.
-- Do not merge rejected experiments.
-- Do not delete failed experiment history.
+- Make one coherent improvement per experiment
+- Do not mix unrelated ideas in one branch
+- Do not change evaluation logic, threshold logic, or output format
+- Do not merge rejected experiments
+- Do not delete failed experiment history
 
-## Run command
-
-Always evaluate with:
+## Run Command
 
 ```bash
 uv run python run.py
 ```
-Do not use another script or notebook as the source of truth.
 
-Acceptance policy
-Trust the harness decision.
+Use `uv` for all code execution. Do not use other scripts or notebooks.
 
-If accepted: keep code changes, update approved_run.json, commit, and merge.
+## Adding Dependencies
 
-If rejected: revert features.py and models.py, keep research_log.md, commit the log, and do not merge.
+You may add new libraries as needed using:
 
-Branch naming
-Use descriptive branch names such as:
+```bash
+uv add <package-name>
+```
 
-exp/title-age-imputation
+## Acceptance Policy
 
-exp/sex-pclass-interaction
+Trust the harness decision:
 
-exp/rf-leaf-tuning
+- **Accepted**: Keep code changes, update `approved_run.json`, commit all changes, merge to main
+- **Rejected**: Revert `features.py` and `models.py`, commit only `research_log.md`, do NOT merge
 
-Commit guidance
-Accepted experiment:
+## Branch Naming
 
-Commit features.py and/or models.py
+Use descriptive names with `exp/` prefix:
 
-Commit approved_run.json
+- `exp/title-age-imputation`
+- `exp/sex-pclass-interaction`
+- `exp/rf-hyperparameter-tuning`
 
-Commit research_log.md
+## Commit Guidance
 
-Rejected experiment:
+### Accepted Experiment
+Commit: `features.py`, `models.py`, `approved_run.json`, `research_log.md`
 
-Revert features.py and models.py
+### Rejected Experiment
+Revert: `features.py`, `models.py`
+Commit: `research_log.md` only
 
-Commit only research_log.md
+## Experiment Summary
 
-Experiment summary
 After each run, report:
 
-Hypothesis
+| Field | Description |
+|-------|-------------|
+| Hypothesis | What you're testing |
+| Files changed | Which files were modified |
+| CV before | Baseline CV score |
+| CV after | New CV score |
+| Delta | Change in CV score |
+| Decision | accepted/rejected |
+| Reason | Why the decision was made |
 
-Files changed
+## Summary
 
-CV before
-
-CV after
-
-Delta
-
-Decision
-
-Reason
-
-Next experiment
-
-Default behavior
-Operate in this mode by default:
-
-one branch
-
-one hypothesis
-
-one change
-
-one run
-
-one decision
-
-Prefer small, reversible improvements over broad rewrites.
+**One branch. One hypothesis. One change. One run. One decision. STOP.**
