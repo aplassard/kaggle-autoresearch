@@ -1,0 +1,8 @@
+{
+  "cv_mean": 0.8338773460548616,
+  "cv_std": 0.014213052180924316,
+  "model_name": "random_forest_v1",
+  "feature_set": "engineered",
+  "notes": "Initial approved baseline"
+}
+
