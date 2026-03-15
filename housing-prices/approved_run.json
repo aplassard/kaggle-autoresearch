@@ -1,331 +1,361 @@
 {
-  "timestamp_utc": "2026-03-15T17:26:41Z",
+  "timestamp_utc": "2026-03-15T17:37:46Z",
   "branch": "unknown",
   "feature_set": "baseline",
-  "hypothesis": "Adding polynomial feature OverallQual^2 will capture the non-linear relationship between quality rating and sale price, where higher quality homes may have disproportionately higher values",
+  "hypothesis": "Adding interaction feature GarageCars x OverallQual will capture how garage capacity value is amplified in higher quality homes, where premium homes with multiple garage spaces command disproportionate prices",
   "model": {
     "model_name": "ridge_v1",
     "model_type": "Ridge",
     "notes": "Single active model for branch-based autoresearch workflow"
   },
   "metrics": {
-    "cv_rmse_mean": 32663.505472339188,
-    "cv_rmse_std": 10239.204016295358,
+    "cv_rmse_mean": 32133.70524512967,
+    "cv_rmse_std": 10169.519981295349,
     "fold_scores": [
-      30807.40057346442,
-      32230.720166741507,
-      51745.70418993099,
-      27044.993815985763,
-      21488.70861557328
+      30264.17492505044,
+      31566.525475529448,
+      51053.35504961976,
+      27013.29668121937,
+      20771.174094229365
     ],
-    "n_features": 94,
+    "n_features": 95,
     "n_rows": 1460
   },
   "approved_baseline": {
-    "timestamp_utc": "2026-03-15T16:55:33Z",
+    "timestamp_utc": "2026-03-15T17:26:41Z",
     "branch": "unknown",
     "feature_set": "baseline",
-    "hypothesis": "Adding ordinal encoding for BsmtExposure (basement walkout/garden exposure) will capture basement-quality price variations and reduce CV RMSE",
+    "hypothesis": "Adding polynomial feature OverallQual^2 will capture the non-linear relationship between quality rating and sale price, where higher quality homes may have disproportionately higher values",
     "model": {
       "model_name": "ridge_v1",
       "model_type": "Ridge",
       "notes": "Single active model for branch-based autoresearch workflow"
     },
     "metrics": {
-      "cv_rmse_mean": 33338.288279847846,
-      "cv_rmse_std": 9906.54213598906,
+      "cv_rmse_mean": 32663.505472339188,
+      "cv_rmse_std": 10239.204016295358,
       "fold_scores": [
-        31716.470518827005,
-        33417.45268452411,
-        51537.68988584698,
-        28019.853993711244,
-        21999.97431632991
+        30807.40057346442,
+        32230.720166741507,
+        51745.70418993099,
+        27044.993815985763,
+        21488.70861557328
       ],
-      "n_features": 93,
+      "n_features": 94,
       "n_rows": 1460
     },
     "approved_baseline": {
-      "timestamp_utc": "2026-03-15T16:39:27Z",
+      "timestamp_utc": "2026-03-15T16:55:33Z",
       "branch": "unknown",
       "feature_set": "baseline",
-      "hypothesis": "Adding one-hot encoding for Functional (home functionality rating) will capture functionality-based price variations and reduce CV RMSE",
+      "hypothesis": "Adding ordinal encoding for BsmtExposure (basement walkout/garden exposure) will capture basement-quality price variations and reduce CV RMSE",
       "model": {
         "model_name": "ridge_v1",
         "model_type": "Ridge",
         "notes": "Single active model for branch-based autoresearch workflow"
       },
       "metrics": {
-        "cv_rmse_mean": 33802.99712240044,
-        "cv_rmse_std": 10026.177371108117,
+        "cv_rmse_mean": 33338.288279847846,
+        "cv_rmse_std": 9906.54213598906,
         "fold_scores": [
-          32433.959013870106,
-          33055.38012467088,
-          52311.557489635874,
-          29018.34050345307,
-          22195.748480372273
+          31716.470518827005,
+          33417.45268452411,
+          51537.68988584698,
+          28019.853993711244,
+          21999.97431632991
         ],
-        "n_features": 92,
+        "n_features": 93,
         "n_rows": 1460
       },
       "approved_baseline": {
-        "timestamp_utc": "2026-03-15T16:29:29Z",
+        "timestamp_utc": "2026-03-15T16:39:27Z",
         "branch": "unknown",
         "feature_set": "baseline",
-        "hypothesis": "Adding one-hot encoding for HouseStyle (style of dwelling) will capture house-style price variations and reduce CV RMSE",
+        "hypothesis": "Adding one-hot encoding for Functional (home functionality rating) will capture functionality-based price variations and reduce CV RMSE",
         "model": {
           "model_name": "ridge_v1",
           "model_type": "Ridge",
           "notes": "Single active model for branch-based autoresearch workflow"
         },
         "metrics": {
-          "cv_rmse_mean": 33873.69151488984,
-          "cv_rmse_std": 9905.670843007636,
+          "cv_rmse_mean": 33802.99712240044,
+          "cv_rmse_std": 10026.177371108117,
           "fold_scores": [
-            32465.94607633122,
-            33280.467571452435,
-            52123.391066426164,
-            29156.360521569153,
-            22342.292338670202
+            32433.959013870106,
+            33055.38012467088,
+            52311.557489635874,
+            29018.34050345307,
+            22195.748480372273
           ],
-          "n_features": 86,
+          "n_features": 92,
           "n_rows": 1460
         },
         "approved_baseline": {
-          "timestamp_utc": "2026-03-15T16:27:01Z",
+          "timestamp_utc": "2026-03-15T16:29:29Z",
           "branch": "unknown",
           "feature_set": "baseline",
-          "hypothesis": "Adding one-hot encoding for BldgType (building type) will capture building-style price variations and reduce CV RMSE",
+          "hypothesis": "Adding one-hot encoding for HouseStyle (style of dwelling) will capture house-style price variations and reduce CV RMSE",
           "model": {
             "model_name": "ridge_v1",
             "model_type": "Ridge",
             "notes": "Single active model for branch-based autoresearch workflow"
           },
           "metrics": {
-            "cv_rmse_mean": 34231.03260358162,
-            "cv_rmse_std": 10066.287989010163,
+            "cv_rmse_mean": 33873.69151488984,
+            "cv_rmse_std": 9905.670843007636,
             "fold_scores": [
-              32547.95613685025,
-              33459.05092436648,
-              52879.58377323203,
-              29622.767021955537,
-              22645.80516150378
+              32465.94607633122,
+              33280.467571452435,
+              52123.391066426164,
+              29156.360521569153,
+              22342.292338670202
             ],
-            "n_features": 79,
+            "n_features": 86,
             "n_rows": 1460
           },
           "approved_baseline": {
-            "timestamp_utc": "2026-03-15T16:23:12Z",
+            "timestamp_utc": "2026-03-15T16:27:01Z",
             "branch": "unknown",
             "feature_set": "baseline",
-            "hypothesis": "Adding one-hot encoding for MSZoning (zoning classification) will capture zoning-based price variations and reduce CV RMSE",
+            "hypothesis": "Adding one-hot encoding for BldgType (building type) will capture building-style price variations and reduce CV RMSE",
             "model": {
               "model_name": "ridge_v1",
               "model_type": "Ridge",
               "notes": "Single active model for branch-based autoresearch workflow"
             },
             "metrics": {
-              "cv_rmse_mean": 35213.61718091713,
-              "cv_rmse_std": 10420.047079192713,
+              "cv_rmse_mean": 34231.03260358162,
+              "cv_rmse_std": 10066.287989010163,
               "fold_scores": [
-                32907.83379405389,
-                34143.48552585115,
-                54852.21272428584,
-                30124.74824597693,
-                24039.805614417837
+                32547.95613685025,
+                33459.05092436648,
+                52879.58377323203,
+                29622.767021955537,
+                22645.80516150378
               ],
-              "n_features": 75,
+              "n_features": 79,
               "n_rows": 1460
             },
             "approved_baseline": {
-              "timestamp_utc": "2026-03-15T16:20:56Z",
+              "timestamp_utc": "2026-03-15T16:23:12Z",
               "branch": "unknown",
               "feature_set": "baseline",
-              "hypothesis": "Adding ordinal encoding for quality variables (ExterQual, BsmtQual, HeatingQC, KitchenQual, GarageQual) will capture quality-based price variations and reduce CV RMSE",
+              "hypothesis": "Adding one-hot encoding for MSZoning (zoning classification) will capture zoning-based price variations and reduce CV RMSE",
               "model": {
                 "model_name": "ridge_v1",
                 "model_type": "Ridge",
                 "notes": "Single active model for branch-based autoresearch workflow"
               },
               "metrics": {
-                "cv_rmse_mean": 35284.560576127216,
-                "cv_rmse_std": 10441.717479782748,
+                "cv_rmse_mean": 35213.61718091713,
+                "cv_rmse_std": 10420.047079192713,
                 "fold_scores": [
-                  33110.169155464064,
-                  34126.43919153295,
-                  54948.67784249176,
-                  30204.202920017597,
-                  24033.313771129688
+                  32907.83379405389,
+                  34143.48552585115,
+                  54852.21272428584,
+                  30124.74824597693,
+                  24039.805614417837
                 ],
-                "n_features": 71,
+                "n_features": 75,
                 "n_rows": 1460
               },
               "approved_baseline": {
-                "timestamp_utc": "2026-03-15T16:18:21Z",
+                "timestamp_utc": "2026-03-15T16:20:56Z",
                 "branch": "unknown",
                 "feature_set": "baseline",
-                "hypothesis": "Adding one-hot encoding for Neighborhood will capture location-based price variations and reduce CV RMSE",
+                "hypothesis": "Adding ordinal encoding for quality variables (ExterQual, BsmtQual, HeatingQC, KitchenQual, GarageQual) will capture quality-based price variations and reduce CV RMSE",
                 "model": {
                   "model_name": "ridge_v1",
                   "model_type": "Ridge",
                   "notes": "Single active model for branch-based autoresearch workflow"
                 },
                 "metrics": {
-                  "cv_rmse_mean": 35603.549103033394,
-                  "cv_rmse_std": 10376.578582674756,
+                  "cv_rmse_mean": 35284.560576127216,
+                  "cv_rmse_std": 10441.717479782748,
                   "fold_scores": [
-                    33641.57698345421,
-                    33986.44194112898,
-                    55280.597771297886,
-                    30306.290391542007,
-                    24802.838427743878
+                    33110.169155464064,
+                    34126.43919153295,
+                    54948.67784249176,
+                    30204.202920017597,
+                    24033.313771129688
                   ],
-                  "n_features": 66,
+                  "n_features": 71,
                   "n_rows": 1460
                 },
                 "approved_baseline": {
-                  "timestamp_utc": "2026-03-15T16:09:03Z",
+                  "timestamp_utc": "2026-03-15T16:18:21Z",
                   "branch": "unknown",
                   "feature_set": "baseline",
-                  "hypothesis": "Adding engineered features (TotalSF, TotalBathrooms, HouseAge, RemodAge, IsRemodeled, HasGarage, HasFireplace) will capture important relationships and reduce CV RMSE",
+                  "hypothesis": "Adding one-hot encoding for Neighborhood will capture location-based price variations and reduce CV RMSE",
                   "model": {
                     "model_name": "ridge_v1",
                     "model_type": "Ridge",
                     "notes": "Single active model for branch-based autoresearch workflow"
                   },
                   "metrics": {
-                    "cv_rmse_mean": 37900.13494917487,
-                    "cv_rmse_std": 11311.279747382447,
+                    "cv_rmse_mean": 35603.549103033394,
+                    "cv_rmse_std": 10376.578582674756,
                     "fold_scores": [
-                      36301.52726988514,
-                      36134.26936523779,
-                      59303.315829544066,
-                      31455.44440001521,
-                      26306.117881192153
+                      33641.57698345421,
+                      33986.44194112898,
+                      55280.597771297886,
+                      30306.290391542007,
+                      24802.838427743878
                     ],
-                    "n_features": 42,
+                    "n_features": 66,
                     "n_rows": 1460
                   },
                   "approved_baseline": {
-                    "timestamp_utc": "2026-03-15T16:00:41Z",
+                    "timestamp_utc": "2026-03-15T16:09:03Z",
                     "branch": "unknown",
                     "feature_set": "baseline",
-                    "hypothesis": "Increasing Ridge alpha from 1.0 to 10.0 will reduce overfitting and improve cross-validation RMSE by applying stronger regularization",
+                    "hypothesis": "Adding engineered features (TotalSF, TotalBathrooms, HouseAge, RemodAge, IsRemodeled, HasGarage, HasFireplace) will capture important relationships and reduce CV RMSE",
                     "model": {
                       "model_name": "ridge_v1",
                       "model_type": "Ridge",
                       "notes": "Single active model for branch-based autoresearch workflow"
                     },
                     "metrics": {
-                      "cv_rmse_mean": 38309.10116889579,
-                      "cv_rmse_std": 11431.625401074265,
+                      "cv_rmse_mean": 37900.13494917487,
+                      "cv_rmse_std": 11311.279747382447,
                       "fold_scores": [
-                        36848.619296241595,
-                        36653.02210236038,
-                        59896.22751768532,
-                        31518.176672675887,
-                        26629.460255515758
+                        36301.52726988514,
+                        36134.26936523779,
+                        59303.315829544066,
+                        31455.44440001521,
+                        26306.117881192153
                       ],
-                      "n_features": 35,
+                      "n_features": 42,
                       "n_rows": 1460
                     },
                     "approved_baseline": {
-                      "timestamp_utc": "2026-03-15T15:44:05Z",
+                      "timestamp_utc": "2026-03-15T16:00:41Z",
                       "branch": "unknown",
                       "feature_set": "baseline",
-                      "hypothesis": "Baseline: Using basic numeric features with simple imputation to establish initial RMSE benchmark",
+                      "hypothesis": "Increasing Ridge alpha from 1.0 to 10.0 will reduce overfitting and improve cross-validation RMSE by applying stronger regularization",
                       "model": {
                         "model_name": "ridge_v1",
                         "model_type": "Ridge",
                         "notes": "Single active model for branch-based autoresearch workflow"
                       },
                       "metrics": {
-                        "cv_rmse_mean": 38381.28260092238,
-                        "cv_rmse_std": 11544.855689478109,
+                        "cv_rmse_mean": 38309.10116889579,
+                        "cv_rmse_std": 11431.625401074265,
                         "fold_scores": [
-                          36830.41357060268,
-                          36672.7565389052,
-                          60209.32224247253,
-                          31570.178231189835,
-                          26623.742421441642
+                          36848.619296241595,
+                          36653.02210236038,
+                          59896.22751768532,
+                          31518.176672675887,
+                          26629.460255515758
                         ],
                         "n_features": 35,
                         "n_rows": 1460
                       },
-                      "approved_baseline": null,
+                      "approved_baseline": {
+                        "timestamp_utc": "2026-03-15T15:44:05Z",
+                        "branch": "unknown",
+                        "feature_set": "baseline",
+                        "hypothesis": "Baseline: Using basic numeric features with simple imputation to establish initial RMSE benchmark",
+                        "model": {
+                          "model_name": "ridge_v1",
+                          "model_type": "Ridge",
+                          "notes": "Single active model for branch-based autoresearch workflow"
+                        },
+                        "metrics": {
+                          "cv_rmse_mean": 38381.28260092238,
+                          "cv_rmse_std": 11544.855689478109,
+                          "fold_scores": [
+                            36830.41357060268,
+                            36672.7565389052,
+                            60209.32224247253,
+                            31570.178231189835,
+                            26623.742421441642
+                          ],
+                          "n_features": 35,
+                          "n_rows": 1460
+                        },
+                        "approved_baseline": null,
+                        "decision": {
+                          "status": "no_baseline",
+                          "accepted": true,
+                          "delta_cv_rmse": null,
+                          "reason": "No approved baseline found; current run becomes the initial baseline candidate."
+                        }
+                      },
                       "decision": {
-                        "status": "no_baseline",
+                        "status": "accepted",
                         "accepted": true,
-                        "delta_cv_rmse": null,
-                        "reason": "No approved baseline found; current run becomes the initial baseline candidate."
+                        "delta_cv_rmse": -72.18143202659121,
+                        "reason": "Reduced RMSE by 72.18, meeting threshold of 50.00 improvement."
                       }
                     },
                     "decision": {
                       "status": "accepted",
                       "accepted": true,
-                      "delta_cv_rmse": -72.18143202659121,
-                      "reason": "Reduced RMSE by 72.18, meeting threshold of 50.00 improvement."
+                      "delta_cv_rmse": -408.96621972091816,
+                      "reason": "Reduced RMSE by 408.97, meeting threshold of 50.00 improvement."
                     }
                   },
                   "decision": {
                     "status": "accepted",
                     "accepted": true,
-                    "delta_cv_rmse": -408.96621972091816,
-                    "reason": "Reduced RMSE by 408.97, meeting threshold of 50.00 improvement."
+                    "delta_cv_rmse": -2296.5858461414755,
+                    "reason": "Reduced RMSE by 2296.59, meeting threshold of 50.00 improvement."
                   }
                 },
                 "decision": {
                   "status": "accepted",
                   "accepted": true,
-                  "delta_cv_rmse": -2296.5858461414755,
-                  "reason": "Reduced RMSE by 2296.59, meeting threshold of 50.00 improvement."
+                  "delta_cv_rmse": -318.98852690617787,
+                  "reason": "Reduced RMSE by 318.99, meeting threshold of 50.00 improvement."
                 }
               },
               "decision": {
                 "status": "accepted",
                 "accepted": true,
-                "delta_cv_rmse": -318.98852690617787,
-                "reason": "Reduced RMSE by 318.99, meeting threshold of 50.00 improvement."
+                "delta_cv_rmse": -70.94339521008806,
+                "reason": "Reduced RMSE by 70.94, meeting threshold of 50.00 improvement."
               }
             },
             "decision": {
               "status": "accepted",
               "accepted": true,
-              "delta_cv_rmse": -70.94339521008806,
-              "reason": "Reduced RMSE by 70.94, meeting threshold of 50.00 improvement."
+              "delta_cv_rmse": -982.5845773355104,
+              "reason": "Reduced RMSE by 982.58, meeting threshold of 50.00 improvement."
             }
           },
           "decision": {
             "status": "accepted",
             "accepted": true,
-            "delta_cv_rmse": -982.5845773355104,
-            "reason": "Reduced RMSE by 982.58, meeting threshold of 50.00 improvement."
+            "delta_cv_rmse": -357.34108869177726,
+            "reason": "Reduced RMSE by 357.34, meeting threshold of 50.00 improvement."
           }
         },
         "decision": {
           "status": "accepted",
           "accepted": true,
-          "delta_cv_rmse": -357.34108869177726,
-          "reason": "Reduced RMSE by 357.34, meeting threshold of 50.00 improvement."
+          "delta_cv_rmse": -70.69439248940034,
+          "reason": "Reduced RMSE by 70.69, meeting threshold of 50.00 improvement."
         }
       },
       "decision": {
         "status": "accepted",
         "accepted": true,
-        "delta_cv_rmse": -70.69439248940034,
-        "reason": "Reduced RMSE by 70.69, meeting threshold of 50.00 improvement."
+        "delta_cv_rmse": -464.70884255259443,
+        "reason": "Reduced RMSE by 464.71, meeting threshold of 50.00 improvement."
       }
     },
     "decision": {
       "status": "accepted",
       "accepted": true,
-      "delta_cv_rmse": -464.70884255259443,
-      "reason": "Reduced RMSE by 464.71, meeting threshold of 50.00 improvement."
+      "delta_cv_rmse": -674.7828075086582,
+      "reason": "Reduced RMSE by 674.78, meeting threshold of 50.00 improvement."
     }
   },
   "decision": {
     "status": "accepted",
     "accepted": true,
-    "delta_cv_rmse": -674.7828075086582,
-    "reason": "Reduced RMSE by 674.78, meeting threshold of 50.00 improvement."
+    "delta_cv_rmse": -529.8002272095182,
+    "reason": "Reduced RMSE by 529.80, meeting threshold of 50.00 improvement."
   }
 }

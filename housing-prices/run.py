@@ -19,7 +19,7 @@ RESEARCH_LOG_PATH = ROOT / "research_log.md"
 THRESHOLD = -50
 RANDOM_STATE = 42
 
-HYPOTHESIS = "Adding polynomial feature OverallQual^2 will capture the non-linear relationship between quality rating and sale price, where higher quality homes may have disproportionately higher values"
+HYPOTHESIS = "Adding interaction feature GarageCars x OverallQual will capture how garage capacity value is amplified in higher quality homes, where premium homes with multiple garage spaces command disproportionate prices"
 
 
 def ensure_dirs():
