@@ -19,7 +19,7 @@ RESEARCH_LOG_PATH = ROOT / "research_log.md"
 THRESHOLD = -50
 RANDOM_STATE = 42
 
-HYPOTHESIS = "Adding interaction feature GarageCars x KitchenQual_Ord will capture how garage capacity value is amplified in homes with excellent kitchens, where homes with both premium kitchens and multiple garage spaces command prices beyond what either feature captures alone"
+HYPOTHESIS = "Adding interaction feature GarageCars x OverallQual_Sq will capture how garage capacity value is amplified in homes with very high quality ratings, where the squared quality rating captures non-linear quality premiums and garage spaces command disproportionate prices in these premium homes"
 
 
 def ensure_dirs():
