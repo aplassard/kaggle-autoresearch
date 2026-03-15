@@ -19,7 +19,7 @@ RESEARCH_LOG_PATH = ROOT / "research_log.md"
 THRESHOLD = -50
 RANDOM_STATE = 42
 
-HYPOTHESIS = "Adding StandardScaler will improve Ridge regression performance by normalizing feature scales, reducing the impact of features with larger magnitudes"
+HYPOTHESIS = "Increasing Ridge alpha from 1.0 to 10.0 will reduce overfitting and improve cross-validation RMSE by applying stronger regularization"
 
 
 def ensure_dirs():
