@@ -19,7 +19,7 @@ RESEARCH_LOG_PATH = ROOT / "research_log.md"
 THRESHOLD = -50
 RANDOM_STATE = 42
 
-HYPOTHESIS = "Adding interaction feature TotalSF x GarageCars will capture how total square footage value is amplified in homes with more garage capacity, where larger homes with multiple garage spaces command premium prices beyond what either feature captures alone"
+HYPOTHESIS = "Adding interaction feature GarageCars x KitchenQual_Ord will capture how garage capacity value is amplified in homes with excellent kitchens, where homes with both premium kitchens and multiple garage spaces command prices beyond what either feature captures alone"
 
 
 def ensure_dirs():
