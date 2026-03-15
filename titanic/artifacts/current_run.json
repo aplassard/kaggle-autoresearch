@@ -1,0 +1,36 @@
+{
+  "timestamp_utc": "2026-03-15T10:23:02Z",
+  "branch": "unknown",
+  "feature_set": "engineered",
+  "model": {
+    "model_name": "random_forest_v1",
+    "model_type": "RandomForestClassifier",
+    "notes": "Single active model for branch-based autoresearch workflow"
+  },
+  "metrics": {
+    "cv_mean": 0.8316427091833531,
+    "cv_std": 0.0133762193765081,
+    "fold_scores": [
+      0.8379888268156425,
+      0.8258426966292135,
+      0.8146067415730337,
+      0.8258426966292135,
+      0.8539325842696629
+    ],
+    "n_features": 66,
+    "n_rows": 891
+  },
+  "approved_baseline": {
+    "cv_mean": 0.8338773460548616,
+    "cv_std": 0.014213052180924316,
+    "model_name": "random_forest_v1",
+    "feature_set": "engineered",
+    "notes": "Initial approved baseline"
+  },
+  "decision": {
+    "status": "rejected",
+    "accepted": false,
+    "delta_cv_mean": -0.0022346368715084886,
+    "reason": "Improvement -0.00223 did not meet threshold 0.00200."
+  }
+}
