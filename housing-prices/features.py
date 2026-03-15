@@ -54,6 +54,7 @@ QUALITY_COLUMNS = [
     "HeatingQC",
     "KitchenQual",
     "GarageQual",
+    "FireplaceQu",
 ]
 
 BSMT_EXPOSURE_MAPPING = {
@@ -128,6 +129,7 @@ def make_features(df: pd.DataFrame, feature_set: str = "baseline") -> pd.DataFra
         out["GarageCars_OverallQual"] = out["GarageCars"] * out["OverallQual"]
         out["BsmtQual_OverallQual"] = out["BsmtQual_Ord"] * out["OverallQual"]
         out["KitchenQual_OverallQual"] = out["KitchenQual_Ord"] * out["OverallQual"]
+        out["FireplaceQu_OverallQual"] = out["FireplaceQu_Ord"] * out["OverallQual"]
 
         cols = (
             NUMERIC_COLUMNS
@@ -143,6 +145,7 @@ def make_features(df: pd.DataFrame, feature_set: str = "baseline") -> pd.DataFra
                 "GarageCars_OverallQual",
                 "BsmtQual_OverallQual",
                 "KitchenQual_OverallQual",
+                "FireplaceQu_OverallQual",
             ]
             + list(neighborhood_dummies.columns)
             + list(mszoning_dummies.columns)
