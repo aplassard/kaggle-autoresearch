@@ -19,7 +19,7 @@ RESEARCH_LOG_PATH = ROOT / "research_log.md"
 THRESHOLD = -50
 RANDOM_STATE = 42
 
-HYPOTHESIS = "Adding ratio feature TotalBsmtSF / GrLivArea will capture how the basement-to-living-area ratio affects price, where homes with proportionally larger basements may indicate different property types (walk-out basements, garden apartments) and value characteristics"
+HYPOTHESIS = "Adding binary feature HasPool (PoolArea > 0) will capture the premium for homes with swimming pools, where properties with pools are rare luxury amenities that command significantly higher prices"
 
 
 def ensure_dirs():
