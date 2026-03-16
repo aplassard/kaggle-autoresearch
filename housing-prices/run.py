@@ -19,7 +19,7 @@ RESEARCH_LOG_PATH = ROOT / "research_log.md"
 THRESHOLD = -50
 RANDOM_STATE = 42
 
-HYPOTHESIS = "Adding binary feature HasMultipleFireplaces (Fireplaces >= 2) will capture the premium for luxury homes with multiple fireplaces, where properties with 2+ fireplaces are rare luxury amenities that signal high-end homes and command significantly higher prices beyond what the fireplace count alone captures"
+HYPOTHESIS = "Adding binary feature HasHighQualityKitchen (KitchenQual_Ord >= 4) will capture the premium for homes with excellent or good kitchen quality, where high-quality kitchens are major selling points that command significantly higher prices beyond what the ordinal kitchen quality encoding alone captures"
 
 
 def ensure_dirs():
