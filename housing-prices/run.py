@@ -19,7 +19,7 @@ RESEARCH_LOG_PATH = ROOT / "research_log.md"
 THRESHOLD = -50
 RANDOM_STATE = 42
 
-HYPOTHESIS = "Adding BsmtQualityIndex feature (BsmtQual_Ord * BsmtExposure_Ord) will capture how basement quality combines with exposure type to affect price, where homes with both excellent basement height and walkout/garden access command premium prices beyond what either feature captures alone"
+HYPOTHESIS = "Adding binary feature IsPeakSeason (MoSold in [5,6,7]) will capture seasonal price premiums, where homes sold during peak selling months (May-July) typically command higher prices due to increased buyer demand, better showing conditions, and families wanting to move before the new school year"
 
 
 def ensure_dirs():
