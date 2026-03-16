@@ -19,7 +19,7 @@ RESEARCH_LOG_PATH = ROOT / "research_log.md"
 THRESHOLD = -50
 RANDOM_STATE = 42
 
-HYPOTHESIS = "Adding binary feature HasPool (PoolArea > 0) will capture the premium for homes with swimming pools, where properties with pools are rare luxury amenities that command significantly higher prices"
+HYPOTHESIS = "Adding BsmtQualityIndex feature (BsmtQual_Ord * BsmtExposure_Ord) will capture how basement quality combines with exposure type to affect price, where homes with both excellent basement height and walkout/garden access command premium prices beyond what either feature captures alone"
 
 
 def ensure_dirs():
