@@ -19,7 +19,7 @@ RESEARCH_LOG_PATH = ROOT / "research_log.md"
 THRESHOLD = -50
 RANDOM_STATE = 42
 
-HYPOTHESIS = "Adding interaction feature IsRemodeled x OverallQual will capture how remodeled homes with high quality ratings command premium prices, where homes that have been updated combined with high overall quality signal well-maintained premium properties that exceed the value of either characteristic alone"
+HYPOTHESIS = "Adding interaction feature TotalSF x IsRemodeled will capture how total square footage value is amplified in remodeled homes, where larger homes that have been updated throughout command premium prices beyond what total size or remodel status captures alone"
 
 
 def ensure_dirs():
