@@ -126,6 +126,7 @@ def make_features(df: pd.DataFrame, feature_set: str = "baseline") -> pd.DataFra
         else:
             bsmt_exposure_col = []
 
+        out["BsmtQualityIndex"] = out["BsmtQual_Ord"] * out["BsmtExposure_Ord"]
         out["OverallQual_Sq"] = out["OverallQual"] ** 2
         out["GarageCars_OverallQual"] = out["GarageCars"] * out["OverallQual"]
         out["BsmtQual_OverallQual"] = out["BsmtQual_Ord"] * out["OverallQual"]
@@ -148,6 +149,7 @@ def make_features(df: pd.DataFrame, feature_set: str = "baseline") -> pd.DataFra
                 "HasGarage",
                 "HasFireplace",
                 "HasPool",
+                "BsmtQualityIndex",
                 "OverallQual_Sq",
                 "GarageCars_OverallQual",
                 "BsmtQual_OverallQual",
