@@ -140,6 +140,7 @@ def make_features(df: pd.DataFrame, feature_set: str = "baseline") -> pd.DataFra
         out["IsPeakSeason"] = out["MoSold"].isin([5, 6, 7]).astype(int)
         out["HasMultipleFireplaces"] = (out["Fireplaces"].fillna(0) >= 2).astype(int)
         out["HasHighQualityKitchen"] = (out["KitchenQual_Ord"] >= 4).astype(int)
+        out["TotalSF_OverallCond"] = out["TotalSF"] * out["OverallCond"]
 
         cols = (
             NUMERIC_COLUMNS
@@ -166,6 +167,7 @@ def make_features(df: pd.DataFrame, feature_set: str = "baseline") -> pd.DataFra
                 "IsPeakSeason",
                 "HasMultipleFireplaces",
                 "HasHighQualityKitchen",
+                "TotalSF_OverallCond",
             ]
             + list(neighborhood_dummies.columns)
             + list(mszoning_dummies.columns)

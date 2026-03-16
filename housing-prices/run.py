@@ -19,7 +19,7 @@ RESEARCH_LOG_PATH = ROOT / "research_log.md"
 THRESHOLD = -50
 RANDOM_STATE = 42
 
-HYPOTHESIS = "Adding binary feature HasHighQualityKitchen (KitchenQual_Ord >= 4) will capture the premium for homes with excellent or good kitchen quality, where high-quality kitchens are major selling points that command significantly higher prices beyond what the ordinal kitchen quality encoding alone captures"
+HYPOTHESIS = "Adding interaction feature TotalSF x OverallCond will capture how total square footage value is amplified in homes with better condition ratings, where larger well-maintained homes command premium prices beyond what either feature captures alone"
 
 
 def ensure_dirs():
