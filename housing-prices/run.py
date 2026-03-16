@@ -19,7 +19,7 @@ RESEARCH_LOG_PATH = ROOT / "research_log.md"
 THRESHOLD = -50
 RANDOM_STATE = 42
 
-HYPOTHESIS = "Adding binary feature IsPeakSeason (MoSold in [5,6,7]) will capture seasonal price premiums, where homes sold during peak selling months (May-July) typically command higher prices due to increased buyer demand, better showing conditions, and families wanting to move before the new school year"
+HYPOTHESIS = "Adding binary feature HasMultipleFireplaces (Fireplaces >= 2) will capture the premium for luxury homes with multiple fireplaces, where properties with 2+ fireplaces are rare luxury amenities that signal high-end homes and command significantly higher prices beyond what the fireplace count alone captures"
 
 
 def ensure_dirs():
