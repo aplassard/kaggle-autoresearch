@@ -19,7 +19,7 @@ RESEARCH_LOG_PATH = ROOT / "research_log.md"
 THRESHOLD = -50
 RANDOM_STATE = 42
 
-HYPOTHESIS = "Testing LightGBM alone to see if it matches or exceeds ensemble performance - LightGBM's leaf-wise growth strategy may be sufficient without XGBoost"
+HYPOTHESIS = "Adding CatBoost to the ensemble (XGBoost + LightGBM + CatBoost with simple averaging) will improve predictions by leveraging CatBoost's superior categorical feature handling and providing additional model diversity"
 
 
 def ensure_dirs():
