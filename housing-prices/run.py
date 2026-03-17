@@ -19,7 +19,7 @@ RESEARCH_LOG_PATH = ROOT / "research_log.md"
 THRESHOLD = -50
 RANDOM_STATE = 42
 
-HYPOTHESIS = "Switching from Ridge regression to XGBoost will capture non-linear relationships and feature interactions that linear models cannot, significantly reducing CV RMSE"
+HYPOTHESIS = "Removing outliers where GrLivArea > 4000 sq ft will eliminate commercial/industrial properties that don't follow typical residential pricing patterns, reducing noise and improving model generalization"
 
 
 def ensure_dirs():
