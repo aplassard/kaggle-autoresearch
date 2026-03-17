@@ -158,6 +158,9 @@ def make_features(
         out["IsRemodeled_OverallQual"] = out["IsRemodeled"] * out["OverallQual"]
         out["TotalSF_IsRemodeled"] = out["TotalSF"] * out["IsRemodeled"]
         out["GarageCars_BsmtQualityIndex"] = out["GarageCars"] * out["BsmtQualityIndex"]
+        out["BathBedroomRatio"] = out["TotalBathrooms"] / out["BedroomAbvGr"].replace(
+            0, 1
+        )
 
         cols = (
             NUMERIC_COLUMNS
@@ -188,6 +191,7 @@ def make_features(
                 "IsRemodeled_OverallQual",
                 "TotalSF_IsRemodeled",
                 "GarageCars_BsmtQualityIndex",
+                "BathBedroomRatio",
                 "Neighborhood_TargetEnc",
             ]
             + list(neighborhood_dummies.columns)
