@@ -19,7 +19,7 @@ RESEARCH_LOG_PATH = ROOT / "research_log.md"
 THRESHOLD = -50
 RANDOM_STATE = 42
 
-HYPOTHESIS = "Removing outliers where GrLivArea > 4000 sq ft will eliminate commercial/industrial properties that don't follow typical residential pricing patterns, reducing noise and improving model generalization"
+HYPOTHESIS = "Reverting outlier removal - previous experiment removed outliers from both train and validation, which doesn't test generalization to edge cases. Model should be evaluated on all data including outliers."
 
 
 def ensure_dirs():
