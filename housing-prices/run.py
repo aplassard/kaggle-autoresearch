@@ -19,7 +19,7 @@ RESEARCH_LOG_PATH = ROOT / "research_log.md"
 THRESHOLD = -50
 RANDOM_STATE = 42
 
-HYPOTHESIS = "Ensembling XGBoost and LightGBM with simple averaging will improve predictions by combining complementary strengths - XGBoost's gradient boosting with LightGBM's leaf-wise growth strategy"
+HYPOTHESIS = "Testing LightGBM alone to see if it matches or exceeds ensemble performance - LightGBM's leaf-wise growth strategy may be sufficient without XGBoost"
 
 
 def ensure_dirs():
