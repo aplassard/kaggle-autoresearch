@@ -19,7 +19,7 @@ RESEARCH_LOG_PATH = ROOT / "research_log.md"
 THRESHOLD = -50
 RANDOM_STATE = 42
 
-HYPOTHESIS = "Adding CatBoost to the ensemble (XGBoost + LightGBM + CatBoost with simple averaging) will improve predictions by leveraging CatBoost's superior categorical feature handling and providing additional model diversity"
+HYPOTHESIS = "Adding target encoding for Neighborhood (smoothed with global mean) will improve gradient boosting model predictions by capturing location-based price patterns more effectively than one-hot encoding, especially for neighborhoods with few samples"
 
 
 def ensure_dirs():

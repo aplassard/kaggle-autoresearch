@@ -1,1081 +1,1111 @@
 {
-  "timestamp_utc": "2026-03-17T10:12:13Z",
+  "timestamp_utc": "2026-03-17T10:41:01Z",
   "branch": "unknown",
   "feature_set": "baseline",
-  "hypothesis": "Adding CatBoost to the ensemble (XGBoost + LightGBM + CatBoost with simple averaging) will improve predictions by leveraging CatBoost's superior categorical feature handling and providing additional model diversity",
+  "hypothesis": "Adding target encoding for Neighborhood (smoothed with global mean) will improve gradient boosting model predictions by capturing location-based price patterns more effectively than one-hot encoding, especially for neighborhoods with few samples",
   "model": {
     "model_name": "ensemble_xgb_lgbm_catboost",
     "model_type": "Ensemble(XGBRegressor + LGBMRegressor + CatBoostRegressor)",
     "notes": "Simple average ensemble of tuned XGBoost, LightGBM, and CatBoost with MAE loss"
   },
   "metrics": {
-    "cv_rmse_mean": 27219.65220300536,
-    "cv_rmse_std": 7194.022320445312,
+    "cv_rmse_mean": 26423.386482436326,
+    "cv_rmse_std": 6332.594193484934,
     "fold_scores": [
-      27567.11553003962,
-      23594.11569160108,
-      40298.2305825762,
-      25954.669643862228,
-      18684.12956694766
+      27209.872617407582,
+      23956.389685268325,
+      37471.93482352631,
+      25471.232259844957,
+      18007.503026134455
     ],
-    "n_features": 113,
+    "n_features": 114,
     "n_rows": 1460
   },
   "approved_baseline": {
-    "timestamp_utc": "2026-03-17T10:04:42Z",
+    "timestamp_utc": "2026-03-17T10:12:13Z",
     "branch": "unknown",
     "feature_set": "baseline",
-    "hypothesis": "Ensembling XGBoost and LightGBM with simple averaging will improve predictions by combining complementary strengths - XGBoost's gradient boosting with LightGBM's leaf-wise growth strategy",
+    "hypothesis": "Adding CatBoost to the ensemble (XGBoost + LightGBM + CatBoost with simple averaging) will improve predictions by leveraging CatBoost's superior categorical feature handling and providing additional model diversity",
     "model": {
-      "model_name": "ensemble_xgb_lgbm",
-      "model_type": "Ensemble(XGBRegressor + LGBMRegressor)",
-      "notes": "Simple average ensemble of tuned XGBoost and LightGBM with MAE loss"
+      "model_name": "ensemble_xgb_lgbm_catboost",
+      "model_type": "Ensemble(XGBRegressor + LGBMRegressor + CatBoostRegressor)",
+      "notes": "Simple average ensemble of tuned XGBoost, LightGBM, and CatBoost with MAE loss"
     },
     "metrics": {
-      "cv_rmse_mean": 27706.093620149728,
-      "cv_rmse_std": 7587.239949946593,
+      "cv_rmse_mean": 27219.65220300536,
+      "cv_rmse_std": 7194.022320445312,
       "fold_scores": [
-        27909.39252254941,
-        23452.91864093209,
-        41593.95768497686,
-        26557.6732120565,
-        19016.52604023378
+        27567.11553003962,
+        23594.11569160108,
+        40298.2305825762,
+        25954.669643862228,
+        18684.12956694766
       ],
       "n_features": 113,
       "n_rows": 1460
     },
     "approved_baseline": {
-      "timestamp_utc": "2026-03-17T09:59:25Z",
+      "timestamp_utc": "2026-03-17T10:04:42Z",
       "branch": "unknown",
       "feature_set": "baseline",
-      "hypothesis": "Tuning XGBoost hyperparameters: deeper trees (max_depth 4\u21926), lower learning rate (0.05\u21920.03), more estimators (500\u2192800), higher min_child_weight (3\u21925) will capture more complex patterns while maintaining generalization",
+      "hypothesis": "Ensembling XGBoost and LightGBM with simple averaging will improve predictions by combining complementary strengths - XGBoost's gradient boosting with LightGBM's leaf-wise growth strategy",
       "model": {
-        "model_name": "xgboost_mae_tuned",
-        "model_type": "XGBRegressor",
-        "notes": "XGBoost MAE tuned: deeper trees (6), lower LR (0.03), more estimators (800)"
+        "model_name": "ensemble_xgb_lgbm",
+        "model_type": "Ensemble(XGBRegressor + LGBMRegressor)",
+        "notes": "Simple average ensemble of tuned XGBoost and LightGBM with MAE loss"
       },
       "metrics": {
-        "cv_rmse_mean": 27830.040113345673,
-        "cv_rmse_std": 7217.063826120461,
+        "cv_rmse_mean": 27706.093620149728,
+        "cv_rmse_std": 7587.239949946593,
         "fold_scores": [
-          28376.473097203354,
-          24644.185421826103,
-          40792.28205695793,
-          26455.565908053977,
-          18881.69408268701
+          27909.39252254941,
+          23452.91864093209,
+          41593.95768497686,
+          26557.6732120565,
+          19016.52604023378
         ],
         "n_features": 113,
         "n_rows": 1460
       },
       "approved_baseline": {
-        "timestamp_utc": "2026-03-17T09:50:25Z",
+        "timestamp_utc": "2026-03-17T09:59:25Z",
         "branch": "unknown",
         "feature_set": "baseline",
-        "hypothesis": "Switching from squared error to MAE loss will make the model robust to outliers by penalizing errors linearly instead of quadratically, reducing the influence of extreme prediction errors while still predicting on all data",
+        "hypothesis": "Tuning XGBoost hyperparameters: deeper trees (max_depth 4\u21926), lower learning rate (0.05\u21920.03), more estimators (500\u2192800), higher min_child_weight (3\u21925) will capture more complex patterns while maintaining generalization",
         "model": {
-          "model_name": "xgboost_mae",
+          "model_name": "xgboost_mae_tuned",
           "model_type": "XGBRegressor",
-          "notes": "XGBoost with MAE loss for robustness to outliers"
+          "notes": "XGBoost MAE tuned: deeper trees (6), lower LR (0.03), more estimators (800)"
         },
         "metrics": {
-          "cv_rmse_mean": 28699.75452482336,
-          "cv_rmse_std": 8054.304476516032,
+          "cv_rmse_mean": 27830.040113345673,
+          "cv_rmse_std": 7217.063826120461,
           "fold_scores": [
-            28763.20797032174,
-            26736.801682464673,
-            43319.6880186472,
-            25935.000981206667,
-            18744.073971476533
+            28376.473097203354,
+            24644.185421826103,
+            40792.28205695793,
+            26455.565908053977,
+            18881.69408268701
           ],
           "n_features": 113,
           "n_rows": 1460
         },
         "approved_baseline": {
-          "timestamp_utc": "2026-03-17T09:46:43Z",
+          "timestamp_utc": "2026-03-17T09:50:25Z",
           "branch": "unknown",
           "feature_set": "baseline",
-          "hypothesis": "Reverting outlier removal - previous experiment removed outliers from both train and validation, which doesn't test generalization to edge cases. Model should be evaluated on all data including outliers.",
+          "hypothesis": "Switching from squared error to MAE loss will make the model robust to outliers by penalizing errors linearly instead of quadratically, reducing the influence of extreme prediction errors while still predicting on all data",
           "model": {
-            "model_name": "xgboost_v1",
+            "model_name": "xgboost_mae",
             "model_type": "XGBRegressor",
-            "notes": "Gradient boosting model for improved non-linear relationships"
+            "notes": "XGBoost with MAE loss for robustness to outliers"
           },
           "metrics": {
-            "cv_rmse_mean": 28855.308575391227,
-            "cv_rmse_std": 10281.538498700475,
+            "cv_rmse_mean": 28699.75452482336,
+            "cv_rmse_std": 8054.304476516032,
             "fold_scores": [
-              25994.13430917015,
-              23647.28466825666,
-              48783.61742353233,
-              26516.26794741171,
-              19335.238528585298
+              28763.20797032174,
+              26736.801682464673,
+              43319.6880186472,
+              25935.000981206667,
+              18744.073971476533
             ],
             "n_features": 113,
             "n_rows": 1460
           },
           "approved_baseline": {
-            "timestamp_utc": "2026-03-17T09:41:23Z",
+            "timestamp_utc": "2026-03-17T09:46:43Z",
             "branch": "unknown",
             "feature_set": "baseline",
-            "hypothesis": "Removing outliers where GrLivArea > 4000 sq ft will eliminate commercial/industrial properties that don't follow typical residential pricing patterns, reducing noise and improving model generalization",
+            "hypothesis": "Reverting outlier removal - previous experiment removed outliers from both train and validation, which doesn't test generalization to edge cases. Model should be evaluated on all data including outliers.",
             "model": {
               "model_name": "xgboost_v1",
               "model_type": "XGBRegressor",
               "notes": "Gradient boosting model for improved non-linear relationships"
             },
             "metrics": {
-              "cv_rmse_mean": 22406.1412714322,
-              "cv_rmse_std": 2179.0663791129464,
+              "cv_rmse_mean": 28855.308575391227,
+              "cv_rmse_std": 10281.538498700475,
               "fold_scores": [
-                21818.92151449803,
-                19388.14639113494,
-                25326.83710680328,
-                24410.29479123151,
-                21086.506553493255
+                25994.13430917015,
+                23647.28466825666,
+                48783.61742353233,
+                26516.26794741171,
+                19335.238528585298
               ],
               "n_features": 113,
-              "n_rows": 1456
+              "n_rows": 1460
             },
             "approved_baseline": {
-              "timestamp_utc": "2026-03-17T09:37:54Z",
+              "timestamp_utc": "2026-03-17T09:41:23Z",
               "branch": "unknown",
               "feature_set": "baseline",
-              "hypothesis": "Switching from Ridge regression to XGBoost will capture non-linear relationships and feature interactions that linear models cannot, significantly reducing CV RMSE",
+              "hypothesis": "Removing outliers where GrLivArea > 4000 sq ft will eliminate commercial/industrial properties that don't follow typical residential pricing patterns, reducing noise and improving model generalization",
               "model": {
                 "model_name": "xgboost_v1",
                 "model_type": "XGBRegressor",
                 "notes": "Gradient boosting model for improved non-linear relationships"
               },
               "metrics": {
-                "cv_rmse_mean": 28855.308575391227,
-                "cv_rmse_std": 10281.538498700475,
+                "cv_rmse_mean": 22406.1412714322,
+                "cv_rmse_std": 2179.0663791129464,
                 "fold_scores": [
-                  25994.13430917015,
-                  23647.28466825666,
-                  48783.61742353233,
-                  26516.26794741171,
-                  19335.238528585298
+                  21818.92151449803,
+                  19388.14639113494,
+                  25326.83710680328,
+                  24410.29479123151,
+                  21086.506553493255
                 ],
                 "n_features": 113,
-                "n_rows": 1460
+                "n_rows": 1456
               },
               "approved_baseline": {
-                "timestamp_utc": "2026-03-16T13:54:16Z",
+                "timestamp_utc": "2026-03-17T09:37:54Z",
                 "branch": "unknown",
                 "feature_set": "baseline",
-                "hypothesis": "Adding interaction feature GarageCars x BsmtQualityIndex will capture how garage capacity value is amplified in homes with excellent basement quality and exposure, where homes with both premium basements and multiple garage spaces command prices beyond what either feature captures alone",
+                "hypothesis": "Switching from Ridge regression to XGBoost will capture non-linear relationships and feature interactions that linear models cannot, significantly reducing CV RMSE",
                 "model": {
-                  "model_name": "ridge_v1",
-                  "model_type": "Ridge",
-                  "notes": "Single active model for branch-based autoresearch workflow"
+                  "model_name": "xgboost_v1",
+                  "model_type": "XGBRegressor",
+                  "notes": "Gradient boosting model for improved non-linear relationships"
                 },
                 "metrics": {
-                  "cv_rmse_mean": 29833.55943061902,
-                  "cv_rmse_std": 10667.23812832364,
+                  "cv_rmse_mean": 28855.308575391227,
+                  "cv_rmse_std": 10281.538498700475,
                   "fold_scores": [
-                    26484.90335588837,
-                    29271.683681153925,
-                    49908.383459818484,
-                    25199.59498802463,
-                    18303.231668209693
+                    25994.13430917015,
+                    23647.28466825666,
+                    48783.61742353233,
+                    26516.26794741171,
+                    19335.238528585298
                   ],
                   "n_features": 113,
                   "n_rows": 1460
                 },
                 "approved_baseline": {
-                  "timestamp_utc": "2026-03-16T12:30:09Z",
+                  "timestamp_utc": "2026-03-16T13:54:16Z",
                   "branch": "unknown",
                   "feature_set": "baseline",
-                  "hypothesis": "Adding interaction feature TotalSF x IsRemodeled will capture how total square footage value is amplified in remodeled homes, where larger homes that have been updated throughout command premium prices beyond what total size or remodel status captures alone",
+                  "hypothesis": "Adding interaction feature GarageCars x BsmtQualityIndex will capture how garage capacity value is amplified in homes with excellent basement quality and exposure, where homes with both premium basements and multiple garage spaces command prices beyond what either feature captures alone",
                   "model": {
                     "model_name": "ridge_v1",
                     "model_type": "Ridge",
                     "notes": "Single active model for branch-based autoresearch workflow"
                   },
                   "metrics": {
-                    "cv_rmse_mean": 29894.958258420917,
-                    "cv_rmse_std": 10657.723469078419,
+                    "cv_rmse_mean": 29833.55943061902,
+                    "cv_rmse_std": 10667.23812832364,
                     "fold_scores": [
-                      26760.080106531692,
-                      28973.189855318327,
-                      50070.25771608639,
-                      25022.325689124067,
-                      18648.937925044094
+                      26484.90335588837,
+                      29271.683681153925,
+                      49908.383459818484,
+                      25199.59498802463,
+                      18303.231668209693
                     ],
-                    "n_features": 112,
+                    "n_features": 113,
                     "n_rows": 1460
                   },
                   "approved_baseline": {
-                    "timestamp_utc": "2026-03-16T09:06:31Z",
+                    "timestamp_utc": "2026-03-16T12:30:09Z",
                     "branch": "unknown",
                     "feature_set": "baseline",
-                    "hypothesis": "Adding interaction feature IsRemodeled x OverallQual will capture how remodeled homes with high quality ratings command premium prices, where homes that have been updated combined with high overall quality signal well-maintained premium properties that exceed the value of either characteristic alone",
+                    "hypothesis": "Adding interaction feature TotalSF x IsRemodeled will capture how total square footage value is amplified in remodeled homes, where larger homes that have been updated throughout command premium prices beyond what total size or remodel status captures alone",
                     "model": {
                       "model_name": "ridge_v1",
                       "model_type": "Ridge",
                       "notes": "Single active model for branch-based autoresearch workflow"
                     },
                     "metrics": {
-                      "cv_rmse_mean": 30055.681968103094,
-                      "cv_rmse_std": 10886.251073947285,
+                      "cv_rmse_mean": 29894.958258420917,
+                      "cv_rmse_std": 10657.723469078419,
                       "fold_scores": [
-                        27037.09307176267,
-                        28938.968915625403,
-                        50624.25058079057,
-                        25310.44920803099,
-                        18367.648064305824
+                        26760.080106531692,
+                        28973.189855318327,
+                        50070.25771608639,
+                        25022.325689124067,
+                        18648.937925044094
                       ],
-                      "n_features": 111,
+                      "n_features": 112,
                       "n_rows": 1460
                     },
                     "approved_baseline": {
-                      "timestamp_utc": "2026-03-16T07:25:05Z",
+                      "timestamp_utc": "2026-03-16T09:06:31Z",
                       "branch": "unknown",
                       "feature_set": "baseline",
-                      "hypothesis": "Adding interaction feature TotalSF x OverallCond will capture how total square footage value is amplified in homes with better condition ratings, where larger well-maintained homes command premium prices beyond what either feature captures alone",
+                      "hypothesis": "Adding interaction feature IsRemodeled x OverallQual will capture how remodeled homes with high quality ratings command premium prices, where homes that have been updated combined with high overall quality signal well-maintained premium properties that exceed the value of either characteristic alone",
                       "model": {
                         "model_name": "ridge_v1",
                         "model_type": "Ridge",
                         "notes": "Single active model for branch-based autoresearch workflow"
                       },
                       "metrics": {
-                        "cv_rmse_mean": 30184.356005878373,
-                        "cv_rmse_std": 10842.338152559474,
+                        "cv_rmse_mean": 30055.681968103094,
+                        "cv_rmse_std": 10886.251073947285,
                         "fold_scores": [
-                          27212.7559065979,
-                          29101.689736335175,
-                          50667.29436591553,
-                          25381.58227061956,
-                          18558.457749923684
+                          27037.09307176267,
+                          28938.968915625403,
+                          50624.25058079057,
+                          25310.44920803099,
+                          18367.648064305824
                         ],
-                        "n_features": 110,
+                        "n_features": 111,
                         "n_rows": 1460
                       },
                       "approved_baseline": {
-                        "timestamp_utc": "2026-03-16T05:45:06Z",
+                        "timestamp_utc": "2026-03-16T07:25:05Z",
                         "branch": "unknown",
                         "feature_set": "baseline",
-                        "hypothesis": "Adding binary feature HasHighQualityKitchen (KitchenQual_Ord >= 4) will capture the premium for homes with excellent or good kitchen quality, where high-quality kitchens are major selling points that command significantly higher prices beyond what the ordinal kitchen quality encoding alone captures",
+                        "hypothesis": "Adding interaction feature TotalSF x OverallCond will capture how total square footage value is amplified in homes with better condition ratings, where larger well-maintained homes command premium prices beyond what either feature captures alone",
                         "model": {
                           "model_name": "ridge_v1",
                           "model_type": "Ridge",
                           "notes": "Single active model for branch-based autoresearch workflow"
                         },
                         "metrics": {
-                          "cv_rmse_mean": 30319.31197839217,
-                          "cv_rmse_std": 10895.366593267105,
+                          "cv_rmse_mean": 30184.356005878373,
+                          "cv_rmse_std": 10842.338152559474,
                           "fold_scores": [
-                            27382.82717248653,
-                            29278.857651144866,
-                            50894.748135189504,
-                            25391.706465286847,
-                            18648.420467853106
+                            27212.7559065979,
+                            29101.689736335175,
+                            50667.29436591553,
+                            25381.58227061956,
+                            18558.457749923684
                           ],
-                          "n_features": 109,
+                          "n_features": 110,
                           "n_rows": 1460
                         },
                         "approved_baseline": {
-                          "timestamp_utc": "2026-03-16T04:50:36Z",
+                          "timestamp_utc": "2026-03-16T05:45:06Z",
                           "branch": "unknown",
                           "feature_set": "baseline",
-                          "hypothesis": "Adding binary feature HasMultipleFireplaces (Fireplaces >= 2) will capture the premium for luxury homes with multiple fireplaces, where properties with 2+ fireplaces are rare luxury amenities that signal high-end homes and command significantly higher prices beyond what the fireplace count alone captures",
+                          "hypothesis": "Adding binary feature HasHighQualityKitchen (KitchenQual_Ord >= 4) will capture the premium for homes with excellent or good kitchen quality, where high-quality kitchens are major selling points that command significantly higher prices beyond what the ordinal kitchen quality encoding alone captures",
                           "model": {
                             "model_name": "ridge_v1",
                             "model_type": "Ridge",
                             "notes": "Single active model for branch-based autoresearch workflow"
                           },
                           "metrics": {
-                            "cv_rmse_mean": 30411.769315438432,
-                            "cv_rmse_std": 10884.564769917191,
+                            "cv_rmse_mean": 30319.31197839217,
+                            "cv_rmse_std": 10895.366593267105,
                             "fold_scores": [
-                              27676.4565993704,
-                              29588.526499123564,
-                              50909.760322904585,
-                              25149.01387217918,
-                              18735.089283614456
+                              27382.82717248653,
+                              29278.857651144866,
+                              50894.748135189504,
+                              25391.706465286847,
+                              18648.420467853106
                             ],
-                            "n_features": 108,
+                            "n_features": 109,
                             "n_rows": 1460
                           },
                           "approved_baseline": {
-                            "timestamp_utc": "2026-03-16T03:54:13Z",
+                            "timestamp_utc": "2026-03-16T04:50:36Z",
                             "branch": "unknown",
                             "feature_set": "baseline",
-                            "hypothesis": "Adding binary feature IsPeakSeason (MoSold in [5,6,7]) will capture seasonal price premiums, where homes sold during peak selling months (May-July) typically command higher prices due to increased buyer demand, better showing conditions, and families wanting to move before the new school year",
+                            "hypothesis": "Adding binary feature HasMultipleFireplaces (Fireplaces >= 2) will capture the premium for luxury homes with multiple fireplaces, where properties with 2+ fireplaces are rare luxury amenities that signal high-end homes and command significantly higher prices beyond what the fireplace count alone captures",
                             "model": {
                               "model_name": "ridge_v1",
                               "model_type": "Ridge",
                               "notes": "Single active model for branch-based autoresearch workflow"
                             },
                             "metrics": {
-                              "cv_rmse_mean": 30590.140780951013,
-                              "cv_rmse_std": 11088.252675361653,
+                              "cv_rmse_mean": 30411.769315438432,
+                              "cv_rmse_std": 10884.564769917191,
                               "fold_scores": [
-                                27922.756120761005,
-                                29945.893879616153,
-                                51372.53240521255,
-                                25223.38151771572,
-                                18486.139981449644
+                                27676.4565993704,
+                                29588.526499123564,
+                                50909.760322904585,
+                                25149.01387217918,
+                                18735.089283614456
                               ],
-                              "n_features": 107,
+                              "n_features": 108,
                               "n_rows": 1460
                             },
                             "approved_baseline": {
-                              "timestamp_utc": "2026-03-16T03:19:54Z",
+                              "timestamp_utc": "2026-03-16T03:54:13Z",
                               "branch": "unknown",
                               "feature_set": "baseline",
-                              "hypothesis": "Adding BsmtQualityIndex feature (BsmtQual_Ord * BsmtExposure_Ord) will capture how basement quality combines with exposure type to affect price, where homes with both excellent basement height and walkout/garden access command premium prices beyond what either feature captures alone",
+                              "hypothesis": "Adding binary feature IsPeakSeason (MoSold in [5,6,7]) will capture seasonal price premiums, where homes sold during peak selling months (May-July) typically command higher prices due to increased buyer demand, better showing conditions, and families wanting to move before the new school year",
                               "model": {
                                 "model_name": "ridge_v1",
                                 "model_type": "Ridge",
                                 "notes": "Single active model for branch-based autoresearch workflow"
                               },
                               "metrics": {
-                                "cv_rmse_mean": 30704.89476101934,
-                                "cv_rmse_std": 11139.064052549727,
+                                "cv_rmse_mean": 30590.140780951013,
+                                "cv_rmse_std": 11088.252675361653,
                                 "fold_scores": [
-                                  27923.30073033136,
-                                  30139.52397739878,
-                                  51591.04628382195,
-                                  25274.011466684664,
-                                  18596.591346859946
+                                  27922.756120761005,
+                                  29945.893879616153,
+                                  51372.53240521255,
+                                  25223.38151771572,
+                                  18486.139981449644
                                 ],
-                                "n_features": 106,
+                                "n_features": 107,
                                 "n_rows": 1460
                               },
                               "approved_baseline": {
-                                "timestamp_utc": "2026-03-16T02:59:43Z",
+                                "timestamp_utc": "2026-03-16T03:19:54Z",
                                 "branch": "unknown",
                                 "feature_set": "baseline",
-                                "hypothesis": "Adding binary feature HasPool (PoolArea > 0) will capture the premium for homes with swimming pools, where properties with pools are rare luxury amenities that command significantly higher prices",
+                                "hypothesis": "Adding BsmtQualityIndex feature (BsmtQual_Ord * BsmtExposure_Ord) will capture how basement quality combines with exposure type to affect price, where homes with both excellent basement height and walkout/garden access command premium prices beyond what either feature captures alone",
                                 "model": {
                                   "model_name": "ridge_v1",
                                   "model_type": "Ridge",
                                   "notes": "Single active model for branch-based autoresearch workflow"
                                 },
                                 "metrics": {
-                                  "cv_rmse_mean": 30786.37462971111,
-                                  "cv_rmse_std": 10871.401259193128,
+                                  "cv_rmse_mean": 30704.89476101934,
+                                  "cv_rmse_std": 11139.064052549727,
                                   "fold_scores": [
-                                    28223.51438259074,
-                                    29923.128046024183,
-                                    51187.12589807419,
-                                    25716.906282668595,
-                                    18881.198539197845
+                                    27923.30073033136,
+                                    30139.52397739878,
+                                    51591.04628382195,
+                                    25274.011466684664,
+                                    18596.591346859946
                                   ],
-                                  "n_features": 105,
+                                  "n_features": 106,
                                   "n_rows": 1460
                                 },
                                 "approved_baseline": {
-                                  "timestamp_utc": "2026-03-15T19:40:39Z",
+                                  "timestamp_utc": "2026-03-16T02:59:43Z",
                                   "branch": "unknown",
                                   "feature_set": "baseline",
-                                  "hypothesis": "Adding ratio feature TotalBsmtSF / GrLivArea will capture how the basement-to-living-area ratio affects price, where homes with proportionally larger basements may indicate different property types (walk-out basements, garden apartments) and value characteristics",
+                                  "hypothesis": "Adding binary feature HasPool (PoolArea > 0) will capture the premium for homes with swimming pools, where properties with pools are rare luxury amenities that command significantly higher prices",
                                   "model": {
                                     "model_name": "ridge_v1",
                                     "model_type": "Ridge",
                                     "notes": "Single active model for branch-based autoresearch workflow"
                                   },
                                   "metrics": {
-                                    "cv_rmse_mean": 31258.384616137035,
-                                    "cv_rmse_std": 10825.004414817005,
+                                    "cv_rmse_mean": 30786.37462971111,
+                                    "cv_rmse_std": 10871.401259193128,
                                     "fold_scores": [
-                                      28630.524123225456,
-                                      29858.00047849798,
-                                      51753.426338094534,
-                                      26297.02198033131,
-                                      19752.950160535893
+                                      28223.51438259074,
+                                      29923.128046024183,
+                                      51187.12589807419,
+                                      25716.906282668595,
+                                      18881.198539197845
                                     ],
-                                    "n_features": 104,
+                                    "n_features": 105,
                                     "n_rows": 1460
                                   },
                                   "approved_baseline": {
-                                    "timestamp_utc": "2026-03-15T19:23:31Z",
+                                    "timestamp_utc": "2026-03-15T19:40:39Z",
                                     "branch": "unknown",
                                     "feature_set": "baseline",
-                                    "hypothesis": "Adding ratio feature GrLivArea / TotalSF will capture how the proportion of above-ground living space to total space affects price, where homes with more above-ground space relative to basement space may indicate different property types and value characteristics",
+                                    "hypothesis": "Adding ratio feature TotalBsmtSF / GrLivArea will capture how the basement-to-living-area ratio affects price, where homes with proportionally larger basements may indicate different property types (walk-out basements, garden apartments) and value characteristics",
                                     "model": {
                                       "model_name": "ridge_v1",
                                       "model_type": "Ridge",
                                       "notes": "Single active model for branch-based autoresearch workflow"
                                     },
                                     "metrics": {
-                                      "cv_rmse_mean": 31312.959024663007,
-                                      "cv_rmse_std": 10843.701893764926,
+                                      "cv_rmse_mean": 31258.384616137035,
+                                      "cv_rmse_std": 10825.004414817005,
                                       "fold_scores": [
-                                        28692.257528901726,
-                                        29929.912465785215,
-                                        51847.79432361105,
-                                        26274.68795033404,
-                                        19820.142854683018
+                                        28630.524123225456,
+                                        29858.00047849798,
+                                        51753.426338094534,
+                                        26297.02198033131,
+                                        19752.950160535893
                                       ],
-                                      "n_features": 103,
+                                      "n_features": 104,
                                       "n_rows": 1460
                                     },
                                     "approved_baseline": {
-                                      "timestamp_utc": "2026-03-15T18:47:54Z",
+                                      "timestamp_utc": "2026-03-15T19:23:31Z",
                                       "branch": "unknown",
                                       "feature_set": "baseline",
-                                      "hypothesis": "Adding interaction feature GarageCars x OverallQual_Sq will capture how garage capacity value is amplified in homes with very high quality ratings, where the squared quality rating captures non-linear quality premiums and garage spaces command disproportionate prices in these premium homes",
+                                      "hypothesis": "Adding ratio feature GrLivArea / TotalSF will capture how the proportion of above-ground living space to total space affects price, where homes with more above-ground space relative to basement space may indicate different property types and value characteristics",
                                       "model": {
                                         "model_name": "ridge_v1",
                                         "model_type": "Ridge",
                                         "notes": "Single active model for branch-based autoresearch workflow"
                                       },
                                       "metrics": {
-                                        "cv_rmse_mean": 31403.18189679834,
-                                        "cv_rmse_std": 10746.861663968872,
+                                        "cv_rmse_mean": 31312.959024663007,
+                                        "cv_rmse_std": 10843.701893764926,
                                         "fold_scores": [
-                                          28905.928420356573,
-                                          30267.564513031713,
-                                          51684.98211353825,
-                                          26241.34523676092,
-                                          19916.089200304235
+                                          28692.257528901726,
+                                          29929.912465785215,
+                                          51847.79432361105,
+                                          26274.68795033404,
+                                          19820.142854683018
                                         ],
-                                        "n_features": 102,
+                                        "n_features": 103,
                                         "n_rows": 1460
                                       },
                                       "approved_baseline": {
-                                        "timestamp_utc": "2026-03-15T18:19:02Z",
+                                        "timestamp_utc": "2026-03-15T18:47:54Z",
                                         "branch": "unknown",
                                         "feature_set": "baseline",
-                                        "hypothesis": "Adding interaction feature GarageCars x KitchenQual_Ord will capture how garage capacity value is amplified in homes with excellent kitchens, where homes with both premium kitchens and multiple garage spaces command prices beyond what either feature captures alone",
+                                        "hypothesis": "Adding interaction feature GarageCars x OverallQual_Sq will capture how garage capacity value is amplified in homes with very high quality ratings, where the squared quality rating captures non-linear quality premiums and garage spaces command disproportionate prices in these premium homes",
                                         "model": {
                                           "model_name": "ridge_v1",
                                           "model_type": "Ridge",
                                           "notes": "Single active model for branch-based autoresearch workflow"
                                         },
                                         "metrics": {
-                                          "cv_rmse_mean": 31534.521373516087,
-                                          "cv_rmse_std": 10802.30322079853,
+                                          "cv_rmse_mean": 31403.18189679834,
+                                          "cv_rmse_std": 10746.861663968872,
                                           "fold_scores": [
-                                            29091.80468065033,
-                                            30455.27358834056,
-                                            51897.93035085176,
-                                            26262.73403565404,
-                                            19964.864212083754
+                                            28905.928420356573,
+                                            30267.564513031713,
+                                            51684.98211353825,
+                                            26241.34523676092,
+                                            19916.089200304235
                                           ],
-                                          "n_features": 101,
+                                          "n_features": 102,
                                           "n_rows": 1460
                                         },
                                         "approved_baseline": {
-                                          "timestamp_utc": "2026-03-15T18:17:04Z",
+                                          "timestamp_utc": "2026-03-15T18:19:02Z",
                                           "branch": "unknown",
                                           "feature_set": "baseline",
-                                          "hypothesis": "Adding interaction feature TotalSF x GarageCars will capture how total square footage value is amplified in homes with more garage capacity, where larger homes with multiple garage spaces command premium prices beyond what either feature captures alone",
+                                          "hypothesis": "Adding interaction feature GarageCars x KitchenQual_Ord will capture how garage capacity value is amplified in homes with excellent kitchens, where homes with both premium kitchens and multiple garage spaces command prices beyond what either feature captures alone",
                                           "model": {
                                             "model_name": "ridge_v1",
                                             "model_type": "Ridge",
                                             "notes": "Single active model for branch-based autoresearch workflow"
                                           },
                                           "metrics": {
-                                            "cv_rmse_mean": 31731.18612711177,
-                                            "cv_rmse_std": 10794.701487855626,
+                                            "cv_rmse_mean": 31534.521373516087,
+                                            "cv_rmse_std": 10802.30322079853,
                                             "fold_scores": [
-                                              29272.09778535373,
-                                              30521.952187643754,
-                                              52132.711200032274,
-                                              26438.367069983527,
-                                              20290.80239254557
+                                              29091.80468065033,
+                                              30455.27358834056,
+                                              51897.93035085176,
+                                              26262.73403565404,
+                                              19964.864212083754
                                             ],
-                                            "n_features": 100,
+                                            "n_features": 101,
                                             "n_rows": 1460
                                           },
                                           "approved_baseline": {
-                                            "timestamp_utc": "2026-03-15T18:08:30Z",
+                                            "timestamp_utc": "2026-03-15T18:17:04Z",
                                             "branch": "unknown",
                                             "feature_set": "baseline",
-                                            "hypothesis": "Adding interaction feature FireplaceQu_Ord x OverallQual will capture how fireplace quality amplifies overall quality value, where homes with both high overall quality and excellent fireplaces command premium prices beyond what either feature captures alone",
+                                            "hypothesis": "Adding interaction feature TotalSF x GarageCars will capture how total square footage value is amplified in homes with more garage capacity, where larger homes with multiple garage spaces command premium prices beyond what either feature captures alone",
                                             "model": {
                                               "model_name": "ridge_v1",
                                               "model_type": "Ridge",
                                               "notes": "Single active model for branch-based autoresearch workflow"
                                             },
                                             "metrics": {
-                                              "cv_rmse_mean": 31807.36803042779,
-                                              "cv_rmse_std": 10441.037708568747,
+                                              "cv_rmse_mean": 31731.18612711177,
+                                              "cv_rmse_std": 10794.701487855626,
                                               "fold_scores": [
-                                                29608.1391042617,
-                                                31072.427774304877,
-                                                51395.83606187208,
-                                                26422.044757377014,
-                                                20538.3924543233
+                                                29272.09778535373,
+                                                30521.952187643754,
+                                                52132.711200032274,
+                                                26438.367069983527,
+                                                20290.80239254557
                                               ],
-                                              "n_features": 99,
+                                              "n_features": 100,
                                               "n_rows": 1460
                                             },
                                             "approved_baseline": {
-                                              "timestamp_utc": "2026-03-15T17:57:37Z",
+                                              "timestamp_utc": "2026-03-15T18:08:30Z",
                                               "branch": "unknown",
                                               "feature_set": "baseline",
-                                              "hypothesis": "Adding interaction feature KitchenQual_Ord x OverallQual will capture how kitchen quality amplifies overall quality value, where homes with both high overall quality and excellent kitchens command premium prices beyond what either feature captures alone",
+                                              "hypothesis": "Adding interaction feature FireplaceQu_Ord x OverallQual will capture how fireplace quality amplifies overall quality value, where homes with both high overall quality and excellent fireplaces command premium prices beyond what either feature captures alone",
                                               "model": {
                                                 "model_name": "ridge_v1",
                                                 "model_type": "Ridge",
                                                 "notes": "Single active model for branch-based autoresearch workflow"
                                               },
                                               "metrics": {
-                                                "cv_rmse_mean": 31934.852778219287,
-                                                "cv_rmse_std": 10394.297083476806,
+                                                "cv_rmse_mean": 31807.36803042779,
+                                                "cv_rmse_std": 10441.037708568747,
                                                 "fold_scores": [
-                                                  29864.317486937896,
-                                                  31115.13369026295,
-                                                  51409.7939439387,
-                                                  26679.67518644432,
-                                                  20605.34358351256
+                                                  29608.1391042617,
+                                                  31072.427774304877,
+                                                  51395.83606187208,
+                                                  26422.044757377014,
+                                                  20538.3924543233
                                                 ],
-                                                "n_features": 97,
+                                                "n_features": 99,
                                                 "n_rows": 1460
                                               },
                                               "approved_baseline": {
-                                                "timestamp_utc": "2026-03-15T17:53:37Z",
+                                                "timestamp_utc": "2026-03-15T17:57:37Z",
                                                 "branch": "unknown",
                                                 "feature_set": "baseline",
-                                                "hypothesis": "Adding interaction feature BsmtQual_Ord x OverallQual will capture how basement quality amplifies overall quality value, where homes with both high overall quality and excellent basements command premium prices beyond what either feature captures alone",
+                                                "hypothesis": "Adding interaction feature KitchenQual_Ord x OverallQual will capture how kitchen quality amplifies overall quality value, where homes with both high overall quality and excellent kitchens command premium prices beyond what either feature captures alone",
                                                 "model": {
                                                   "model_name": "ridge_v1",
                                                   "model_type": "Ridge",
                                                   "notes": "Single active model for branch-based autoresearch workflow"
                                                 },
                                                 "metrics": {
-                                                  "cv_rmse_mean": 32039.382973240874,
-                                                  "cv_rmse_std": 10371.616722294286,
+                                                  "cv_rmse_mean": 31934.852778219287,
+                                                  "cv_rmse_std": 10394.297083476806,
                                                   "fold_scores": [
-                                                    30073.35920289266,
-                                                    31299.45122238292,
-                                                    51399.69764335454,
-                                                    26869.24277557293,
-                                                    20555.16402200131
+                                                    29864.317486937896,
+                                                    31115.13369026295,
+                                                    51409.7939439387,
+                                                    26679.67518644432,
+                                                    20605.34358351256
                                                   ],
-                                                  "n_features": 96,
+                                                  "n_features": 97,
                                                   "n_rows": 1460
                                                 },
                                                 "approved_baseline": {
-                                                  "timestamp_utc": "2026-03-15T17:37:46Z",
+                                                  "timestamp_utc": "2026-03-15T17:53:37Z",
                                                   "branch": "unknown",
                                                   "feature_set": "baseline",
-                                                  "hypothesis": "Adding interaction feature GarageCars x OverallQual will capture how garage capacity value is amplified in higher quality homes, where premium homes with multiple garage spaces command disproportionate prices",
+                                                  "hypothesis": "Adding interaction feature BsmtQual_Ord x OverallQual will capture how basement quality amplifies overall quality value, where homes with both high overall quality and excellent basements command premium prices beyond what either feature captures alone",
                                                   "model": {
                                                     "model_name": "ridge_v1",
                                                     "model_type": "Ridge",
                                                     "notes": "Single active model for branch-based autoresearch workflow"
                                                   },
                                                   "metrics": {
-                                                    "cv_rmse_mean": 32133.70524512967,
-                                                    "cv_rmse_std": 10169.519981295349,
+                                                    "cv_rmse_mean": 32039.382973240874,
+                                                    "cv_rmse_std": 10371.616722294286,
                                                     "fold_scores": [
-                                                      30264.17492505044,
-                                                      31566.525475529448,
-                                                      51053.35504961976,
-                                                      27013.29668121937,
-                                                      20771.174094229365
+                                                      30073.35920289266,
+                                                      31299.45122238292,
+                                                      51399.69764335454,
+                                                      26869.24277557293,
+                                                      20555.16402200131
                                                     ],
-                                                    "n_features": 95,
+                                                    "n_features": 96,
                                                     "n_rows": 1460
                                                   },
                                                   "approved_baseline": {
-                                                    "timestamp_utc": "2026-03-15T17:26:41Z",
+                                                    "timestamp_utc": "2026-03-15T17:37:46Z",
                                                     "branch": "unknown",
                                                     "feature_set": "baseline",
-                                                    "hypothesis": "Adding polynomial feature OverallQual^2 will capture the non-linear relationship between quality rating and sale price, where higher quality homes may have disproportionately higher values",
+                                                    "hypothesis": "Adding interaction feature GarageCars x OverallQual will capture how garage capacity value is amplified in higher quality homes, where premium homes with multiple garage spaces command disproportionate prices",
                                                     "model": {
                                                       "model_name": "ridge_v1",
                                                       "model_type": "Ridge",
                                                       "notes": "Single active model for branch-based autoresearch workflow"
                                                     },
                                                     "metrics": {
-                                                      "cv_rmse_mean": 32663.505472339188,
-                                                      "cv_rmse_std": 10239.204016295358,
+                                                      "cv_rmse_mean": 32133.70524512967,
+                                                      "cv_rmse_std": 10169.519981295349,
                                                       "fold_scores": [
-                                                        30807.40057346442,
-                                                        32230.720166741507,
-                                                        51745.70418993099,
-                                                        27044.993815985763,
-                                                        21488.70861557328
+                                                        30264.17492505044,
+                                                        31566.525475529448,
+                                                        51053.35504961976,
+                                                        27013.29668121937,
+                                                        20771.174094229365
                                                       ],
-                                                      "n_features": 94,
+                                                      "n_features": 95,
                                                       "n_rows": 1460
                                                     },
                                                     "approved_baseline": {
-                                                      "timestamp_utc": "2026-03-15T16:55:33Z",
+                                                      "timestamp_utc": "2026-03-15T17:26:41Z",
                                                       "branch": "unknown",
                                                       "feature_set": "baseline",
-                                                      "hypothesis": "Adding ordinal encoding for BsmtExposure (basement walkout/garden exposure) will capture basement-quality price variations and reduce CV RMSE",
+                                                      "hypothesis": "Adding polynomial feature OverallQual^2 will capture the non-linear relationship between quality rating and sale price, where higher quality homes may have disproportionately higher values",
                                                       "model": {
                                                         "model_name": "ridge_v1",
                                                         "model_type": "Ridge",
                                                         "notes": "Single active model for branch-based autoresearch workflow"
                                                       },
                                                       "metrics": {
-                                                        "cv_rmse_mean": 33338.288279847846,
-                                                        "cv_rmse_std": 9906.54213598906,
+                                                        "cv_rmse_mean": 32663.505472339188,
+                                                        "cv_rmse_std": 10239.204016295358,
                                                         "fold_scores": [
-                                                          31716.470518827005,
-                                                          33417.45268452411,
-                                                          51537.68988584698,
-                                                          28019.853993711244,
-                                                          21999.97431632991
+                                                          30807.40057346442,
+                                                          32230.720166741507,
+                                                          51745.70418993099,
+                                                          27044.993815985763,
+                                                          21488.70861557328
                                                         ],
-                                                        "n_features": 93,
+                                                        "n_features": 94,
                                                         "n_rows": 1460
                                                       },
                                                       "approved_baseline": {
-                                                        "timestamp_utc": "2026-03-15T16:39:27Z",
+                                                        "timestamp_utc": "2026-03-15T16:55:33Z",
                                                         "branch": "unknown",
                                                         "feature_set": "baseline",
-                                                        "hypothesis": "Adding one-hot encoding for Functional (home functionality rating) will capture functionality-based price variations and reduce CV RMSE",
+                                                        "hypothesis": "Adding ordinal encoding for BsmtExposure (basement walkout/garden exposure) will capture basement-quality price variations and reduce CV RMSE",
                                                         "model": {
                                                           "model_name": "ridge_v1",
                                                           "model_type": "Ridge",
                                                           "notes": "Single active model for branch-based autoresearch workflow"
                                                         },
                                                         "metrics": {
-                                                          "cv_rmse_mean": 33802.99712240044,
-                                                          "cv_rmse_std": 10026.177371108117,
+                                                          "cv_rmse_mean": 33338.288279847846,
+                                                          "cv_rmse_std": 9906.54213598906,
                                                           "fold_scores": [
-                                                            32433.959013870106,
-                                                            33055.38012467088,
-                                                            52311.557489635874,
-                                                            29018.34050345307,
-                                                            22195.748480372273
+                                                            31716.470518827005,
+                                                            33417.45268452411,
+                                                            51537.68988584698,
+                                                            28019.853993711244,
+                                                            21999.97431632991
                                                           ],
-                                                          "n_features": 92,
+                                                          "n_features": 93,
                                                           "n_rows": 1460
                                                         },
                                                         "approved_baseline": {
-                                                          "timestamp_utc": "2026-03-15T16:29:29Z",
+                                                          "timestamp_utc": "2026-03-15T16:39:27Z",
                                                           "branch": "unknown",
                                                           "feature_set": "baseline",
-                                                          "hypothesis": "Adding one-hot encoding for HouseStyle (style of dwelling) will capture house-style price variations and reduce CV RMSE",
+                                                          "hypothesis": "Adding one-hot encoding for Functional (home functionality rating) will capture functionality-based price variations and reduce CV RMSE",
                                                           "model": {
                                                             "model_name": "ridge_v1",
                                                             "model_type": "Ridge",
                                                             "notes": "Single active model for branch-based autoresearch workflow"
                                                           },
                                                           "metrics": {
-                                                            "cv_rmse_mean": 33873.69151488984,
-                                                            "cv_rmse_std": 9905.670843007636,
+                                                            "cv_rmse_mean": 33802.99712240044,
+                                                            "cv_rmse_std": 10026.177371108117,
                                                             "fold_scores": [
-                                                              32465.94607633122,
-                                                              33280.467571452435,
-                                                              52123.391066426164,
-                                                              29156.360521569153,
-                                                              22342.292338670202
+                                                              32433.959013870106,
+                                                              33055.38012467088,
+                                                              52311.557489635874,
+                                                              29018.34050345307,
+                                                              22195.748480372273
                                                             ],
-                                                            "n_features": 86,
+                                                            "n_features": 92,
                                                             "n_rows": 1460
                                                           },
                                                           "approved_baseline": {
-                                                            "timestamp_utc": "2026-03-15T16:27:01Z",
+                                                            "timestamp_utc": "2026-03-15T16:29:29Z",
                                                             "branch": "unknown",
                                                             "feature_set": "baseline",
-                                                            "hypothesis": "Adding one-hot encoding for BldgType (building type) will capture building-style price variations and reduce CV RMSE",
+                                                            "hypothesis": "Adding one-hot encoding for HouseStyle (style of dwelling) will capture house-style price variations and reduce CV RMSE",
                                                             "model": {
                                                               "model_name": "ridge_v1",
                                                               "model_type": "Ridge",
                                                               "notes": "Single active model for branch-based autoresearch workflow"
                                                             },
                                                             "metrics": {
-                                                              "cv_rmse_mean": 34231.03260358162,
-                                                              "cv_rmse_std": 10066.287989010163,
+                                                              "cv_rmse_mean": 33873.69151488984,
+                                                              "cv_rmse_std": 9905.670843007636,
                                                               "fold_scores": [
-                                                                32547.95613685025,
-                                                                33459.05092436648,
-                                                                52879.58377323203,
-                                                                29622.767021955537,
-                                                                22645.80516150378
+                                                                32465.94607633122,
+                                                                33280.467571452435,
+                                                                52123.391066426164,
+                                                                29156.360521569153,
+                                                                22342.292338670202
                                                               ],
-                                                              "n_features": 79,
+                                                              "n_features": 86,
                                                               "n_rows": 1460
                                                             },
                                                             "approved_baseline": {
-                                                              "timestamp_utc": "2026-03-15T16:23:12Z",
+                                                              "timestamp_utc": "2026-03-15T16:27:01Z",
                                                               "branch": "unknown",
                                                               "feature_set": "baseline",
-                                                              "hypothesis": "Adding one-hot encoding for MSZoning (zoning classification) will capture zoning-based price variations and reduce CV RMSE",
+                                                              "hypothesis": "Adding one-hot encoding for BldgType (building type) will capture building-style price variations and reduce CV RMSE",
                                                               "model": {
                                                                 "model_name": "ridge_v1",
                                                                 "model_type": "Ridge",
                                                                 "notes": "Single active model for branch-based autoresearch workflow"
                                                               },
                                                               "metrics": {
-                                                                "cv_rmse_mean": 35213.61718091713,
-                                                                "cv_rmse_std": 10420.047079192713,
+                                                                "cv_rmse_mean": 34231.03260358162,
+                                                                "cv_rmse_std": 10066.287989010163,
                                                                 "fold_scores": [
-                                                                  32907.83379405389,
-                                                                  34143.48552585115,
-                                                                  54852.21272428584,
-                                                                  30124.74824597693,
-                                                                  24039.805614417837
+                                                                  32547.95613685025,
+                                                                  33459.05092436648,
+                                                                  52879.58377323203,
+                                                                  29622.767021955537,
+                                                                  22645.80516150378
                                                                 ],
-                                                                "n_features": 75,
+                                                                "n_features": 79,
                                                                 "n_rows": 1460
                                                               },
                                                               "approved_baseline": {
-                                                                "timestamp_utc": "2026-03-15T16:20:56Z",
+                                                                "timestamp_utc": "2026-03-15T16:23:12Z",
                                                                 "branch": "unknown",
                                                                 "feature_set": "baseline",
-                                                                "hypothesis": "Adding ordinal encoding for quality variables (ExterQual, BsmtQual, HeatingQC, KitchenQual, GarageQual) will capture quality-based price variations and reduce CV RMSE",
+                                                                "hypothesis": "Adding one-hot encoding for MSZoning (zoning classification) will capture zoning-based price variations and reduce CV RMSE",
                                                                 "model": {
                                                                   "model_name": "ridge_v1",
                                                                   "model_type": "Ridge",
                                                                   "notes": "Single active model for branch-based autoresearch workflow"
                                                                 },
                                                                 "metrics": {
-                                                                  "cv_rmse_mean": 35284.560576127216,
-                                                                  "cv_rmse_std": 10441.717479782748,
+                                                                  "cv_rmse_mean": 35213.61718091713,
+                                                                  "cv_rmse_std": 10420.047079192713,
                                                                   "fold_scores": [
-                                                                    33110.169155464064,
-                                                                    34126.43919153295,
-                                                                    54948.67784249176,
-                                                                    30204.202920017597,
-                                                                    24033.313771129688
+                                                                    32907.83379405389,
+                                                                    34143.48552585115,
+                                                                    54852.21272428584,
+                                                                    30124.74824597693,
+                                                                    24039.805614417837
                                                                   ],
-                                                                  "n_features": 71,
+                                                                  "n_features": 75,
                                                                   "n_rows": 1460
                                                                 },
                                                                 "approved_baseline": {
-                                                                  "timestamp_utc": "2026-03-15T16:18:21Z",
+                                                                  "timestamp_utc": "2026-03-15T16:20:56Z",
                                                                   "branch": "unknown",
                                                                   "feature_set": "baseline",
-                                                                  "hypothesis": "Adding one-hot encoding for Neighborhood will capture location-based price variations and reduce CV RMSE",
+                                                                  "hypothesis": "Adding ordinal encoding for quality variables (ExterQual, BsmtQual, HeatingQC, KitchenQual, GarageQual) will capture quality-based price variations and reduce CV RMSE",
                                                                   "model": {
                                                                     "model_name": "ridge_v1",
                                                                     "model_type": "Ridge",
                                                                     "notes": "Single active model for branch-based autoresearch workflow"
                                                                   },
                                                                   "metrics": {
-                                                                    "cv_rmse_mean": 35603.549103033394,
-                                                                    "cv_rmse_std": 10376.578582674756,
+                                                                    "cv_rmse_mean": 35284.560576127216,
+                                                                    "cv_rmse_std": 10441.717479782748,
                                                                     "fold_scores": [
-                                                                      33641.57698345421,
-                                                                      33986.44194112898,
-                                                                      55280.597771297886,
-                                                                      30306.290391542007,
-                                                                      24802.838427743878
+                                                                      33110.169155464064,
+                                                                      34126.43919153295,
+                                                                      54948.67784249176,
+                                                                      30204.202920017597,
+                                                                      24033.313771129688
                                                                     ],
-                                                                    "n_features": 66,
+                                                                    "n_features": 71,
                                                                     "n_rows": 1460
                                                                   },
                                                                   "approved_baseline": {
-                                                                    "timestamp_utc": "2026-03-15T16:09:03Z",
+                                                                    "timestamp_utc": "2026-03-15T16:18:21Z",
                                                                     "branch": "unknown",
                                                                     "feature_set": "baseline",
-                                                                    "hypothesis": "Adding engineered features (TotalSF, TotalBathrooms, HouseAge, RemodAge, IsRemodeled, HasGarage, HasFireplace) will capture important relationships and reduce CV RMSE",
+                                                                    "hypothesis": "Adding one-hot encoding for Neighborhood will capture location-based price variations and reduce CV RMSE",
                                                                     "model": {
                                                                       "model_name": "ridge_v1",
                                                                       "model_type": "Ridge",
                                                                       "notes": "Single active model for branch-based autoresearch workflow"
                                                                     },
                                                                     "metrics": {
-                                                                      "cv_rmse_mean": 37900.13494917487,
-                                                                      "cv_rmse_std": 11311.279747382447,
+                                                                      "cv_rmse_mean": 35603.549103033394,
+                                                                      "cv_rmse_std": 10376.578582674756,
                                                                       "fold_scores": [
-                                                                        36301.52726988514,
-                                                                        36134.26936523779,
-                                                                        59303.315829544066,
-                                                                        31455.44440001521,
-                                                                        26306.117881192153
+                                                                        33641.57698345421,
+                                                                        33986.44194112898,
+                                                                        55280.597771297886,
+                                                                        30306.290391542007,
+                                                                        24802.838427743878
                                                                       ],
-                                                                      "n_features": 42,
+                                                                      "n_features": 66,
                                                                       "n_rows": 1460
                                                                     },
                                                                     "approved_baseline": {
-                                                                      "timestamp_utc": "2026-03-15T16:00:41Z",
+                                                                      "timestamp_utc": "2026-03-15T16:09:03Z",
                                                                       "branch": "unknown",
                                                                       "feature_set": "baseline",
-                                                                      "hypothesis": "Increasing Ridge alpha from 1.0 to 10.0 will reduce overfitting and improve cross-validation RMSE by applying stronger regularization",
+                                                                      "hypothesis": "Adding engineered features (TotalSF, TotalBathrooms, HouseAge, RemodAge, IsRemodeled, HasGarage, HasFireplace) will capture important relationships and reduce CV RMSE",
                                                                       "model": {
                                                                         "model_name": "ridge_v1",
                                                                         "model_type": "Ridge",
                                                                         "notes": "Single active model for branch-based autoresearch workflow"
                                                                       },
                                                                       "metrics": {
-                                                                        "cv_rmse_mean": 38309.10116889579,
-                                                                        "cv_rmse_std": 11431.625401074265,
+                                                                        "cv_rmse_mean": 37900.13494917487,
+                                                                        "cv_rmse_std": 11311.279747382447,
                                                                         "fold_scores": [
-                                                                          36848.619296241595,
-                                                                          36653.02210236038,
-                                                                          59896.22751768532,
-                                                                          31518.176672675887,
-                                                                          26629.460255515758
+                                                                          36301.52726988514,
+                                                                          36134.26936523779,
+                                                                          59303.315829544066,
+                                                                          31455.44440001521,
+                                                                          26306.117881192153
                                                                         ],
-                                                                        "n_features": 35,
+                                                                        "n_features": 42,
                                                                         "n_rows": 1460
                                                                       },
                                                                       "approved_baseline": {
-                                                                        "timestamp_utc": "2026-03-15T15:44:05Z",
+                                                                        "timestamp_utc": "2026-03-15T16:00:41Z",
                                                                         "branch": "unknown",
                                                                         "feature_set": "baseline",
-                                                                        "hypothesis": "Baseline: Using basic numeric features with simple imputation to establish initial RMSE benchmark",
+                                                                        "hypothesis": "Increasing Ridge alpha from 1.0 to 10.0 will reduce overfitting and improve cross-validation RMSE by applying stronger regularization",
                                                                         "model": {
                                                                           "model_name": "ridge_v1",
                                                                           "model_type": "Ridge",
                                                                           "notes": "Single active model for branch-based autoresearch workflow"
                                                                         },
                                                                         "metrics": {
-                                                                          "cv_rmse_mean": 38381.28260092238,
-                                                                          "cv_rmse_std": 11544.855689478109,
+                                                                          "cv_rmse_mean": 38309.10116889579,
+                                                                          "cv_rmse_std": 11431.625401074265,
                                                                           "fold_scores": [
-                                                                            36830.41357060268,
-                                                                            36672.7565389052,
-                                                                            60209.32224247253,
-                                                                            31570.178231189835,
-                                                                            26623.742421441642
+                                                                            36848.619296241595,
+                                                                            36653.02210236038,
+                                                                            59896.22751768532,
+                                                                            31518.176672675887,
+                                                                            26629.460255515758
                                                                           ],
                                                                           "n_features": 35,
                                                                           "n_rows": 1460
                                                                         },
-                                                                        "approved_baseline": null,
+                                                                        "approved_baseline": {
+                                                                          "timestamp_utc": "2026-03-15T15:44:05Z",
+                                                                          "branch": "unknown",
+                                                                          "feature_set": "baseline",
+                                                                          "hypothesis": "Baseline: Using basic numeric features with simple imputation to establish initial RMSE benchmark",
+                                                                          "model": {
+                                                                            "model_name": "ridge_v1",
+                                                                            "model_type": "Ridge",
+                                                                            "notes": "Single active model for branch-based autoresearch workflow"
+                                                                          },
+                                                                          "metrics": {
+                                                                            "cv_rmse_mean": 38381.28260092238,
+                                                                            "cv_rmse_std": 11544.855689478109,
+                                                                            "fold_scores": [
+                                                                              36830.41357060268,
+                                                                              36672.7565389052,
+                                                                              60209.32224247253,
+                                                                              31570.178231189835,
+                                                                              26623.742421441642
+                                                                            ],
+                                                                            "n_features": 35,
+                                                                            "n_rows": 1460
+                                                                          },
+                                                                          "approved_baseline": null,
+                                                                          "decision": {
+                                                                            "status": "no_baseline",
+                                                                            "accepted": true,
+                                                                            "delta_cv_rmse": null,
+                                                                            "reason": "No approved baseline found; current run becomes the initial baseline candidate."
+                                                                          }
+                                                                        },
                                                                         "decision": {
-                                                                          "status": "no_baseline",
+                                                                          "status": "accepted",
                                                                           "accepted": true,
-                                                                          "delta_cv_rmse": null,
-                                                                          "reason": "No approved baseline found; current run becomes the initial baseline candidate."
+                                                                          "delta_cv_rmse": -72.18143202659121,
+                                                                          "reason": "Reduced RMSE by 72.18, meeting threshold of 50.00 improvement."
                                                                         }
                                                                       },
                                                                       "decision": {
                                                                         "status": "accepted",
                                                                         "accepted": true,
-                                                                        "delta_cv_rmse": -72.18143202659121,
-                                                                        "reason": "Reduced RMSE by 72.18, meeting threshold of 50.00 improvement."
+                                                                        "delta_cv_rmse": -408.96621972091816,
+                                                                        "reason": "Reduced RMSE by 408.97, meeting threshold of 50.00 improvement."
                                                                       }
                                                                     },
                                                                     "decision": {
                                                                       "status": "accepted",
                                                                       "accepted": true,
-                                                                      "delta_cv_rmse": -408.96621972091816,
-                                                                      "reason": "Reduced RMSE by 408.97, meeting threshold of 50.00 improvement."
+                                                                      "delta_cv_rmse": -2296.5858461414755,
+                                                                      "reason": "Reduced RMSE by 2296.59, meeting threshold of 50.00 improvement."
                                                                     }
                                                                   },
                                                                   "decision": {
                                                                     "status": "accepted",
                                                                     "accepted": true,
-                                                                    "delta_cv_rmse": -2296.5858461414755,
-                                                                    "reason": "Reduced RMSE by 2296.59, meeting threshold of 50.00 improvement."
+                                                                    "delta_cv_rmse": -318.98852690617787,
+                                                                    "reason": "Reduced RMSE by 318.99, meeting threshold of 50.00 improvement."
                                                                   }
                                                                 },
                                                                 "decision": {
                                                                   "status": "accepted",
                                                                   "accepted": true,
-                                                                  "delta_cv_rmse": -318.98852690617787,
-                                                                  "reason": "Reduced RMSE by 318.99, meeting threshold of 50.00 improvement."
+                                                                  "delta_cv_rmse": -70.94339521008806,
+                                                                  "reason": "Reduced RMSE by 70.94, meeting threshold of 50.00 improvement."
                                                                 }
                                                               },
                                                               "decision": {
                                                                 "status": "accepted",
                                                                 "accepted": true,
-                                                                "delta_cv_rmse": -70.94339521008806,
-                                                                "reason": "Reduced RMSE by 70.94, meeting threshold of 50.00 improvement."
+                                                                "delta_cv_rmse": -982.5845773355104,
+                                                                "reason": "Reduced RMSE by 982.58, meeting threshold of 50.00 improvement."
                                                               }
                                                             },
                                                             "decision": {
                                                               "status": "accepted",
                                                               "accepted": true,
-                                                              "delta_cv_rmse": -982.5845773355104,
-                                                              "reason": "Reduced RMSE by 982.58, meeting threshold of 50.00 improvement."
+                                                              "delta_cv_rmse": -357.34108869177726,
+                                                              "reason": "Reduced RMSE by 357.34, meeting threshold of 50.00 improvement."
                                                             }
                                                           },
                                                           "decision": {
                                                             "status": "accepted",
                                                             "accepted": true,
-                                                            "delta_cv_rmse": -357.34108869177726,
-                                                            "reason": "Reduced RMSE by 357.34, meeting threshold of 50.00 improvement."
+                                                            "delta_cv_rmse": -70.69439248940034,
+                                                            "reason": "Reduced RMSE by 70.69, meeting threshold of 50.00 improvement."
                                                           }
                                                         },
                                                         "decision": {
                                                           "status": "accepted",
                                                           "accepted": true,
-                                                          "delta_cv_rmse": -70.69439248940034,
-                                                          "reason": "Reduced RMSE by 70.69, meeting threshold of 50.00 improvement."
+                                                          "delta_cv_rmse": -464.70884255259443,
+                                                          "reason": "Reduced RMSE by 464.71, meeting threshold of 50.00 improvement."
                                                         }
                                                       },
                                                       "decision": {
                                                         "status": "accepted",
                                                         "accepted": true,
-                                                        "delta_cv_rmse": -464.70884255259443,
-                                                        "reason": "Reduced RMSE by 464.71, meeting threshold of 50.00 improvement."
+                                                        "delta_cv_rmse": -674.7828075086582,
+                                                        "reason": "Reduced RMSE by 674.78, meeting threshold of 50.00 improvement."
                                                       }
                                                     },
                                                     "decision": {
                                                       "status": "accepted",
                                                       "accepted": true,
-                                                      "delta_cv_rmse": -674.7828075086582,
-                                                      "reason": "Reduced RMSE by 674.78, meeting threshold of 50.00 improvement."
+                                                      "delta_cv_rmse": -529.8002272095182,
+                                                      "reason": "Reduced RMSE by 529.80, meeting threshold of 50.00 improvement."
                                                     }
                                                   },
                                                   "decision": {
                                                     "status": "accepted",
                                                     "accepted": true,
-                                                    "delta_cv_rmse": -529.8002272095182,
-                                                    "reason": "Reduced RMSE by 529.80, meeting threshold of 50.00 improvement."
+                                                    "delta_cv_rmse": -94.32227188879551,
+                                                    "reason": "Reduced RMSE by 94.32, meeting threshold of 50.00 improvement."
                                                   }
                                                 },
                                                 "decision": {
                                                   "status": "accepted",
                                                   "accepted": true,
-                                                  "delta_cv_rmse": -94.32227188879551,
-                                                  "reason": "Reduced RMSE by 94.32, meeting threshold of 50.00 improvement."
+                                                  "delta_cv_rmse": -104.53019502158713,
+                                                  "reason": "Reduced RMSE by 104.53, meeting threshold of 50.00 improvement."
                                                 }
                                               },
                                               "decision": {
                                                 "status": "accepted",
                                                 "accepted": true,
-                                                "delta_cv_rmse": -104.53019502158713,
-                                                "reason": "Reduced RMSE by 104.53, meeting threshold of 50.00 improvement."
+                                                "delta_cv_rmse": -127.48474779149547,
+                                                "reason": "Reduced RMSE by 127.48, meeting threshold of 50.00 improvement."
                                               }
                                             },
                                             "decision": {
                                               "status": "accepted",
                                               "accepted": true,
-                                              "delta_cv_rmse": -127.48474779149547,
-                                              "reason": "Reduced RMSE by 127.48, meeting threshold of 50.00 improvement."
+                                              "delta_cv_rmse": -76.18190331602091,
+                                              "reason": "Reduced RMSE by 76.18, meeting threshold of 50.00 improvement."
                                             }
                                           },
                                           "decision": {
                                             "status": "accepted",
                                             "accepted": true,
-                                            "delta_cv_rmse": -76.18190331602091,
-                                            "reason": "Reduced RMSE by 76.18, meeting threshold of 50.00 improvement."
+                                            "delta_cv_rmse": -196.66475359568358,
+                                            "reason": "Reduced RMSE by 196.66, meeting threshold of 50.00 improvement."
                                           }
                                         },
                                         "decision": {
                                           "status": "accepted",
                                           "accepted": true,
-                                          "delta_cv_rmse": -196.66475359568358,
-                                          "reason": "Reduced RMSE by 196.66, meeting threshold of 50.00 improvement."
+                                          "delta_cv_rmse": -131.33947671774513,
+                                          "reason": "Reduced RMSE by 131.34, meeting threshold of 50.00 improvement."
                                         }
                                       },
                                       "decision": {
                                         "status": "accepted",
                                         "accepted": true,
-                                        "delta_cv_rmse": -131.33947671774513,
-                                        "reason": "Reduced RMSE by 131.34, meeting threshold of 50.00 improvement."
+                                        "delta_cv_rmse": -90.22287213533491,
+                                        "reason": "Reduced RMSE by 90.22, meeting threshold of 50.00 improvement."
                                       }
                                     },
                                     "decision": {
                                       "status": "accepted",
                                       "accepted": true,
-                                      "delta_cv_rmse": -90.22287213533491,
-                                      "reason": "Reduced RMSE by 90.22, meeting threshold of 50.00 improvement."
+                                      "delta_cv_rmse": -54.5744085259721,
+                                      "reason": "Reduced RMSE by 54.57, meeting threshold of 50.00 improvement."
                                     }
                                   },
                                   "decision": {
                                     "status": "accepted",
                                     "accepted": true,
-                                    "delta_cv_rmse": -54.5744085259721,
-                                    "reason": "Reduced RMSE by 54.57, meeting threshold of 50.00 improvement."
+                                    "delta_cv_rmse": -472.0099864259246,
+                                    "reason": "Reduced RMSE by 472.01, meeting threshold of 50.00 improvement."
                                   }
                                 },
                                 "decision": {
                                   "status": "accepted",
                                   "accepted": true,
-                                  "delta_cv_rmse": -472.0099864259246,
-                                  "reason": "Reduced RMSE by 472.01, meeting threshold of 50.00 improvement."
+                                  "delta_cv_rmse": -81.47986869177112,
+                                  "reason": "Reduced RMSE by 81.48, meeting threshold of 50.00 improvement."
                                 }
                               },
                               "decision": {
                                 "status": "accepted",
                                 "accepted": true,
-                                "delta_cv_rmse": -81.47986869177112,
-                                "reason": "Reduced RMSE by 81.48, meeting threshold of 50.00 improvement."
+                                "delta_cv_rmse": -114.7539800683262,
+                                "reason": "Reduced RMSE by 114.75, meeting threshold of 50.00 improvement."
                               }
                             },
                             "decision": {
                               "status": "accepted",
                               "accepted": true,
-                              "delta_cv_rmse": -114.7539800683262,
-                              "reason": "Reduced RMSE by 114.75, meeting threshold of 50.00 improvement."
+                              "delta_cv_rmse": -178.37146551258047,
+                              "reason": "Reduced RMSE by 178.37, meeting threshold of 50.00 improvement."
                             }
                           },
                           "decision": {
                             "status": "accepted",
                             "accepted": true,
-                            "delta_cv_rmse": -178.37146551258047,
-                            "reason": "Reduced RMSE by 178.37, meeting threshold of 50.00 improvement."
+                            "delta_cv_rmse": -92.457337046264,
+                            "reason": "Reduced RMSE by 92.46, meeting threshold of 50.00 improvement."
                           }
                         },
                         "decision": {
                           "status": "accepted",
                           "accepted": true,
-                          "delta_cv_rmse": -92.457337046264,
-                          "reason": "Reduced RMSE by 92.46, meeting threshold of 50.00 improvement."
+                          "delta_cv_rmse": -134.95597251379513,
+                          "reason": "Reduced RMSE by 134.96, meeting threshold of 50.00 improvement."
                         }
                       },
                       "decision": {
                         "status": "accepted",
                         "accepted": true,
-                        "delta_cv_rmse": -134.95597251379513,
-                        "reason": "Reduced RMSE by 134.96, meeting threshold of 50.00 improvement."
+                        "delta_cv_rmse": -128.67403777527943,
+                        "reason": "Reduced RMSE by 128.67, meeting threshold of 50.00 improvement."
                       }
                     },
                     "decision": {
                       "status": "accepted",
                       "accepted": true,
-                      "delta_cv_rmse": -128.67403777527943,
-                      "reason": "Reduced RMSE by 128.67, meeting threshold of 50.00 improvement."
+                      "delta_cv_rmse": -160.7237096821773,
+                      "reason": "Reduced RMSE by 160.72, meeting threshold of 50.00 improvement."
                     }
                   },
                   "decision": {
                     "status": "accepted",
                     "accepted": true,
-                    "delta_cv_rmse": -160.7237096821773,
-                    "reason": "Reduced RMSE by 160.72, meeting threshold of 50.00 improvement."
+                    "delta_cv_rmse": -61.398827801895095,
+                    "reason": "Reduced RMSE by 61.40, meeting threshold of 50.00 improvement."
                   }
                 },
                 "decision": {
                   "status": "accepted",
                   "accepted": true,
-                  "delta_cv_rmse": -61.398827801895095,
-                  "reason": "Reduced RMSE by 61.40, meeting threshold of 50.00 improvement."
+                  "delta_cv_rmse": -978.2508552277941,
+                  "reason": "Reduced RMSE by 978.25, meeting threshold of 50.00 improvement."
                 }
               },
               "decision": {
                 "status": "accepted",
                 "accepted": true,
-                "delta_cv_rmse": -978.2508552277941,
-                "reason": "Reduced RMSE by 978.25, meeting threshold of 50.00 improvement."
+                "delta_cv_rmse": -6449.167303959028,
+                "reason": "Reduced RMSE by 6449.17, meeting threshold of 50.00 improvement."
               }
             },
             "decision": {
-              "status": "accepted",
-              "accepted": true,
-              "delta_cv_rmse": -6449.167303959028,
-              "reason": "Reduced RMSE by 6449.17, meeting threshold of 50.00 improvement."
+              "status": "rejected",
+              "accepted": false,
+              "delta_cv_rmse": 6449.167303959028,
+              "reason": "RMSE reduction -6449.17 did not meet threshold of 50.00 improvement."
             }
           },
           "decision": {
-            "status": "rejected",
-            "accepted": false,
-            "delta_cv_rmse": 6449.167303959028,
-            "reason": "RMSE reduction -6449.17 did not meet threshold of 50.00 improvement."
+            "status": "accepted",
+            "accepted": true,
+            "delta_cv_rmse": -155.55405056786913,
+            "reason": "Reduced RMSE by 155.55, meeting threshold of 50.00 improvement."
           }
         },
         "decision": {
           "status": "accepted",
           "accepted": true,
-          "delta_cv_rmse": -155.55405056786913,
-          "reason": "Reduced RMSE by 155.55, meeting threshold of 50.00 improvement."
+          "delta_cv_rmse": -869.7144114776856,
+          "reason": "Reduced RMSE by 869.71, meeting threshold of 50.00 improvement."
         }
       },
       "decision": {
         "status": "accepted",
         "accepted": true,
-        "delta_cv_rmse": -869.7144114776856,
-        "reason": "Reduced RMSE by 869.71, meeting threshold of 50.00 improvement."
+        "delta_cv_rmse": -123.94649319594464,
+        "reason": "Reduced RMSE by 123.95, meeting threshold of 50.00 improvement."
       }
     },
     "decision": {
       "status": "accepted",
       "accepted": true,
-      "delta_cv_rmse": -123.94649319594464,
-      "reason": "Reduced RMSE by 123.95, meeting threshold of 50.00 improvement."
+      "delta_cv_rmse": -486.44141714436773,
+      "reason": "Reduced RMSE by 486.44, meeting threshold of 50.00 improvement."
     }
   },
   "decision": {
     "status": "accepted",
     "accepted": true,
-    "delta_cv_rmse": -486.44141714436773,
-    "reason": "Reduced RMSE by 486.44, meeting threshold of 50.00 improvement."
+    "delta_cv_rmse": -796.2657205690339,
+    "reason": "Reduced RMSE by 796.27, meeting threshold of 50.00 improvement."
   }
 }
