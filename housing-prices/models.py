@@ -1,6 +1,6 @@
 from xgboost import XGBRegressor
 
-MODEL_NAME = "xgboost_v1"
+MODEL_NAME = "xgboost_mae"
 
 
 def get_model(random_state: int = 42):
@@ -11,6 +11,7 @@ def get_model(random_state: int = 42):
         min_child_weight=3,
         subsample=0.8,
         colsample_bytree=0.8,
+        objective="reg:absoluteerror",
         random_state=random_state,
         n_jobs=-1,
     )
@@ -20,5 +21,5 @@ def get_model_metadata():
     return {
         "model_name": MODEL_NAME,
         "model_type": "XGBRegressor",
-        "notes": "Gradient boosting model for improved non-linear relationships",
+        "notes": "XGBoost with MAE loss for robustness to outliers",
     }
