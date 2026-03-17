@@ -20,7 +20,7 @@ RESEARCH_LOG_PATH = ROOT / "research_log.md"
 THRESHOLD = -50
 RANDOM_STATE = 42
 
-HYPOTHESIS = "Implementing stacked ensemble with Ridge meta-learner trained on out-of-fold predictions from XGBoost, LightGBM, and CatBoost will improve predictions by learning optimal weights for combining model predictions instead of simple averaging"
+HYPOTHESIS = "Adding ExtraTrees to the stacked ensemble base models will improve predictions by providing additional model diversity through ExtraTrees' random split selection strategy, which complements XGBoost, LightGBM, and CatBoost's optimized split finding"
 
 
 def ensure_dirs():
