@@ -19,7 +19,7 @@ RESEARCH_LOG_PATH = ROOT / "research_log.md"
 THRESHOLD = -50
 RANDOM_STATE = 42
 
-HYPOTHESIS = "Adding target encoding for Neighborhood (smoothed with global mean) will improve gradient boosting model predictions by capturing location-based price patterns more effectively than one-hot encoding, especially for neighborhoods with few samples"
+HYPOTHESIS = "Adding BathBedroomRatio feature (TotalBathrooms / BedroomAbvGr) will capture the balance between bathrooms and bedrooms, where homes with more bathrooms per bedroom indicate luxury properties with ample facilities and command premium prices beyond what either count captures alone"
 
 
 def ensure_dirs():
