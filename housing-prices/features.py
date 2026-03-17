@@ -191,6 +191,7 @@ def make_features(df: pd.DataFrame, feature_set: str = "baseline") -> pd.DataFra
 
 
 def build_feature_matrices(train_df, test_df, feature_set="baseline"):
+    train_df = train_df[train_df["GrLivArea"] <= 4000].reset_index(drop=True)
     y = train_df["SalePrice"].astype(float).reset_index(drop=True)
 
     train_x = make_features(train_df.drop(columns=["SalePrice"]).copy(), feature_set)
