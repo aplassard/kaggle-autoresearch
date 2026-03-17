@@ -7,7 +7,7 @@ import pandas as pd
 from sklearn.model_selection import KFold, cross_val_score
 
 from features import build_feature_matrices
-from models import get_model, get_model_metadata
+from models import get_model, get_models, get_model_metadata
 
 ROOT = Path(__file__).resolve().parent
 DATA_DIR = ROOT / "data"
@@ -19,7 +19,7 @@ RESEARCH_LOG_PATH = ROOT / "research_log.md"
 THRESHOLD = -50
 RANDOM_STATE = 42
 
-HYPOTHESIS = "Tuning XGBoost hyperparameters: deeper trees (max_depth 4→6), lower learning rate (0.05→0.03), more estimators (500→800), higher min_child_weight (3→5) will capture more complex patterns while maintaining generalization"
+HYPOTHESIS = "Ensembling XGBoost and LightGBM with simple averaging will improve predictions by combining complementary strengths - XGBoost's gradient boosting with LightGBM's leaf-wise growth strategy"
 
 
 def ensure_dirs():
@@ -33,26 +33,39 @@ def load_data():
 
 
 def evaluate_current_model(x_train, y_train):
-    model = get_model(random_state=RANDOM_STATE)
+    models = get_models(random_state=RANDOM_STATE)
     cv = KFold(n_splits=5, shuffle=True, random_state=RANDOM_STATE)
-    scores = cross_val_score(
-        model, x_train, y_train, cv=cv, scoring="neg_root_mean_squared_error", n_jobs=-1
-    )
-    rmse_scores = -scores
+
+    fold_scores = []
+    for train_idx, val_idx in cv.split(x_train):
+        x_tr, x_val = x_train.iloc[train_idx], x_train.iloc[val_idx]
+        y_tr, y_val = y_train.iloc[train_idx], y_train.iloc[val_idx]
+
+        fold_preds = []
+        for name, model in models:
+            model.fit(x_tr, y_tr)
+            fold_preds.append(model.predict(x_val))
+
+        ensemble_preds = np.mean(fold_preds, axis=0)
+        rmse = np.sqrt(np.mean((ensemble_preds - y_val) ** 2))
+        fold_scores.append(rmse)
+
     return {
-        "cv_rmse_mean": float(rmse_scores.mean()),
-        "cv_rmse_std": float(rmse_scores.std()),
-        "fold_scores": [float(x) for x in rmse_scores],
+        "cv_rmse_mean": float(np.mean(fold_scores)),
+        "cv_rmse_std": float(np.std(fold_scores)),
+        "fold_scores": [float(x) for x in fold_scores],
         "n_features": int(x_train.shape[1]),
         "n_rows": int(x_train.shape[0]),
     }
 
 
 def fit_and_predict(x_train, y_train, x_test):
-    model = get_model(random_state=RANDOM_STATE)
-    model.fit(x_train, y_train)
-    preds = model.predict(x_test)
-    return preds
+    models = get_models(random_state=RANDOM_STATE)
+    all_preds = []
+    for name, model in models:
+        model.fit(x_train, y_train)
+        all_preds.append(model.predict(x_test))
+    return np.mean(all_preds, axis=0)
 
 
 def load_approved_run():
