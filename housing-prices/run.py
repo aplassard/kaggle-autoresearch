@@ -19,7 +19,7 @@ RESEARCH_LOG_PATH = ROOT / "research_log.md"
 THRESHOLD = -50
 RANDOM_STATE = 42
 
-HYPOTHESIS = "Reverting outlier removal - previous experiment removed outliers from both train and validation, which doesn't test generalization to edge cases. Model should be evaluated on all data including outliers."
+HYPOTHESIS = "Switching from squared error to MAE loss will make the model robust to outliers by penalizing errors linearly instead of quadratically, reducing the influence of extreme prediction errors while still predicting on all data"
 
 
 def ensure_dirs():
