@@ -1,14 +1,14 @@
 from xgboost import XGBRegressor
 
-MODEL_NAME = "xgboost_mae"
+MODEL_NAME = "xgboost_mae_tuned"
 
 
 def get_model(random_state: int = 42):
     return XGBRegressor(
-        n_estimators=500,
-        learning_rate=0.05,
-        max_depth=4,
-        min_child_weight=3,
+        n_estimators=800,
+        learning_rate=0.03,
+        max_depth=6,
+        min_child_weight=5,
         subsample=0.8,
         colsample_bytree=0.8,
         objective="reg:absoluteerror",
@@ -21,5 +21,5 @@ def get_model_metadata():
     return {
         "model_name": MODEL_NAME,
         "model_type": "XGBRegressor",
-        "notes": "XGBoost with MAE loss for robustness to outliers",
+        "notes": "XGBoost MAE tuned: deeper trees (6), lower LR (0.03), more estimators (800)",
     }

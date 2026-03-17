@@ -19,7 +19,7 @@ RESEARCH_LOG_PATH = ROOT / "research_log.md"
 THRESHOLD = -50
 RANDOM_STATE = 42
 
-HYPOTHESIS = "Removing all interaction features (polynomials, multiplications, ratios) will simplify the model and let XGBoost learn optimal interactions automatically through its tree structure, potentially improving generalization and reducing overfitting"
+HYPOTHESIS = "Tuning XGBoost hyperparameters: deeper trees (max_depth 4→6), lower learning rate (0.05→0.03), more estimators (500→800), higher min_child_weight (3→5) will capture more complex patterns while maintaining generalization"
 
 
 def ensure_dirs():
