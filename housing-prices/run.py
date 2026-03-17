@@ -4,6 +4,7 @@ from pathlib import Path
 
 import numpy as np
 import pandas as pd
+from sklearn.linear_model import Ridge
 from sklearn.model_selection import KFold, cross_val_score
 
 from features import build_feature_matrices
@@ -19,7 +20,7 @@ RESEARCH_LOG_PATH = ROOT / "research_log.md"
 THRESHOLD = -50
 RANDOM_STATE = 42
 
-HYPOTHESIS = "Adding QualAreaScore feature (OverallQual * GrLivArea / 1000) will capture quality-weighted living space, where homes with high quality ratings and large living areas command premium prices beyond what either feature captures alone"
+HYPOTHESIS = "Implementing stacked ensemble with Ridge meta-learner trained on out-of-fold predictions from XGBoost, LightGBM, and CatBoost will improve predictions by learning optimal weights for combining model predictions instead of simple averaging"
 
 
 def ensure_dirs():
@@ -36,18 +37,31 @@ def evaluate_current_model(x_train, y_train):
     models = get_models(random_state=RANDOM_STATE)
     cv = KFold(n_splits=5, shuffle=True, random_state=RANDOM_STATE)
 
+    oof_preds = np.zeros((len(x_train), len(models)))
     fold_scores = []
+
     for train_idx, val_idx in cv.split(x_train):
         x_tr, x_val = x_train.iloc[train_idx], x_train.iloc[val_idx]
         y_tr, y_val = y_train.iloc[train_idx], y_train.iloc[val_idx]
 
-        fold_preds = []
-        for name, model in models:
+        for i, (name, model) in enumerate(models):
             model.fit(x_tr, y_tr)
-            fold_preds.append(model.predict(x_val))
+            oof_preds[val_idx, i] = model.predict(x_val)
 
-        ensemble_preds = np.mean(fold_preds, axis=0)
-        rmse = np.sqrt(np.mean((ensemble_preds - y_val) ** 2))
+    meta_learner = Ridge(alpha=1.0)
+    meta_learner.fit(oof_preds, y_train)
+
+    for train_idx, val_idx in cv.split(x_train):
+        x_tr, x_val = x_train.iloc[train_idx], x_train.iloc[val_idx]
+        y_tr, y_val = y_train.iloc[train_idx], y_train.iloc[val_idx]
+
+        fold_oof = np.zeros((len(x_val), len(models)))
+        for i, (name, model) in enumerate(models):
+            model.fit(x_tr, y_tr)
+            fold_oof[:, i] = model.predict(x_val)
+
+        stacked_preds = meta_learner.predict(fold_oof)
+        rmse = np.sqrt(np.mean((stacked_preds - y_val) ** 2))
         fold_scores.append(rmse)
 
     return {
@@ -61,11 +75,25 @@ def evaluate_current_model(x_train, y_train):
 
 def fit_and_predict(x_train, y_train, x_test):
     models = get_models(random_state=RANDOM_STATE)
-    all_preds = []
-    for name, model in models:
+    cv = KFold(n_splits=5, shuffle=True, random_state=RANDOM_STATE)
+
+    oof_preds = np.zeros((len(x_train), len(models)))
+    for train_idx, val_idx in cv.split(x_train):
+        x_tr, x_val = x_train.iloc[train_idx], x_train.iloc[val_idx]
+        y_tr = y_train.iloc[train_idx]
+        for i, (name, model) in enumerate(models):
+            model.fit(x_tr, y_tr)
+            oof_preds[val_idx, i] = model.predict(x_val)
+
+    meta_learner = Ridge(alpha=1.0)
+    meta_learner.fit(oof_preds, y_train)
+
+    test_preds = np.zeros((len(x_test), len(models)))
+    for i, (name, model) in enumerate(models):
         model.fit(x_train, y_train)
-        all_preds.append(model.predict(x_test))
-    return np.mean(all_preds, axis=0)
+        test_preds[:, i] = model.predict(x_test)
+
+    return meta_learner.predict(test_preds)
 
 
 def load_approved_run():
