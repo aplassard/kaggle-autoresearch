@@ -1,8 +1,9 @@
 from catboost import CatBoostRegressor
 from lightgbm import LGBMRegressor
+from sklearn.ensemble import ExtraTreesRegressor
 from xgboost import XGBRegressor
 
-MODEL_NAME = "ensemble_xgb_lgbm_catboost"
+MODEL_NAME = "ensemble_xgb_lgbm_catboost_extratrees"
 
 
 def get_models(random_state: int = 42):
@@ -39,7 +40,20 @@ def get_models(random_state: int = 42):
         random_state=random_state,
         verbose=0,
     )
-    return [("xgb", xgb), ("lgbm", lgbm), ("catboost", catboost)]
+    extratrees = ExtraTreesRegressor(
+        n_estimators=800,
+        max_depth=6,
+        min_samples_split=5,
+        min_samples_leaf=2,
+        random_state=random_state,
+        n_jobs=-1,
+    )
+    return [
+        ("xgb", xgb),
+        ("lgbm", lgbm),
+        ("catboost", catboost),
+        ("extratrees", extratrees),
+    ]
 
 
 def get_model(random_state: int = 42):
@@ -49,6 +63,6 @@ def get_model(random_state: int = 42):
 def get_model_metadata():
     return {
         "model_name": MODEL_NAME,
-        "model_type": "Ensemble(XGBRegressor + LGBMRegressor + CatBoostRegressor)",
-        "notes": "Simple average ensemble of tuned XGBoost, LightGBM, and CatBoost with MAE loss",
+        "model_type": "Ensemble(XGBRegressor + LGBMRegressor + CatBoostRegressor + ExtraTreesRegressor)",
+        "notes": "Stacked ensemble with Ridge meta-learner combining XGBoost, LightGBM, CatBoost, and ExtraTrees with MAE loss",
     }
