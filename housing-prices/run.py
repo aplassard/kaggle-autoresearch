@@ -19,7 +19,7 @@ RESEARCH_LOG_PATH = ROOT / "research_log.md"
 THRESHOLD = -50
 RANDOM_STATE = 42
 
-HYPOTHESIS = "Adding BathBedroomRatio feature (TotalBathrooms / BedroomAbvGr) will capture the balance between bathrooms and bedrooms, where homes with more bathrooms per bedroom indicate luxury properties with ample facilities and command premium prices beyond what either count captures alone"
+HYPOTHESIS = "Adding QualAreaScore feature (OverallQual * GrLivArea / 1000) will capture quality-weighted living space, where homes with high quality ratings and large living areas command premium prices beyond what either feature captures alone"
 
 
 def ensure_dirs():
