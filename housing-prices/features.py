@@ -65,7 +65,11 @@ BSMT_EXPOSURE_MAPPING = {
 }
 
 
-def make_features(df: pd.DataFrame, feature_set: str = "baseline") -> pd.DataFrame:
+def make_features(
+    df: pd.DataFrame,
+    feature_set: str = "baseline",
+    neighborhood_target_encoding: dict = None,
+) -> pd.DataFrame:
     out = df.copy()
 
     if feature_set == "baseline":
@@ -91,6 +95,16 @@ def make_features(df: pd.DataFrame, feature_set: str = "baseline") -> pd.DataFra
             out["Neighborhood"], prefix="Neighborhood", drop_first=True
         )
         out = pd.concat([out, neighborhood_dummies], axis=1)
+
+        target_enc_cols = []
+        if neighborhood_target_encoding is not None and "Neighborhood" in out.columns:
+            global_mean = neighborhood_target_encoding.get("_global_mean_", 180000)
+            out["Neighborhood_TargetEnc"] = (
+                out["Neighborhood"]
+                .map(neighborhood_target_encoding)
+                .fillna(global_mean)
+            )
+            target_enc_cols = ["Neighborhood_TargetEnc"]
 
         mszoning_dummies = pd.get_dummies(
             out["MSZoning"], prefix="MSZoning", drop_first=True
@@ -174,6 +188,7 @@ def make_features(df: pd.DataFrame, feature_set: str = "baseline") -> pd.DataFra
                 "IsRemodeled_OverallQual",
                 "TotalSF_IsRemodeled",
                 "GarageCars_BsmtQualityIndex",
+                "Neighborhood_TargetEnc",
             ]
             + list(neighborhood_dummies.columns)
             + list(mszoning_dummies.columns)
@@ -193,8 +208,21 @@ def make_features(df: pd.DataFrame, feature_set: str = "baseline") -> pd.DataFra
 def build_feature_matrices(train_df, test_df, feature_set="baseline"):
     y = train_df["SalePrice"].astype(float).reset_index(drop=True)
 
-    train_x = make_features(train_df.drop(columns=["SalePrice"]).copy(), feature_set)
-    test_x = make_features(test_df.copy(), feature_set)
+    global_mean = y.mean()
+    neighborhood_means = train_df.groupby("Neighborhood")["SalePrice"].mean()
+    neighborhood_target_encoding = {"_global_mean_": global_mean}
+    neighborhood_target_encoding.update(neighborhood_means.to_dict())
+
+    train_x = make_features(
+        train_df.drop(columns=["SalePrice"]).copy(),
+        feature_set,
+        neighborhood_target_encoding=neighborhood_target_encoding,
+    )
+    test_x = make_features(
+        test_df.copy(),
+        feature_set,
+        neighborhood_target_encoding=neighborhood_target_encoding,
+    )
 
     combined = pd.concat([train_x, test_x], axis=0, ignore_index=True)
 
