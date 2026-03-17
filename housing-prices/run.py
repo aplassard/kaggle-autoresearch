@@ -19,7 +19,7 @@ RESEARCH_LOG_PATH = ROOT / "research_log.md"
 THRESHOLD = -50
 RANDOM_STATE = 42
 
-HYPOTHESIS = "Switching from squared error to MAE loss will make the model robust to outliers by penalizing errors linearly instead of quadratically, reducing the influence of extreme prediction errors while still predicting on all data"
+HYPOTHESIS = "Removing all interaction features (polynomials, multiplications, ratios) will simplify the model and let XGBoost learn optimal interactions automatically through its tree structure, potentially improving generalization and reducing overfitting"
 
 
 def ensure_dirs():
