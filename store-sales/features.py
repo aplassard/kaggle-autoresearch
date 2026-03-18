@@ -406,6 +406,35 @@ def build_feature_matrices(
     ]:
         test_x[col] = test_trans[col].values
 
+    store_family_stats = (
+        train_df.groupby(["store_nbr", "family"])["sales"]
+        .agg(["mean", "std"])
+        .reset_index()
+    )
+    store_family_stats.columns = [
+        "store_nbr",
+        "family",
+        "store_family_mean",
+        "store_family_std",
+    ]
+    store_family_stats["store_family_std"] = store_family_stats[
+        "store_family_std"
+    ].fillna(0)
+
+    train_stats = train_df[["id", "store_nbr", "family"]].copy()
+    train_stats = train_stats.merge(
+        store_family_stats, on=["store_nbr", "family"], how="left"
+    )
+    train_x["store_family_mean"] = train_stats["store_family_mean"].values
+    train_x["store_family_std"] = train_stats["store_family_std"].values
+
+    test_stats = test_df[["id", "store_nbr", "family"]].copy()
+    test_stats = test_stats.merge(
+        store_family_stats, on=["store_nbr", "family"], how="left"
+    )
+    test_x["store_family_mean"] = test_stats["store_family_mean"].values
+    test_x["store_family_std"] = test_stats["store_family_std"].values
+
     combined = pd.concat([train_x, test_x], axis=0, ignore_index=True)
 
     for col in combined.columns:
