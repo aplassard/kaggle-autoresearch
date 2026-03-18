@@ -20,7 +20,7 @@ RESEARCH_LOG_PATH = ROOT / "research_log.md"
 THRESHOLD = -0.005
 RANDOM_STATE = 42
 
-HYPOTHESIS = "Decreasing n_estimators from 500 to 300 will speed up training while maintaining accuracy by reducing overfitting to noise in the training data"
+HYPOTHESIS = "Adding transactions-based features (16, 21, 28 day lags and 7, 14, 30 day rolling means) will capture store-level activity patterns and improve forecasting accuracy by providing additional signal about customer traffic at each store"
 
 
 def ensure_dirs():
