@@ -1,10 +1,28 @@
-# Housing Prices Pipeline Autoresearch Agent
+# Store Sales Pipeline Autoresearch Agent
 
-You are improving a single-model Kaggle Housing Prices pipeline through controlled experiments.
+You are improving a single-model Kaggle Store Sales Time Series Forecasting pipeline through controlled experiments.
 
 ## Goal
 
-Improve the approved baseline using small, reversible changes. Lower RMSE is better.
+Improve the approved baseline using small, reversible changes. Lower RMSLE is better.
+
+## Dataset Overview
+
+This is a time series forecasting problem predicting sales for grocery stores in Ecuador.
+
+**Training data**: `train.csv` - time series of features store_nbr, family, onpromotion and target sales
+**Test data**: `test.csv` - 15 days after the last training date
+
+**Key Files:**
+- `stores.csv` - Store metadata (city, state, type, cluster)
+- `oil.csv` - Daily oil prices (Ecuador is oil-dependent)
+- `holidays_events.csv` - Holidays and events with transferred flags
+
+**Important Domain Knowledge:**
+- Public sector wages paid on 15th and last day of month (affects sales)
+- Earthquake on April 16, 2016 affected sales for weeks after
+- Transferred holidays are like normal days; look for Transfer type for actual celebration date
+- Bridge days extend holidays; Work Day pays them back
 
 ## Workflow
 
@@ -99,7 +117,7 @@ git checkout features.py models.py run.py
 
 # 2. Stage and commit research log
 git add research_log.md
-git commit -m "rejected: <brief description> - RMSE did not improve enough"
+git commit -m "rejected: <brief description> - RMSLE did not improve enough"
 
 # 3. Push branch to remote
 git push -u origin HEAD
@@ -119,9 +137,9 @@ git pull
 
 Use descriptive names with `exp/` prefix:
 
-- `exp/add-neighborhood-encoding`
-- `exp/log-transform-target`
-- `exp/ridge-alpha-tuning`
+- `exp/add-lag-features`
+- `exp/oil-price-features`
+- `exp/holiday-encoding`
 
 ## Commit Guidance
 
@@ -140,9 +158,9 @@ After each run, report:
 |-------|-------------|
 | Hypothesis | What you're testing (from run.py HYPOTHESIS variable) |
 | Files changed | Which files were modified |
-| CV RMSE before | Baseline CV RMSE |
-| CV RMSE after | New CV RMSE |
-| Delta | Change in CV RMSE (negative is better) |
+| CV RMSLE before | Baseline CV RMSLE |
+| CV RMSLE after | New CV RMSLE |
+| Delta | Change in CV RMSLE (negative is better) |
 | Decision | accepted/rejected |
 | Reason | Why the decision was made |
 
@@ -151,50 +169,49 @@ After each run, report:
 Diversify your experiments across these categories. Do not focus only on feature engineering.
 
 ### 1. Feature Engineering (`features.py`)
-- Interaction features (e.g., quality * area)
-- Polynomial features (squared, cubed terms)
-- Domain-specific ratios (e.g., living area / lot area)
-- Ordinal encoding for quality variables
-- Target encoding for categorical variables
-- Binning continuous variables
-- Missing value indicator features
+- Lag features (sales, oil prices, promotions from previous days)
+- Rolling statistics (mean, std, min, max over windows)
+- Date/time features (cyclical encoding, special periods)
+- External data integration (holidays, oil, transactions)
+- Store-family specific features
+- Interaction features between existing columns
 
 ### 2. Model Architecture (`models.py`)
 - Add or remove models from ensemble
-- Change model types (XGBoost, LightGBM, CatBoost, RandomForest, Ridge, etc.)
+- Change model types (XGBoost, LightGBM, CatBoost, RandomForest, etc.)
 - Adjust ensemble meta-learner (Ridge, LinearRegression, etc.)
 - Add neural network models (if dependencies available)
 
 ### 3. Hyperparameter Tuning (`models.py`)
 - Number of estimators/trees
 - Learning rate
-- Max depth, min child weight
+- Max depth, min samples
 - Subsample, colsample ratios
 - Regularization parameters (alpha, lambda)
-- Loss function choice (MAE vs MSE vs RMSE)
+- Loss function choice
 
 ### 4. Target Transformation (`features.py` or `run.py`)
-- Log transform target (log1p for SalePrice)
+- Log transform target (log1p) - RMSLE is already log-based
 - Box-Cox transformation
-- Standard scaling of target
-- Quantile transformation
+- Scaling/normalization of target
+- Per-store or per-family normalization
 
 ### 5. Data Preprocessing (`features.py`)
-- Handle outliers (clip extreme values, remove outliers)
+- Handle outliers (clip extreme values)
 - Missing value imputation strategies
 - Feature scaling methods (StandardScaler, MinMax, Robust)
 - Feature selection / remove noisy features
-- PCA or other dimensionality reduction
 
-### 6. Cross-Validation (`run.py` - evaluation logic only)
-- Number of folds
-- Shuffle vs stratified splits
-- Different random seeds for robustness
+### 6. Training Strategy (`run.py` - evaluation logic only)
+- Cross-validation splits (TimeSeriesSplit parameters)
+- Early stopping
+- Sample weights
+- Per-store-family models vs global model
 
 ### 7. Post-Processing
-- Clip predictions to valid range
-- Blend with simple baseline for stability
-- Inverse transform predictions correctly
+- Clip predictions to valid range (>= 0)
+- Smooth predictions
+- Blend with naive baseline for stability
 
 ## Experiment Selection Strategy
 
