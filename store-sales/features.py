@@ -199,6 +199,93 @@ def build_feature_matrices(
 
     y = train_df["sales"].astype(float).reset_index(drop=True)
 
+    train_df_sorted = train_df.sort_values(["store_nbr", "family", "date"]).copy()
+    train_df_sorted["sales_lag_16"] = train_df_sorted.groupby(["store_nbr", "family"])[
+        "sales"
+    ].shift(16)
+    train_df_sorted["sales_lag_21"] = train_df_sorted.groupby(["store_nbr", "family"])[
+        "sales"
+    ].shift(21)
+    train_df_sorted["sales_lag_28"] = train_df_sorted.groupby(["store_nbr", "family"])[
+        "sales"
+    ].shift(28)
+    train_df_sorted["sales_lag_35"] = train_df_sorted.groupby(["store_nbr", "family"])[
+        "sales"
+    ].shift(35)
+    train_df_sorted["sales_roll_mean_7"] = (
+        train_df_sorted.groupby(["store_nbr", "family"])["sales"]
+        .shift(16)
+        .rolling(window=7, min_periods=1)
+        .mean()
+    )
+    train_df_sorted["sales_roll_mean_14"] = (
+        train_df_sorted.groupby(["store_nbr", "family"])["sales"]
+        .shift(16)
+        .rolling(window=14, min_periods=1)
+        .mean()
+    )
+    train_df_sorted["sales_roll_mean_30"] = (
+        train_df_sorted.groupby(["store_nbr", "family"])["sales"]
+        .shift(16)
+        .rolling(window=30, min_periods=1)
+        .mean()
+    )
+
+    last_train_date = train_df["date"].max()
+    sales_lag_map = (
+        train_df_sorted[train_df_sorted["date"] == last_train_date][
+            [
+                "store_nbr",
+                "family",
+                "sales_lag_16",
+                "sales_lag_21",
+                "sales_lag_28",
+                "sales_lag_35",
+                "sales_roll_mean_7",
+                "sales_roll_mean_14",
+                "sales_roll_mean_30",
+            ]
+        ]
+        .drop_duplicates()
+        .copy()
+    )
+
+    train_lags = train_df_sorted[
+        [
+            "id",
+            "sales_lag_16",
+            "sales_lag_21",
+            "sales_lag_28",
+            "sales_lag_35",
+            "sales_roll_mean_7",
+            "sales_roll_mean_14",
+            "sales_roll_mean_30",
+        ]
+    ].copy()
+    train_x = train_x.reset_index(drop=True)
+    train_lags = train_lags.set_index("id")
+    train_x = train_x.join(
+        train_lags, on=train_df["id"].values, how="left", rsuffix="_lag"
+    )
+
+    test_x = test_x.reset_index(drop=True)
+    test_merged = test_df[["id", "store_nbr", "family"]].copy()
+    test_merged = test_merged.merge(
+        sales_lag_map,
+        on=["store_nbr", "family"],
+        how="left",
+    )
+    for col in [
+        "sales_lag_16",
+        "sales_lag_21",
+        "sales_lag_28",
+        "sales_lag_35",
+        "sales_roll_mean_7",
+        "sales_roll_mean_14",
+        "sales_roll_mean_30",
+    ]:
+        test_x[col] = test_merged[col].values
+
     combined = pd.concat([train_x, test_x], axis=0, ignore_index=True)
 
     for col in combined.columns:
