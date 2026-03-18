@@ -20,7 +20,7 @@ RESEARCH_LOG_PATH = ROOT / "research_log.md"
 THRESHOLD = -0.005
 RANDOM_STATE = 42
 
-HYPOTHESIS = "Adding sin/cos encoding for cyclical time features (month, dayofweek, dayofyear, weekofyear) will help the model understand the circular nature of these features and improve forecasting accuracy"
+HYPOTHESIS = "Applying log1p transformation to the target variable before training will align the model's loss function with RMSLE and improve forecasting accuracy, especially for high-variance sales values"
 
 
 def ensure_dirs():
@@ -43,6 +43,7 @@ def rmsle(y_true, y_pred):
 
 
 def evaluate_current_model(x_train, y_train, groups):
+    y_train_log = np.log1p(y_train)
     models = get_models(random_state=RANDOM_STATE)
     unique_dates = sorted(groups.unique())
     n_splits = 5
@@ -63,8 +64,8 @@ def evaluate_current_model(x_train, y_train, groups):
 
         x_tr = x_train[train_mask]
         x_val = x_train[val_mask]
-        y_tr = y_train[train_mask]
-        y_val = y_train[val_mask]
+        y_tr = y_train_log[train_mask]
+        y_val = y_train_log[val_mask]
 
         if len(x_tr) == 0 or len(x_val) == 0:
             continue
@@ -76,9 +77,10 @@ def evaluate_current_model(x_train, y_train, groups):
 
         meta_learner = Ridge(alpha=1.0)
         meta_learner.fit(oof_preds, y_val)
-        stacked_preds = meta_learner.predict(oof_preds)
+        stacked_preds_log = meta_learner.predict(oof_preds)
+        stacked_preds = np.expm1(stacked_preds_log)
 
-        score = rmsle(y_val, stacked_preds)
+        score = rmsle(y_train[val_mask], stacked_preds)
         fold_scores.append(score)
 
     return {
@@ -91,6 +93,7 @@ def evaluate_current_model(x_train, y_train, groups):
 
 
 def fit_and_predict(x_train, y_train, x_test):
+    y_train_log = np.log1p(y_train)
     models = get_models(random_state=RANDOM_STATE)
 
     oof_preds = np.zeros((len(x_train), len(models)))
@@ -111,21 +114,21 @@ def fit_and_predict(x_train, y_train, x_test):
             continue
 
         x_tr = x_train[train_idx]
-        y_tr = y_train[train_idx]
+        y_tr = y_train_log[train_idx]
 
         for j, (name, model) in enumerate(models):
             model.fit(x_tr, y_tr)
             oof_preds[val_idx, j] = model.predict(x_train[val_idx])
 
     meta_learner = Ridge(alpha=1.0)
-    meta_learner.fit(oof_preds, y_train)
+    meta_learner.fit(oof_preds, y_train_log)
 
     test_preds = np.zeros((len(x_test), len(models)))
     for j, (name, model) in enumerate(models):
-        model.fit(x_train, y_train)
+        model.fit(x_train, y_train_log)
         test_preds[:, j] = model.predict(x_test)
 
-    return meta_learner.predict(test_preds)
+    return np.expm1(meta_learner.predict(test_preds))
 
 
 def load_approved_run():
