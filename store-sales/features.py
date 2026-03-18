@@ -1,3 +1,4 @@
+import numpy as np
 import pandas as pd
 from sklearn.preprocessing import LabelEncoder, StandardScaler
 
@@ -36,6 +37,15 @@ def make_features(
         out["is_payday"] = (
             (out["day"] == 15) | (out["day"] == out["date"].dt.days_in_month)
         ).astype(int)
+
+        out["month_sin"] = np.sin(2 * np.pi * out["month"] / 12)
+        out["month_cos"] = np.cos(2 * np.pi * out["month"] / 12)
+        out["dayofweek_sin"] = np.sin(2 * np.pi * out["dayofweek"] / 7)
+        out["dayofweek_cos"] = np.cos(2 * np.pi * out["dayofweek"] / 7)
+        out["dayofyear_sin"] = np.sin(2 * np.pi * out["dayofyear"] / 365)
+        out["dayofyear_cos"] = np.cos(2 * np.pi * out["dayofyear"] / 365)
+        out["weekofyear_sin"] = np.sin(2 * np.pi * out["weekofyear"] / 52)
+        out["weekofyear_cos"] = np.cos(2 * np.pi * out["weekofyear"] / 52)
 
         out["is_quake_period"] = (
             (out["date"] >= "2016-04-16") & (out["date"] <= "2016-05-31")
@@ -146,6 +156,14 @@ def make_features(
             "oil_roll_mean_7",
             "oil_roll_mean_14",
             "oil_roll_mean_30",
+            "month_sin",
+            "month_cos",
+            "dayofweek_sin",
+            "dayofweek_cos",
+            "dayofyear_sin",
+            "dayofyear_cos",
+            "weekofyear_sin",
+            "weekofyear_cos",
         ]
     else:
         cols = ["store_nbr", "onpromotion"]
