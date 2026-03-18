@@ -20,7 +20,7 @@ RESEARCH_LOG_PATH = ROOT / "research_log.md"
 THRESHOLD = -0.005
 RANDOM_STATE = 42
 
-HYPOTHESIS = "Adding early stopping with 20 rounds to all ensemble models will prevent overfitting and improve generalization by finding the optimal number of trees for each fold, leading to lower RMSLE on validation data"
+HYPOTHESIS = "Adding oil price volatility features (rolling standard deviation over 7, 14, 30 day windows) will capture market uncertainty and its impact on consumer spending in oil-dependent Ecuador, improving forecasting accuracy"
 
 
 def ensure_dirs():
