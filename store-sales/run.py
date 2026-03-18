@@ -20,7 +20,7 @@ RESEARCH_LOG_PATH = ROOT / "research_log.md"
 THRESHOLD = -0.005
 RANDOM_STATE = 42
 
-HYPOTHESIS = "Adding sales lag features (16, 21, 28 days) and rolling mean features (7, 14, 30 days computed from 16-day lag) will capture store-family specific sales patterns and improve forecasting accuracy"
+HYPOTHESIS = "Adding sin/cos encoding for cyclical time features (month, dayofweek, dayofyear, weekofyear) will help the model understand the circular nature of these features and improve forecasting accuracy"
 
 
 def ensure_dirs():
