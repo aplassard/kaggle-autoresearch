@@ -1,6 +1,9 @@
 import numpy as np
 import pandas as pd
+from pathlib import Path
 from sklearn.preprocessing import LabelEncoder, StandardScaler
+
+ROOT = Path(__file__).resolve().parent
 
 
 def make_features(
@@ -175,6 +178,10 @@ def make_features(
 def build_feature_matrices(
     train_df, test_df, stores_df, oil_df, holidays_df, feature_set="baseline"
 ):
+    transactions_df = pd.read_csv(
+        ROOT / "data" / "transactions.csv", parse_dates=["date"]
+    )
+
     family_encoder = LabelEncoder()
     family_encoder.fit(train_df["family"])
 
@@ -303,6 +310,91 @@ def build_feature_matrices(
         "sales_roll_mean_30",
     ]:
         test_x[col] = test_merged[col].values
+
+    trans_sorted = transactions_df.sort_values(["store_nbr", "date"]).copy()
+    trans_sorted["trans_lag_16"] = trans_sorted.groupby("store_nbr")[
+        "transactions"
+    ].shift(16)
+    trans_sorted["trans_lag_21"] = trans_sorted.groupby("store_nbr")[
+        "transactions"
+    ].shift(21)
+    trans_sorted["trans_lag_28"] = trans_sorted.groupby("store_nbr")[
+        "transactions"
+    ].shift(28)
+    trans_sorted["trans_roll_mean_7"] = (
+        trans_sorted.groupby("store_nbr")["transactions"]
+        .shift(16)
+        .rolling(window=7, min_periods=1)
+        .mean()
+    )
+    trans_sorted["trans_roll_mean_14"] = (
+        trans_sorted.groupby("store_nbr")["transactions"]
+        .shift(16)
+        .rolling(window=14, min_periods=1)
+        .mean()
+    )
+    trans_sorted["trans_roll_mean_30"] = (
+        trans_sorted.groupby("store_nbr")["transactions"]
+        .shift(16)
+        .rolling(window=30, min_periods=1)
+        .mean()
+    )
+
+    last_trans_date = transactions_df["date"].max()
+    trans_lag_map = (
+        trans_sorted[trans_sorted["date"] == last_trans_date][
+            [
+                "store_nbr",
+                "trans_lag_16",
+                "trans_lag_21",
+                "trans_lag_28",
+                "trans_roll_mean_7",
+                "trans_roll_mean_14",
+                "trans_roll_mean_30",
+            ]
+        ]
+        .drop_duplicates()
+        .copy()
+    )
+
+    train_trans = train_df[["id", "store_nbr", "date"]].copy()
+    train_trans = train_trans.merge(
+        trans_sorted[
+            [
+                "store_nbr",
+                "date",
+                "trans_lag_16",
+                "trans_lag_21",
+                "trans_lag_28",
+                "trans_roll_mean_7",
+                "trans_roll_mean_14",
+                "trans_roll_mean_30",
+            ]
+        ],
+        on=["store_nbr", "date"],
+        how="left",
+    )
+    for col in [
+        "trans_lag_16",
+        "trans_lag_21",
+        "trans_lag_28",
+        "trans_roll_mean_7",
+        "trans_roll_mean_14",
+        "trans_roll_mean_30",
+    ]:
+        train_x[col] = train_trans[col].values
+
+    test_trans = test_df[["id", "store_nbr"]].copy()
+    test_trans = test_trans.merge(trans_lag_map, on="store_nbr", how="left")
+    for col in [
+        "trans_lag_16",
+        "trans_lag_21",
+        "trans_lag_28",
+        "trans_roll_mean_7",
+        "trans_roll_mean_14",
+        "trans_roll_mean_30",
+    ]:
+        test_x[col] = test_trans[col].values
 
     combined = pd.concat([train_x, test_x], axis=0, ignore_index=True)
 
