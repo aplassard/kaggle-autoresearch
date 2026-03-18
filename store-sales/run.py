@@ -20,7 +20,7 @@ RESEARCH_LOG_PATH = ROOT / "research_log.md"
 THRESHOLD = -0.005
 RANDOM_STATE = 42
 
-HYPOTHESIS = "Adding transactions-based features (16, 21, 28 day lags and 7, 14, 30 day rolling means) will capture store-level activity patterns and improve forecasting accuracy by providing additional signal about customer traffic at each store"
+HYPOTHESIS = "Adding cyclical encoding for day of month (day_sin/cos) will capture within-month sales patterns related to paydays on 15th and last day of month, improving forecasting accuracy"
 
 
 def ensure_dirs():
