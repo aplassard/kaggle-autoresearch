@@ -20,7 +20,7 @@ RESEARCH_LOG_PATH = ROOT / "research_log.md"
 THRESHOLD = -0.005
 RANDOM_STATE = 42
 
-HYPOTHESIS = "Adding cyclical encoding for day of month (day_sin/cos) will capture within-month sales patterns related to paydays on 15th and last day of month, improving forecasting accuracy"
+HYPOTHESIS = "Adding a 60-day lag for sales (sales_lag_60) will capture longer-term seasonal patterns and improve forecasting accuracy by providing signal about sales cycles that repeat every 2 months"
 
 
 def ensure_dirs():
