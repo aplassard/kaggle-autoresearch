@@ -20,7 +20,7 @@ RESEARCH_LOG_PATH = ROOT / "research_log.md"
 THRESHOLD = -0.005
 RANDOM_STATE = 42
 
-HYPOTHESIS = "Applying log1p transformation to the target variable before training will align the model's loss function with RMSLE and improve forecasting accuracy, especially for high-variance sales values"
+HYPOTHESIS = "Decreasing n_estimators from 500 to 300 will speed up training while maintaining accuracy by reducing overfitting to noise in the training data"
 
 
 def ensure_dirs():
