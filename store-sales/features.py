@@ -49,6 +49,8 @@ def make_features(
         out["dayofyear_cos"] = np.cos(2 * np.pi * out["dayofyear"] / 365)
         out["weekofyear_sin"] = np.sin(2 * np.pi * out["weekofyear"] / 52)
         out["weekofyear_cos"] = np.cos(2 * np.pi * out["weekofyear"] / 52)
+        out["day_sin"] = np.sin(2 * np.pi * out["day"] / 31)
+        out["day_cos"] = np.cos(2 * np.pi * out["day"] / 31)
 
         out["is_quake_period"] = (
             (out["date"] >= "2016-04-16") & (out["date"] <= "2016-05-31")
@@ -167,6 +169,8 @@ def make_features(
             "dayofyear_cos",
             "weekofyear_sin",
             "weekofyear_cos",
+            "day_sin",
+            "day_cos",
         ]
     else:
         cols = ["store_nbr", "onpromotion"]
