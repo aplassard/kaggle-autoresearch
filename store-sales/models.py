@@ -7,7 +7,7 @@ MODEL_NAME = "ensemble_xgb_lgbm_catboost"
 
 def get_models(random_state: int = 42):
     xgb = XGBRegressor(
-        n_estimators=300,
+        n_estimators=500,
         learning_rate=0.05,
         max_depth=8,
         min_child_weight=5,
@@ -16,9 +16,10 @@ def get_models(random_state: int = 42):
         objective="reg:squarederror",
         random_state=random_state,
         n_jobs=-1,
+        early_stopping_rounds=20,
     )
     lgbm = LGBMRegressor(
-        n_estimators=300,
+        n_estimators=500,
         learning_rate=0.05,
         max_depth=8,
         min_child_samples=5,
@@ -30,7 +31,7 @@ def get_models(random_state: int = 42):
         verbose=-1,
     )
     catboost = CatBoostRegressor(
-        iterations=300,
+        iterations=500,
         learning_rate=0.05,
         depth=8,
         min_data_in_leaf=5,
@@ -38,6 +39,7 @@ def get_models(random_state: int = 42):
         loss_function="RMSE",
         random_state=random_state,
         verbose=0,
+        early_stopping_rounds=20,
     )
     return [
         ("xgb", xgb),
