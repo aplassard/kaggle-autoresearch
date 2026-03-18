@@ -20,7 +20,7 @@ RESEARCH_LOG_PATH = ROOT / "research_log.md"
 THRESHOLD = -0.005
 RANDOM_STATE = 42
 
-HYPOTHESIS = "Adding a 60-day lag for sales (sales_lag_60) will capture longer-term seasonal patterns and improve forecasting accuracy by providing signal about sales cycles that repeat every 2 months"
+HYPOTHESIS = "Adding per-store-family mean and std features for sales will capture the baseline sales level and variability for each store-family combination, helping the model understand the scale of sales and improve forecasting accuracy"
 
 
 def ensure_dirs():
