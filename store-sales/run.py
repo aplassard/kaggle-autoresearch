@@ -20,7 +20,7 @@ RESEARCH_LOG_PATH = ROOT / "research_log.md"
 THRESHOLD = -0.005
 RANDOM_STATE = 42
 
-HYPOTHESIS = "Adding oil price lag features (1, 7, 14 days) and rolling mean features (7, 14, 30 days) will improve forecasting accuracy by capturing delayed effects of oil price changes on consumer spending"
+HYPOTHESIS = "Adding sales lag features (16, 21, 28 days) and rolling mean features (7, 14, 30 days computed from 16-day lag) will capture store-family specific sales patterns and improve forecasting accuracy"
 
 
 def ensure_dirs():
