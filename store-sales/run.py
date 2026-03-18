@@ -20,7 +20,7 @@ RESEARCH_LOG_PATH = ROOT / "research_log.md"
 THRESHOLD = -0.005
 RANDOM_STATE = 42
 
-HYPOTHESIS = "Adding per-store-family mean and std features for sales will capture the baseline sales level and variability for each store-family combination, helping the model understand the scale of sales and improve forecasting accuracy"
+HYPOTHESIS = "Adding early stopping with 20 rounds to all ensemble models will prevent overfitting and improve generalization by finding the optimal number of trees for each fold, leading to lower RMSLE on validation data"
 
 
 def ensure_dirs():
@@ -72,7 +72,10 @@ def evaluate_current_model(x_train, y_train, groups):
 
         oof_preds = np.zeros((len(x_val), len(models)))
         for j, (name, model) in enumerate(models):
-            model.fit(x_tr, y_tr)
+            if name == "catboost":
+                model.fit(x_tr, y_tr, eval_set=[(x_val, y_val)], verbose=False)
+            else:
+                model.fit(x_tr, y_tr, eval_set=[(x_val, y_val)])
             oof_preds[:, j] = model.predict(x_val)
 
         meta_learner = Ridge(alpha=1.0)
@@ -117,15 +120,39 @@ def fit_and_predict(x_train, y_train, x_test):
         y_tr = y_train_log[train_idx]
 
         for j, (name, model) in enumerate(models):
-            model.fit(x_tr, y_tr)
+            if name == "catboost":
+                model.fit(
+                    x_tr,
+                    y_tr,
+                    eval_set=[(x_train[val_idx], y_train_log[val_idx])],
+                    verbose=False,
+                )
+            else:
+                model.fit(
+                    x_tr, y_tr, eval_set=[(x_train[val_idx], y_train_log[val_idx])]
+                )
             oof_preds[val_idx, j] = model.predict(x_train[val_idx])
 
     meta_learner = Ridge(alpha=1.0)
     meta_learner.fit(oof_preds, y_train_log)
 
+    val_size = int(len(x_train) * 0.1)
+    x_tr_final = x_train[:-val_size]
+    y_tr_final = y_train_log[:-val_size]
+    x_val_final = x_train[-val_size:]
+    y_val_final = y_train_log[-val_size:]
+
     test_preds = np.zeros((len(x_test), len(models)))
     for j, (name, model) in enumerate(models):
-        model.fit(x_train, y_train_log)
+        if name == "catboost":
+            model.fit(
+                x_tr_final,
+                y_tr_final,
+                eval_set=[(x_val_final, y_val_final)],
+                verbose=False,
+            )
+        else:
+            model.fit(x_tr_final, y_tr_final, eval_set=[(x_val_final, y_val_final)])
         test_preds[:, j] = model.predict(x_test)
 
     return np.expm1(meta_learner.predict(test_preds))
