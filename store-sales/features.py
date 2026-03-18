@@ -115,6 +115,15 @@ def make_features(
         oil_unique["oil_roll_mean_30"] = (
             oil_unique["oil_price"].rolling(window=30, min_periods=1).mean()
         )
+        oil_unique["oil_roll_std_7"] = (
+            oil_unique["oil_price"].rolling(window=7, min_periods=1).std()
+        )
+        oil_unique["oil_roll_std_14"] = (
+            oil_unique["oil_price"].rolling(window=14, min_periods=1).std()
+        )
+        oil_unique["oil_roll_std_30"] = (
+            oil_unique["oil_price"].rolling(window=30, min_periods=1).std()
+        )
         oil_unique = oil_unique.reset_index()
         out = out.drop(
             columns=[
@@ -124,6 +133,9 @@ def make_features(
                 "oil_roll_mean_7",
                 "oil_roll_mean_14",
                 "oil_roll_mean_30",
+                "oil_roll_std_7",
+                "oil_roll_std_14",
+                "oil_roll_std_30",
             ],
             errors="ignore",
         )
@@ -161,6 +173,9 @@ def make_features(
             "oil_roll_mean_7",
             "oil_roll_mean_14",
             "oil_roll_mean_30",
+            "oil_roll_std_7",
+            "oil_roll_std_14",
+            "oil_roll_std_30",
             "month_sin",
             "month_cos",
             "dayofweek_sin",
