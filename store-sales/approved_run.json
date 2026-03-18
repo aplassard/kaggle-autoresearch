@@ -1,121 +1,151 @@
 {
-  "timestamp_utc": "2026-03-18T11:10:46Z",
+  "timestamp_utc": "2026-03-18T11:42:41Z",
   "branch": "unknown",
   "feature_set": "baseline",
-  "hypothesis": "Adding sin/cos encoding for cyclical time features (month, dayofweek, dayofyear, weekofyear) will help the model understand the circular nature of these features and improve forecasting accuracy",
+  "hypothesis": "Applying log1p transformation to the target variable before training will align the model's loss function with RMSLE and improve forecasting accuracy, especially for high-variance sales values",
   "model": {
     "model_name": "ensemble_xgb_lgbm_catboost",
     "model_type": "Ensemble(XGBRegressor + LGBMRegressor + CatBoostRegressor)",
     "notes": "Stacked ensemble with Ridge meta-learner combining XGBoost, LightGBM, and CatBoost with RMSE loss"
   },
   "metrics": {
-    "cv_rmsle_mean": 1.417170833097793,
-    "cv_rmsle_std": 0.4512669616996277,
+    "cv_rmsle_mean": 0.7342193718582116,
+    "cv_rmsle_std": 0.21775668321601263,
     "fold_scores": [
-      2.178290956469688,
-      1.535920999539745,
-      1.4485315765481759,
-      0.8957928075614102,
-      1.027317825369946
+      1.0316263306378883,
+      0.9302299091090228,
+      0.7088687308320908,
+      0.5042412005126549,
+      0.4961306881994016
     ],
     "n_features": 43,
     "n_rows": 3000888
   },
   "approved_baseline": {
-    "timestamp_utc": "2026-03-18T10:59:44Z",
+    "timestamp_utc": "2026-03-18T11:10:46Z",
     "branch": "unknown",
     "feature_set": "baseline",
-    "hypothesis": "Adding sales lag features (16, 21, 28 days) and rolling mean features (7, 14, 30 days computed from 16-day lag) will capture store-family specific sales patterns and improve forecasting accuracy",
+    "hypothesis": "Adding sin/cos encoding for cyclical time features (month, dayofweek, dayofyear, weekofyear) will help the model understand the circular nature of these features and improve forecasting accuracy",
     "model": {
       "model_name": "ensemble_xgb_lgbm_catboost",
       "model_type": "Ensemble(XGBRegressor + LGBMRegressor + CatBoostRegressor)",
       "notes": "Stacked ensemble with Ridge meta-learner combining XGBoost, LightGBM, and CatBoost with RMSE loss"
     },
     "metrics": {
-      "cv_rmsle_mean": 1.4271987846592211,
-      "cv_rmsle_std": 0.4687404826636528,
+      "cv_rmsle_mean": 1.417170833097793,
+      "cv_rmsle_std": 0.4512669616996277,
       "fold_scores": [
-        2.154012576335762,
-        1.6869584685453685,
-        1.4363071983354785,
-        0.8698572357739351,
-        0.9888584443055614
+        2.178290956469688,
+        1.535920999539745,
+        1.4485315765481759,
+        0.8957928075614102,
+        1.027317825369946
       ],
-      "n_features": 35,
+      "n_features": 43,
       "n_rows": 3000888
     },
     "approved_baseline": {
-      "timestamp_utc": "2026-03-18T10:49:09Z",
+      "timestamp_utc": "2026-03-18T10:59:44Z",
       "branch": "unknown",
       "feature_set": "baseline",
-      "hypothesis": "Adding oil price lag features (1, 7, 14 days) and rolling mean features (7, 14, 30 days) will improve forecasting accuracy by capturing delayed effects of oil price changes on consumer spending",
+      "hypothesis": "Adding sales lag features (16, 21, 28 days) and rolling mean features (7, 14, 30 days computed from 16-day lag) will capture store-family specific sales patterns and improve forecasting accuracy",
       "model": {
         "model_name": "ensemble_xgb_lgbm_catboost",
         "model_type": "Ensemble(XGBRegressor + LGBMRegressor + CatBoostRegressor)",
         "notes": "Stacked ensemble with Ridge meta-learner combining XGBoost, LightGBM, and CatBoost with RMSE loss"
       },
       "metrics": {
-        "cv_rmsle_mean": 1.9135379186340338,
-        "cv_rmsle_std": 0.35672503989314436,
+        "cv_rmsle_mean": 1.4271987846592211,
+        "cv_rmsle_std": 0.4687404826636528,
         "fold_scores": [
-          2.5459810751122003,
-          1.9462125591340451,
-          1.9334773910846321,
-          1.5800225620619957,
-          1.5619960057772966
+          2.154012576335762,
+          1.6869584685453685,
+          1.4363071983354785,
+          0.8698572357739351,
+          0.9888584443055614
         ],
-        "n_features": 27,
+        "n_features": 35,
         "n_rows": 3000888
       },
       "approved_baseline": {
-        "timestamp_utc": "2026-03-18T10:26:27Z",
+        "timestamp_utc": "2026-03-18T10:49:09Z",
         "branch": "unknown",
         "feature_set": "baseline",
-        "hypothesis": "Baseline model using time series features, store metadata, and oil prices with a stacked ensemble of XGBoost, LightGBM, and CatBoost",
+        "hypothesis": "Adding oil price lag features (1, 7, 14 days) and rolling mean features (7, 14, 30 days) will improve forecasting accuracy by capturing delayed effects of oil price changes on consumer spending",
         "model": {
           "model_name": "ensemble_xgb_lgbm_catboost",
           "model_type": "Ensemble(XGBRegressor + LGBMRegressor + CatBoostRegressor)",
           "notes": "Stacked ensemble with Ridge meta-learner combining XGBoost, LightGBM, and CatBoost with RMSE loss"
         },
         "metrics": {
-          "cv_rmsle_mean": 1.9351687234420805,
-          "cv_rmsle_std": 0.37492361022372117,
+          "cv_rmsle_mean": 1.9135379186340338,
+          "cv_rmsle_std": 0.35672503989314436,
           "fold_scores": [
-            2.556920876549747,
-            1.9700194203985326,
-            2.0542629912164125,
-            1.5448909037884524,
-            1.5497494252572588
+            2.5459810751122003,
+            1.9462125591340451,
+            1.9334773910846321,
+            1.5800225620619957,
+            1.5619960057772966
           ],
-          "n_features": 21,
+          "n_features": 27,
           "n_rows": 3000888
         },
-        "approved_baseline": null,
+        "approved_baseline": {
+          "timestamp_utc": "2026-03-18T10:26:27Z",
+          "branch": "unknown",
+          "feature_set": "baseline",
+          "hypothesis": "Baseline model using time series features, store metadata, and oil prices with a stacked ensemble of XGBoost, LightGBM, and CatBoost",
+          "model": {
+            "model_name": "ensemble_xgb_lgbm_catboost",
+            "model_type": "Ensemble(XGBRegressor + LGBMRegressor + CatBoostRegressor)",
+            "notes": "Stacked ensemble with Ridge meta-learner combining XGBoost, LightGBM, and CatBoost with RMSE loss"
+          },
+          "metrics": {
+            "cv_rmsle_mean": 1.9351687234420805,
+            "cv_rmsle_std": 0.37492361022372117,
+            "fold_scores": [
+              2.556920876549747,
+              1.9700194203985326,
+              2.0542629912164125,
+              1.5448909037884524,
+              1.5497494252572588
+            ],
+            "n_features": 21,
+            "n_rows": 3000888
+          },
+          "approved_baseline": null,
+          "decision": {
+            "status": "no_baseline",
+            "accepted": true,
+            "delta_cv_rmsle": null,
+            "reason": "No approved baseline found; current run becomes the initial baseline candidate."
+          }
+        },
         "decision": {
-          "status": "no_baseline",
+          "status": "accepted",
           "accepted": true,
-          "delta_cv_rmsle": null,
-          "reason": "No approved baseline found; current run becomes the initial baseline candidate."
+          "delta_cv_rmsle": -0.02163080480804669,
+          "reason": "Reduced RMSLE by 0.02163, meeting threshold of 0.00500 improvement."
         }
       },
       "decision": {
         "status": "accepted",
         "accepted": true,
-        "delta_cv_rmsle": -0.02163080480804669,
-        "reason": "Reduced RMSLE by 0.02163, meeting threshold of 0.00500 improvement."
+        "delta_cv_rmsle": -0.48633913397481265,
+        "reason": "Reduced RMSLE by 0.48634, meeting threshold of 0.00500 improvement."
       }
     },
     "decision": {
       "status": "accepted",
       "accepted": true,
-      "delta_cv_rmsle": -0.48633913397481265,
-      "reason": "Reduced RMSLE by 0.48634, meeting threshold of 0.00500 improvement."
+      "delta_cv_rmsle": -0.010027951561428106,
+      "reason": "Reduced RMSLE by 0.01003, meeting threshold of 0.00500 improvement."
     }
   },
   "decision": {
     "status": "accepted",
     "accepted": true,
-    "delta_cv_rmsle": -0.010027951561428106,
-    "reason": "Reduced RMSLE by 0.01003, meeting threshold of 0.00500 improvement."
+    "delta_cv_rmsle": -0.6829514612395814,
+    "reason": "Reduced RMSLE by 0.68295, meeting threshold of 0.00500 improvement."
   }
 }
