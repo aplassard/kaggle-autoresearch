@@ -20,7 +20,7 @@ RESEARCH_LOG_PATH = ROOT / "research_log.md"
 THRESHOLD = -0.005
 RANDOM_STATE = 42
 
-HYPOTHESIS = "Adding a 2-day sales lag will capture very short-term purchasing patterns (e.g., restocking behavior, two-day shopping cycles), complementing the 3-day lag and improving forecasting accuracy"
+HYPOTHESIS = "Decreasing n_estimators from 500 to 350 for all ensemble models will reduce overfitting while maintaining sufficient model capacity for the expanded feature set, leading to lower RMSLE on validation data"
 
 
 def ensure_dirs():
