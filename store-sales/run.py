@@ -20,7 +20,7 @@ RESEARCH_LOG_PATH = ROOT / "research_log.md"
 THRESHOLD = -0.005
 RANDOM_STATE = 42
 
-HYPOTHESIS = "Computing rolling mean features from 7-day shifted sales instead of 16-day shifted will provide more recent trend information that complements the direct lag features, improving forecasting accuracy"
+HYPOTHESIS = "Adding a 3-day sales lag will capture very short-term purchasing patterns (e.g., customers returning for related items within days), complementing existing lags and improving forecasting accuracy"
 
 
 def ensure_dirs():
