@@ -268,6 +268,12 @@ def build_feature_matrices(
     train_df_sorted["sales_lag_60"] = train_df_sorted.groupby(["store_nbr", "family"])[
         "sales"
     ].shift(60)
+    train_df_sorted["sales_roll_mean_3"] = (
+        train_df_sorted.groupby(["store_nbr", "family"])["sales"]
+        .shift(3)
+        .rolling(window=3, min_periods=1)
+        .mean()
+    )
     train_df_sorted["sales_roll_mean_7"] = (
         train_df_sorted.groupby(["store_nbr", "family"])["sales"]
         .shift(3)
@@ -301,6 +307,7 @@ def build_feature_matrices(
                 "sales_lag_28",
                 "sales_lag_35",
                 "sales_lag_60",
+                "sales_roll_mean_3",
                 "sales_roll_mean_7",
                 "sales_roll_mean_14",
                 "sales_roll_mean_30",
@@ -321,6 +328,7 @@ def build_feature_matrices(
             "sales_lag_28",
             "sales_lag_35",
             "sales_lag_60",
+            "sales_roll_mean_3",
             "sales_roll_mean_7",
             "sales_roll_mean_14",
             "sales_roll_mean_30",
@@ -348,6 +356,7 @@ def build_feature_matrices(
         "sales_lag_28",
         "sales_lag_35",
         "sales_lag_60",
+        "sales_roll_mean_3",
         "sales_roll_mean_7",
         "sales_roll_mean_14",
         "sales_roll_mean_30",
