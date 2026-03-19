@@ -267,19 +267,19 @@ def build_feature_matrices(
     ].shift(60)
     train_df_sorted["sales_roll_mean_7"] = (
         train_df_sorted.groupby(["store_nbr", "family"])["sales"]
-        .shift(16)
+        .shift(7)
         .rolling(window=7, min_periods=1)
         .mean()
     )
     train_df_sorted["sales_roll_mean_14"] = (
         train_df_sorted.groupby(["store_nbr", "family"])["sales"]
-        .shift(16)
+        .shift(7)
         .rolling(window=14, min_periods=1)
         .mean()
     )
     train_df_sorted["sales_roll_mean_30"] = (
         train_df_sorted.groupby(["store_nbr", "family"])["sales"]
-        .shift(16)
+        .shift(7)
         .rolling(window=30, min_periods=1)
         .mean()
     )
