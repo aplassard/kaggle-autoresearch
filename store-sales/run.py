@@ -20,7 +20,7 @@ RESEARCH_LOG_PATH = ROOT / "research_log.md"
 THRESHOLD = -0.005
 RANDOM_STATE = 42
 
-HYPOTHESIS = "Adding oil price volatility features (rolling standard deviation over 7, 14, 30 day windows) will capture market uncertainty and its impact on consumer spending in oil-dependent Ecuador, improving forecasting accuracy"
+HYPOTHESIS = "Adding a 7-day sales lag will capture weekly seasonality patterns directly, helping the model understand day-of-week effects that are fundamental in retail sales forecasting"
 
 
 def ensure_dirs():
