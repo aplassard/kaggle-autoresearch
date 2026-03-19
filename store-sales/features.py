@@ -244,6 +244,9 @@ def build_feature_matrices(
     y = train_df["sales"].astype(float).reset_index(drop=True)
 
     train_df_sorted = train_df.sort_values(["store_nbr", "family", "date"]).copy()
+    train_df_sorted["sales_lag_3"] = train_df_sorted.groupby(["store_nbr", "family"])[
+        "sales"
+    ].shift(3)
     train_df_sorted["sales_lag_7"] = train_df_sorted.groupby(["store_nbr", "family"])[
         "sales"
     ].shift(7)
@@ -290,6 +293,7 @@ def build_feature_matrices(
             [
                 "store_nbr",
                 "family",
+                "sales_lag_3",
                 "sales_lag_7",
                 "sales_lag_14",
                 "sales_lag_16",
@@ -309,6 +313,7 @@ def build_feature_matrices(
     train_lags = train_df_sorted[
         [
             "id",
+            "sales_lag_3",
             "sales_lag_7",
             "sales_lag_14",
             "sales_lag_16",
@@ -335,6 +340,7 @@ def build_feature_matrices(
         how="left",
     )
     for col in [
+        "sales_lag_3",
         "sales_lag_7",
         "sales_lag_14",
         "sales_lag_16",
