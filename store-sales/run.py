@@ -20,7 +20,7 @@ RESEARCH_LOG_PATH = ROOT / "research_log.md"
 THRESHOLD = -0.005
 RANDOM_STATE = 42
 
-HYPOTHESIS = "Adding a 7-day sales lag will capture weekly seasonality patterns directly, helping the model understand day-of-week effects that are fundamental in retail sales forecasting"
+HYPOTHESIS = "Adding a 14-day sales lag will capture bi-weekly patterns related to paydays (15th and last day of month), complementing the 7-day lag and improving forecasting accuracy"
 
 
 def ensure_dirs():
