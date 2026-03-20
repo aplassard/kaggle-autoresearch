@@ -20,7 +20,7 @@ RESEARCH_LOG_PATH = ROOT / "research_log.md"
 THRESHOLD = -0.005
 RANDOM_STATE = 42
 
-HYPOTHESIS = "Decreasing n_estimators from 500 to 350 for all ensemble models will reduce overfitting while maintaining sufficient model capacity for the expanded feature set, leading to lower RMSLE on validation data"
+HYPOTHESIS = "Adding a 1-day sales lag will capture immediate day-to-day sales patterns (restocking behavior, daily shopping routines), complementing existing lags and improving forecasting accuracy. With n_estimators=350, this should complete without timeout."
 
 
 def ensure_dirs():
